@@ -60,8 +60,9 @@
     nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:600}
     nav a:hover{background:rgba(255,255,255,0.06)}
     .container{max-width:1100px;margin:24px auto;padding:0 16px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
-    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    /* Removed grid, now single column layout */
+    .grid { display: block; }
+    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06); width:100%; box-sizing:border-box;}
     h2{margin:0 0 12px;color:var(--accent)}
     p.lead{margin:0 0 14px;color:var(--muted)}
     .example{margin-bottom:18px}
@@ -69,7 +70,6 @@
     .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
     .btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
     .small{font-size:13px;color:var(--muted)}
-    aside .card{position:sticky;top:20px}
     footer{max-width:1100px;margin:28px auto 60px;padding:0 16px;color:var(--muted);text-align:center}
     .copied{background:#16a34a;padding:6px 10px;border-radius:6px;color:#fff;font-weight:600}
     hr.sep{border:0;border-top:1px solid #eef2f7;margin:14px 0}
@@ -89,7 +89,6 @@
       100% { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0);}
     }
     .grid > section.card { animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; }
-    aside .card { animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.1s forwards; opacity: 0; transform: translateY(18px); animation-fill-mode: forwards; }
     .example { opacity: 0; transform: translateY(12px); animation: gentleFadeSlide 0.45s ease-out forwards; animation-delay: calc(0.05s * var(--order, 0)); }
     .example:nth-child(1) { --order: 1; }
     .example:nth-child(2) { --order: 2; }
@@ -124,7 +123,6 @@
     }
     .card { transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s ease; will-change: transform; backdrop-filter: blur(0px);}
     .card:hover { transform: translateY(-6px); box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(0, 0, 0, 0.02);}
-    aside .card:hover { transform: translateY(-4px);}
     nav a { position: relative; transition: all 0.2s ease; overflow: hidden;}
     nav a::after { content: ''; position: absolute; bottom: 4px; left: 50%; width: 0%; height: 2px; background: rgba(255, 255, 255, 0.8); border-radius: 2px; transform: translateX(-50%); transition: width 0.25s ease-out;}
     nav a:hover::after { width: 70%;}
@@ -250,7 +248,7 @@
     <div class="grid">
       <section class="card" aria-labelledby="examples-title">
         <h2 id="examples-title">Code Examples</h2>
-        <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into an IDE. Every code block has been verified for correct Java syntax.</p>
+        <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE. Every code block has been verified for correct Java syntax.</p>
 
         <!-- Example 1: Hello World -->
         <div class="example" id="hello">
@@ -709,20 +707,11 @@ public class ExceptionDemo {
 </code></pre>
         </div>
       </section>
-
-      <aside>
-        <div class="card">
-          <h2>Quick Actions</h2>
-          <p class="small">Use the copy buttons to copy a complete class to clipboard. Save as &lt;PublicClass&gt;.java and run:</p>
-          <ol class="small"><li><code>javac FileName.java</code></li><li><code>java ClassName</code></li></ol>
-          <hr class="sep"><p class="small"><strong>Interactive Logo</strong> — Move your mouse cursor near the globe logo: it will tilt, scale smoothly, and glow.</p>
-          <hr class="sep"><p class="small"><strong>Syntax verification</strong> — All Java code snippets have been reviewed for proper syntax, braces, semicolons, imports, and class declarations. They are fully compilable and runnable.</p>
-          <p class="small">Included examples: Hello World, Input/Data types, Variables, String I/O, Type casting, Even/Odd, Palindrome, Armstrong, OOP, Factorial/Fibonacci, Prime, Sorting, Simple Interest, Quadratic, Second Smallest, Grade Calculator, Areas (4 shapes), File I/O, Exception Handling.</p>
-        </div>
-      </aside>
     </div>
   </main>
-  <footer><div class="small">© 2026 Java World — Real Java examples provided for learning</div></footer>
+  <footer>
+    <div class="small">© 2026 Java World — Real Java examples provided for learning</div>
+  </footer>
 
   <script>
     // Mouse-reactive 3D tilt for logo
