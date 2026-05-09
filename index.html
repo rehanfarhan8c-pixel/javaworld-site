@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Java World</title>
-  <!-- custom favicon (new coffee + code logo) -->
+  <!-- favicon matching new logo -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232b6cb0'/%3E%3Cpath d='M35 45 L65 45 L65 55 L55 60 L45 60 L35 55 Z' fill='white'/%3E%3Cpath d='M65 48 L70 48 C72 48 72 52 70 52 L65 52' fill='none' stroke='white' stroke-width='2'/%3E%3Cpath d='M42 38 L42 45 M50 36 L50 45 M58 38 L58 45' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Ctext x='50' y='80' font-size='14' fill='white' font-weight='bold' text-anchor='middle'%3E☕%3C/text%3E%3C/svg%3E">
   <style>
     :root{
@@ -16,56 +16,63 @@
       --code-fg:#d6deeb;
     }
     html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;}
-    header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
-    /* Logo container - enhanced reactive */
+    header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:2;}
+    /* Logo container - Claude style ultra-reactive */
     .logo-globe {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 56px;
-      height: 56px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 20px;
+      width: 64px;
+      height: 64px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 24px;
       backdrop-filter: blur(4px);
       transition: box-shadow 0.2s ease, background 0.2s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
       will-change: transform;
       cursor: pointer;
       position: relative;
       overflow: visible;
+      z-index: 10;
     }
-    /* Outer glow ring animation on hover (extra reactive) */
-    .logo-globe::before {
-      content: '';
+    /* ripple ring overlay (canvas will be used for dynamic cursor ripple) */
+    .logo-ripple-canvas {
       position: absolute;
-      top: -4px;
-      left: -4px;
-      right: -4px;
-      bottom: -4px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 24px;
-      background: radial-gradient(circle, rgba(255,215,0,0.6), rgba(43,108,176,0));
-      opacity: 0;
-      transition: opacity 0.3s ease;
       pointer-events: none;
-      z-index: -1;
-    }
-    .logo-globe:hover::before {
-      opacity: 1;
-      animation: pulseGlow 0.8s infinite alternate;
-    }
-    @keyframes pulseGlow {
-      0% { opacity: 0.3; transform: scale(0.98);}
-      100% { opacity: 0.8; transform: scale(1.05);}
+      z-index: 20;
     }
     .logo-svg {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       display: block;
-      transition: filter 0.2s, transform 0.1s;
+      transition: filter 0.2s;
+      position: relative;
+      z-index: 5;
+    }
+    /* steam animation for coffee cup */
+    @keyframes steamDrift {
+      0% { transform: translateY(0) scale(1); opacity: 0.6; }
+      100% { transform: translateY(-12px) scale(1.3); opacity: 0; }
+    }
+    .steam-particle {
+      position: absolute;
+      background: rgba(255,255,255,0.7);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      filter: blur(1px);
+      pointer-events: none;
+      z-index: 15;
+      animation: steamDrift 1.2s ease-out forwards;
     }
     .logo-globe:hover {
-      background: rgba(255,255,255,0.4);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 0 4px rgba(255,215,0,0.6);
+      background: rgba(255,255,255,0.35);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 0 4px rgba(255,215,0,0.5);
     }
     .title-group {
       display: flex;
@@ -240,14 +247,20 @@
 </div>
 
   <header>
-    <!-- Enhanced reactive logo -->
-    <div class="logo-globe" id="interactiveLogo" aria-label="Java World Logo - ultra reactive">
+    <!-- Claude-style interactive logo with canvas ripple + steam -->
+    <div class="logo-globe" id="interactiveLogo" style="position: relative;">
+      <canvas id="rippleCanvas" class="logo-ripple-canvas" width="64" height="64"></canvas>
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="8" y="8" width="84" height="84" rx="18" fill="white" stroke="#2b6cb0" stroke-width="2.5"/>
+        <!-- coffee cup body -->
         <path d="M32 32 L68 32 L65 68 L55 74 L45 74 L35 68 L32 32 Z" fill="#2b6cb0" stroke="#1f4f7a" stroke-width="1.5"/>
+        <!-- handle -->
         <path d="M68 42 L74 42 C78 42 78 54 74 54 L68 54" fill="none" stroke="#2b6cb0" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- steam dashes -->
         <path d="M40 28 L40 20 M50 26 L50 18 M60 28 L60 20" stroke="#2b6cb0" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <!-- angle brackets (code) -->
         <text x="50" y="58" font-size="20" text-anchor="middle" fill="white" font-weight="bold" font-family="monospace">&lt;/&gt;</text>
+        <!-- coffee bean accent -->
         <circle cx="50" cy="50" r="4" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
       </svg>
     </div>
@@ -273,7 +286,7 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE. Every code block has been verified for correct Java syntax.</p>
 
-        <!-- All existing code examples unchanged -->
+        <!-- (All existing code examples remain exactly the same, unchanged) -->
         <div class="example" id="hello">
           <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
@@ -719,67 +732,159 @@ public class ExceptionDemo {
   </footer>
 
   <script>
-    // ULTRA REACTIVE LOGO: stronger tilt, faster response, additional scale and rotation effect
+    // Claude-style reactive logo: 3D tilt + dynamic canvas ripple + steam particles
     const logo = document.getElementById('interactiveLogo');
-    if (logo) {
-      let currentTransform = { rotateX: 0, rotateY: 0, scale: 1, rotate: 0 };
-      let animFrame = null;
-      let hoverActive = false;
-      
-      function updateTransform() {
-        if (logo) {
-          // Apply a more dramatic 3D tilt + slight rotation + scale
-          logo.style.transform = `perspective(800px) rotateX(${currentTransform.rotateX}deg) rotateY(${currentTransform.rotateY}deg) rotate(${currentTransform.rotate}deg) scale(${currentTransform.scale})`;
-        }
+    const canvas = document.getElementById('rippleCanvas');
+    const ctx = canvas.getContext('2d');
+    let rippleActive = false;
+    let rippleRadius = 0;
+    let rippleAlpha = 0;
+    let animationFrameRipple = null;
+    
+    // resize canvas to match logo dimensions
+    function resizeCanvas() {
+      const rect = logo.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+    }
+    window.addEventListener('resize', () => { resizeCanvas(); });
+    resizeCanvas();
+    
+    // Draw ripple effect based on mouse position
+    function drawRipple(x, y) {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (rippleRadius > 0 && rippleAlpha > 0) {
+        const gradient = ctx.createRadialGradient(x, y, 2, x, y, rippleRadius);
+        gradient.addColorStop(0, `rgba(255, 215, 0, ${rippleAlpha * 0.8})`);
+        gradient.addColorStop(0.6, `rgba(43, 108, 176, ${rippleAlpha * 0.5})`);
+        gradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
+        ctx.fillStyle = gradient;
+        ctx.arc(x, y, rippleRadius, 0, Math.PI * 2);
+        ctx.fill();
       }
-      
-      function handleMouseMove(e) {
-        if (!hoverActive) return;
-        const rect = logo.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        // Increase sensitivity: wider range for tilt (-20 to 20 degrees)
-        const relX = (e.clientX - centerX) / (rect.width / 2);
-        const relY = (e.clientY - centerY) / (rect.height / 2);
-        const maxTilt = 22;   // more dramatic
-        const maxRotate = 8;  // slight extra spin
-        let rotY = relX * maxTilt;
-        let rotX = -relY * maxTilt;
-        let extraRot = relX * maxRotate;
-        currentTransform.rotateX = Math.min(Math.max(rotX, -maxTilt), maxTilt);
-        currentTransform.rotateY = Math.min(Math.max(rotY, -maxTilt), maxTilt);
-        currentTransform.rotate = extraRot * 0.5;
-        currentTransform.scale = 1.12;  // larger scale on hover
-        if (animFrame) cancelAnimationFrame(animFrame);
-        animFrame = requestAnimationFrame(updateTransform);
-      }
-      
-      function handleMouseLeave() {
-        hoverActive = false;
-        currentTransform.rotateX = 0;
-        currentTransform.rotateY = 0;
-        currentTransform.rotate = 0;
-        currentTransform.scale = 1;
-        if (animFrame) cancelAnimationFrame(animFrame);
-        animFrame = requestAnimationFrame(updateTransform);
-        // Smooth return transition
-        logo.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
-        setTimeout(() => { if (logo) logo.style.transition = ''; }, 400);
-      }
-      
-      function handleMouseEnter() {
-        hoverActive = true;
-        logo.style.transition = 'transform 0.03s linear';
-        // Also add a subtle pulse class (handled by CSS)
-      }
-      
-      logo.addEventListener('mousemove', handleMouseMove);
-      logo.addEventListener('mouseleave', handleMouseLeave);
-      logo.addEventListener('mouseenter', handleMouseEnter);
-      updateTransform();
     }
     
-    // Copy buttons (unchanged)
+    function animateRipple() {
+      if (!rippleActive && rippleRadius <= 0) {
+        if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
+        return;
+      }
+      if (rippleActive) {
+        rippleRadius += 6;
+        rippleAlpha -= 0.02;
+        if (rippleRadius > 70 || rippleAlpha <= 0) {
+          rippleActive = false;
+          rippleRadius = 0;
+          rippleAlpha = 0;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
+          return;
+        }
+      } else {
+        if (rippleRadius <= 0) {
+          if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
+          return;
+        }
+        rippleRadius -= 4;
+        rippleAlpha -= 0.03;
+        if (rippleRadius <= 0) {
+          rippleRadius = 0;
+          rippleAlpha = 0;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
+          return;
+        }
+      }
+      if (window.lastRippleX && window.lastRippleY) {
+        drawRipple(window.lastRippleX, window.lastRippleY);
+      }
+      animationFrameRipple = requestAnimationFrame(animateRipple);
+    }
+    
+    // 3D tilt transform for logo (ultra reactive)
+    let currentTransform = { rotateX: 0, rotateY: 0, scale: 1 };
+    let animFrameTilt = null;
+    function updateTransform() {
+      if (logo) {
+        logo.style.transform = `perspective(800px) rotateX(${currentTransform.rotateX}deg) rotateY(${currentTransform.rotateY}deg) scale(${currentTransform.scale})`;
+      }
+    }
+    
+    let hoverActive = false;
+    function handleMouseMove(e) {
+      if (!hoverActive) return;
+      const rect = logo.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const relX = (e.clientX - centerX) / (rect.width / 2);
+      const relY = (e.clientY - centerY) / (rect.height / 2);
+      const maxTilt = 22;
+      let rotY = relX * maxTilt;
+      let rotX = -relY * maxTilt;
+      currentTransform.rotateX = Math.min(Math.max(rotX, -maxTilt), maxTilt);
+      currentTransform.rotateY = Math.min(Math.max(rotY, -maxTilt), maxTilt);
+      currentTransform.scale = 1.12;
+      if (animFrameTilt) cancelAnimationFrame(animFrameTilt);
+      animFrameTilt = requestAnimationFrame(updateTransform);
+      
+      // Ripple at cursor relative to logo
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      if (mouseX >= 0 && mouseX <= rect.width && mouseY >= 0 && mouseY <= rect.height) {
+        window.lastRippleX = mouseX;
+        window.lastRippleY = mouseY;
+        rippleActive = true;
+        rippleRadius = 8;
+        rippleAlpha = 0.7;
+        drawRipple(mouseX, mouseY);
+        if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
+        animateRipple();
+      }
+      
+      // Generate steam particle occasionally
+      if (Math.random() < 0.3) {
+        const steam = document.createElement('div');
+        steam.className = 'steam-particle';
+        const offsetX = (Math.random() * 30) + 15;
+        const offsetY = (Math.random() * 20) + 10;
+        steam.style.left = `${offsetX}px`;
+        steam.style.top = `${offsetY}px`;
+        logo.appendChild(steam);
+        setTimeout(() => steam.remove(), 1200);
+      }
+    }
+    
+    function handleMouseLeave() {
+      hoverActive = false;
+      currentTransform.rotateX = 0;
+      currentTransform.rotateY = 0;
+      currentTransform.scale = 1;
+      if (animFrameTilt) cancelAnimationFrame(animFrameTilt);
+      animFrameTilt = requestAnimationFrame(updateTransform);
+      logo.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
+      setTimeout(() => { if (logo) logo.style.transition = ''; }, 400);
+      // fade out ripple
+      if (rippleActive) {
+        rippleActive = false;
+        animateRipple();
+      }
+    }
+    
+    function handleMouseEnter() {
+      hoverActive = true;
+      logo.style.transition = 'transform 0.03s linear';
+      resizeCanvas();
+    }
+    
+    logo.addEventListener('mousemove', handleMouseMove);
+    logo.addEventListener('mouseleave', handleMouseLeave);
+    logo.addEventListener('mouseenter', handleMouseEnter);
+    updateTransform();
+    
+    // Copy button logic (unchanged)
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-target');
