@@ -112,7 +112,8 @@
     .example:nth-child(18) { --order: 18; }
     .example:nth-child(19) { --order: 19; }
     .example:nth-child(20) { --order: 20; }
-    .example:nth-child(21) { --order: 21; } /* support for palindrome example */
+    .example:nth-child(21) { --order: 21; }
+    .example:nth-child(22) { --order: 22; } /* For Armstrong example */
 
     header {
       background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e);
@@ -253,7 +254,7 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into an IDE.</p>
 
-        <!-- All existing examples preserved exactly -->
+        <!-- All existing examples preserved exactly (no changes) -->
         <div class="example" id="hello">
           <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
@@ -332,7 +333,7 @@ public class TypeCastingDemo {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac TypeCastingDemo.java</div><button class="btn" data-target="code-casting">Copy Code</button></div>
         </div>
 
-        <!-- Even or Odd Checker (existing, unchanged) -->
+        <!-- Even or Odd Checker (existing) -->
         <div class="example" id="even-odd">
           <div class="meta"><strong>Even or Odd Checker</strong><div class="small">Check whether a number is even or odd</div></div>
           <pre id="code-even-odd"><code>// EvenOdd.java
@@ -354,41 +355,69 @@ public class EvenOdd {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac EvenOdd.java</div><button class="btn" data-target="code-even-odd">Copy Code</button></div>
         </div>
 
-        <!-- NEW: Palindrome Checker -->
+        <!-- Palindrome Checker (existing) -->
         <div class="example" id="palindrome">
-          <div class="meta">
-            <strong>Palindrome Checker</strong>
-            <div class="small">Check whether a number is palindrome (e.g., 121 → Palindrome)</div>
-          </div>
+          <div class="meta"><strong>Palindrome Checker</strong><div class="small">Check whether a number is palindrome (e.g., 121 → Palindrome)</div></div>
           <pre id="code-palindrome"><code>// PalindromeNumber.java
 import java.util.Scanner;
-
 public class PalindromeNumber {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter an integer: ");
         int num = sc.nextInt();
-        int original = num;
-        int reversed = 0;
-        
+        int original = num, reversed = 0;
         while (num != 0) {
             int digit = num % 10;
             reversed = reversed * 10 + digit;
             num /= 10;
         }
-        
-        if (original == reversed) {
+        if (original == reversed)
             System.out.println(original + " is a palindrome.");
-        } else {
+        else
             System.out.println(original + " is not a palindrome.");
+        sc.close();
+    }
+}
+</code></pre>
+          <div class="meta" style="margin-top:8px;"><div class="small">Example: 121 → Palindrome</div><button class="btn" data-target="code-palindrome">Copy Code</button></div>
+        </div>
+
+        <!-- NEW: Armstrong Number Checker -->
+        <div class="example" id="armstrong">
+          <div class="meta">
+            <strong>Armstrong Number Checker</strong>
+            <div class="small">Check whether a number is an Armstrong number (e.g., 153 = 1³ + 5³ + 3³)</div>
+          </div>
+          <pre id="code-armstrong"><code>// ArmstrongNumber.java
+import java.util.Scanner;
+
+public class ArmstrongNumber {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter an integer: ");
+        int num = sc.nextInt();
+        int original = num;
+        int sum = 0;
+        int digits = String.valueOf(num).length(); // count digits
+        
+        int temp = num;
+        while (temp != 0) {
+            int digit = temp % 10;
+            sum += Math.pow(digit, digits);
+            temp /= 10;
         }
+        
+        if (sum == original)
+            System.out.println(original + " is an Armstrong number.");
+        else
+            System.out.println(original + " is not an Armstrong number.");
         sc.close();
     }
 }
 </code></pre>
           <div class="meta" style="margin-top:8px;">
-            <div class="small">Example: 121 → Palindrome &nbsp;|&nbsp; Compile: javac PalindromeNumber.java</div>
-            <button class="btn" data-target="code-palindrome">Copy Code</button>
+            <div class="small">Example: 153 → 1³+5³+3³ = 153 &nbsp;|&nbsp; Compile: javac ArmstrongNumber.java</div>
+            <button class="btn" data-target="code-armstrong">Copy Code</button>
           </div>
         </div>
 
@@ -558,8 +587,8 @@ public class ExceptionDemo {
           <p class="small">Use the copy buttons to copy a complete class to clipboard. Save as &lt;PublicClass&gt;.java and run:</p>
           <ol class="small"><li><code>javac FileName.java</code></li><li><code>java ClassName</code></li></ol>
           <hr class="sep"><p class="small"><strong>Interactive Logo</strong> — Move your mouse cursor near the globe logo: it will tilt, scale smoothly, and glow.</p>
-          <hr class="sep"><p class="small"><strong>New: Palindrome Checker</strong> — Checks if a number reads the same forwards and backwards (e.g., 121 → palindrome). Uses integer reversal algorithm.</p>
-          <p class="small">All previous code examples remain unchanged, including Even/Odd, Simple Interest, Quadratic, etc.</p>
+          <hr class="sep"><p class="small"><strong>New: Armstrong Number Checker</strong> — Checks if a number equals the sum of its own digits each raised to the power of the number of digits (e.g., 153 = 1³+5³+3³).</p>
+          <p class="small">All previous 20+ Java examples (Hello World, even/odd, palindrome, simple interest, quadratic, etc.) remain unchanged.</p>
         </div>
       </aside>
     </div>
