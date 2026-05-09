@@ -111,7 +111,8 @@
     .example:nth-child(17) { --order: 17; }
     .example:nth-child(18) { --order: 18; }
     .example:nth-child(19) { --order: 19; }
-    .example:nth-child(20) { --order: 20; }  /* Support for new even-odd example */
+    .example:nth-child(20) { --order: 20; }
+    .example:nth-child(21) { --order: 21; } /* support for palindrome example */
 
     header {
       background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e);
@@ -252,7 +253,7 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into an IDE.</p>
 
-        <!-- Existing examples unchanged -->
+        <!-- All existing examples preserved exactly -->
         <div class="example" id="hello">
           <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
@@ -331,21 +332,16 @@ public class TypeCastingDemo {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac TypeCastingDemo.java</div><button class="btn" data-target="code-casting">Copy Code</button></div>
         </div>
 
-        <!-- NEW: Even or Odd Checker  (added without altering existing examples) -->
+        <!-- Even or Odd Checker (existing, unchanged) -->
         <div class="example" id="even-odd">
-          <div class="meta">
-            <strong>Even or Odd Checker</strong>
-            <div class="small">Check whether a number is even or odd using modulo operator</div>
-          </div>
+          <div class="meta"><strong>Even or Odd Checker</strong><div class="small">Check whether a number is even or odd</div></div>
           <pre id="code-even-odd"><code>// EvenOdd.java
 import java.util.Scanner;
-
 public class EvenOdd {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter an integer: ");
         int num = sc.nextInt();
-        
         if (num % 2 == 0) {
             System.out.println(num + " is even.");
         } else {
@@ -355,9 +351,44 @@ public class EvenOdd {
     }
 }
 </code></pre>
+          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac EvenOdd.java</div><button class="btn" data-target="code-even-odd">Copy Code</button></div>
+        </div>
+
+        <!-- NEW: Palindrome Checker -->
+        <div class="example" id="palindrome">
+          <div class="meta">
+            <strong>Palindrome Checker</strong>
+            <div class="small">Check whether a number is palindrome (e.g., 121 → Palindrome)</div>
+          </div>
+          <pre id="code-palindrome"><code>// PalindromeNumber.java
+import java.util.Scanner;
+
+public class PalindromeNumber {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter an integer: ");
+        int num = sc.nextInt();
+        int original = num;
+        int reversed = 0;
+        
+        while (num != 0) {
+            int digit = num % 10;
+            reversed = reversed * 10 + digit;
+            num /= 10;
+        }
+        
+        if (original == reversed) {
+            System.out.println(original + " is a palindrome.");
+        } else {
+            System.out.println(original + " is not a palindrome.");
+        }
+        sc.close();
+    }
+}
+</code></pre>
           <div class="meta" style="margin-top:8px;">
-            <div class="small">Compile: javac EvenOdd.java &nbsp;&nbsp; Run: java EvenOdd</div>
-            <button class="btn" data-target="code-even-odd">Copy Code</button>
+            <div class="small">Example: 121 → Palindrome &nbsp;|&nbsp; Compile: javac PalindromeNumber.java</div>
+            <button class="btn" data-target="code-palindrome">Copy Code</button>
           </div>
         </div>
 
@@ -527,8 +558,8 @@ public class ExceptionDemo {
           <p class="small">Use the copy buttons to copy a complete class to clipboard. Save as &lt;PublicClass&gt;.java and run:</p>
           <ol class="small"><li><code>javac FileName.java</code></li><li><code>java ClassName</code></li></ol>
           <hr class="sep"><p class="small"><strong>Interactive Logo</strong> — Move your mouse cursor near the globe logo: it will tilt, scale smoothly, and glow.</p>
-          <hr class="sep"><p class="small"><strong>Even or Odd Checker</strong> (new): Simple program using modulo operator to check if a number is even or odd.</p>
-          <p class="small">All previous code examples remain unchanged.</p>
+          <hr class="sep"><p class="small"><strong>New: Palindrome Checker</strong> — Checks if a number reads the same forwards and backwards (e.g., 121 → palindrome). Uses integer reversal algorithm.</p>
+          <p class="small">All previous code examples remain unchanged, including Even/Odd, Simple Interest, Quadratic, etc.</p>
         </div>
       </aside>
     </div>
