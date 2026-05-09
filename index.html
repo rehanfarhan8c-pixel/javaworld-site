@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Java World</title>
-  <!-- Add a custom favicon (logo) that appears in browser tab - inline SVG favicon -->
+  <!-- custom favicon (logo in browser tab) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%232b6cb0' stroke='%231f4f7a' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3Cpath d='M50 20 L50 80 M20 50 L80 50' stroke='%23ffffff' stroke-width='2'/%3E%3Cpath d='M30 30 A40 40 0 0 1 70 70 M70 30 A40 40 0 0 0 30 70' stroke='%23ffffff' fill='none' stroke-width='2'/%3E%3Ctext x='50' y='68' font-size='20' text-anchor='middle' fill='%23ffffff' font-weight='bold'%3E☕%3C/text%3E%3C/svg%3E">
   <style>
     :root{
@@ -17,27 +17,35 @@
     }
     html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;}
     header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
-    /* Logo container styles */
+    /* Logo container with interactive mouse-reactive effect */
     .logo-globe {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 56px;
       height: 56px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.18);
       border-radius: 50%;
-      backdrop-filter: blur(2px);
-      transition: transform 0.3s ease, box-shadow 0.2s;
+      backdrop-filter: blur(4px);
+      transition: box-shadow 0.25s ease, background 0.2s;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      will-change: transform;
+      cursor: pointer;
     }
-    .logo-globe:hover {
-      transform: scale(1.05) rotate(2deg);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    /* will be controlled by JS for 3D tilt + scale on hover, but also provide base smoothness */
+    .logo-globe {
+      transition: transform 0.1s ease-out, box-shadow 0.2s ease, background 0.2s;
     }
     .logo-svg {
       width: 46px;
       height: 46px;
       display: block;
+      transition: filter 0.2s;
+    }
+    /* interactive glow when mouse is near/on the logo (reactive) */
+    .logo-globe:hover {
+      background: rgba(255,255,255,0.35);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 0 0 3px rgba(255,215,0,0.5);
     }
     .title-group {
       display: flex;
@@ -46,7 +54,6 @@
     }
     header h1{margin:0;font-size:28px;letter-spacing:0.4px; line-height:1.2;}
     header p{margin:4px 0 0;color:rgba(255,255,255,0.9); font-size:0.9rem;}
-    /* For smaller screens keep centered */
     @media (max-width: 560px) {
       header { flex-direction: column; text-align: center; gap: 8px; }
       .title-group { text-align: center; }
@@ -69,7 +76,7 @@
     .copied{background:#16a34a;padding:6px 10px;border-radius:6px;color:#fff;font-weight:600}
     hr.sep{border:0;border-top:1px solid #eef2f7;margin:14px 0}
   </style>
-  <!-- ANIMATIONS STYLES (existing + more background depth) -->
+  <!-- existing animations + background (unchanged except logo enhancements) -->
   <style>
     @keyframes gentleFadeSlide {
       0% { opacity: 0; transform: translateY(18px);}
@@ -132,7 +139,7 @@
     footer:hover .small { opacity: 0.85;}
     .container { animation: gentleFadeSlide 0.6s ease-out;}
     
-    /* Enhanced background animations (floating gradient + orbs) */
+    /* Enhanced background animations (same as before, kept intact) */
     body {
       background: radial-gradient(circle at 10% 20%, rgba(43, 108, 176, 0.08), rgba(31, 79, 122, 0.02));
       position: relative;
@@ -215,8 +222,8 @@
 </div>
 
   <header>
-    <!-- Custom Globe Logo replacing the placeholder globe from your reference image -->
-    <div class="logo-globe" aria-label="Java World Logo - Globe with coffee symbol">
+    <!-- Interactive Mouse-Reactive Logo: 3D tilt + scale + glow when cursor moves near -->
+    <div class="logo-globe" id="interactiveLogo" aria-label="Java World Logo - reactive to mouse">
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="50" r="46" fill="white" stroke="#2b6cb0" stroke-width="2.5"/>
         <circle cx="50" cy="50" r="18" fill="none" stroke="#1f4f7a" stroke-width="2.5"/>
@@ -248,10 +255,7 @@
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into an IDE.</p>
 
         <div class="example" id="hello">
-          <div class="meta">
-            <strong>Hello World</strong>
-            <div><button class="btn" data-target="code-hello">Copy</button></div>
-          </div>
+          <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -262,13 +266,9 @@ public class HelloWorld {
         </div>
 
         <div class="example" id="basics">
-          <div class="meta">
-            <strong>Basic Input and Data Types</strong>
-            <div class="small">Run from terminal; enter a number when prompted</div>
-          </div>
+          <div class="meta"><strong>Basic Input and Data Types</strong><div class="small">Run from terminal; enter a number when prompted</div></div>
           <pre id="code-basics"><code>// ReadNumber.java
 import java.util.Scanner;
-
 public class ReadNumber {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -282,7 +282,7 @@ public class ReadNumber {
         </div>
 
         <div class="example" id="variables">
-          <div class="meta"><strong>Variables & Arithmetic</strong><div class="small">Declare variables, perform basic math operations</div></div>
+          <div class="meta"><strong>Variables & Arithmetic</strong><div class="small">Declare variables, basic math</div></div>
           <pre id="code-variables"><code>// ArithmeticDemo.java
 public class ArithmeticDemo {
     public static void main(String[] args) {
@@ -497,8 +497,8 @@ public class ExceptionDemo {
           <h2>Quick Actions</h2>
           <p class="small">Use the copy buttons to copy a complete class to clipboard. Save as &lt;PublicClass&gt;.java and run:</p>
           <ol class="small"><li><code>javac FileName.java</code></li><li><code>java ClassName</code></li></ol>
-          <hr class="sep"><p class="small"><strong>Logo</strong> — The custom globe + coffee cup logo now appears in header and browser tab, replacing the previous placeholder globe image.</p>
-          <hr class="sep"><p class="small"><strong>Note</strong>: All original Java examples & content remain unchanged; only visual logo & background animations enhanced.</p>
+          <hr class="sep"><p class="small"><strong>Interactive Logo</strong> — Move your mouse cursor near the globe logo: it will tilt, scale smoothly, and glow. This is a reactive mouse animation similar to modern interactive UIs.</p>
+          <hr class="sep"><p class="small"><strong>All code examples remain unchanged, only visual logo interactivity added.</strong></p>
         </div>
       </aside>
     </div>
@@ -506,6 +506,63 @@ public class ExceptionDemo {
   <footer><div class="small">© 2026 Java World — Real Java examples provided for learning</div></footer>
 
   <script>
+    // ----- Mouse-reactive 3D tilt effect for the logo (Claude-like interaction) -----
+    const logo = document.getElementById('interactiveLogo');
+    if (logo) {
+      // Smooth out the transform
+      let currentTransform = { rotateX: 0, rotateY: 0, scale: 1 };
+      let animFrame = null;
+      
+      function updateTransform() {
+        if (logo) {
+          logo.style.transform = `perspective(600px) rotateX(${currentTransform.rotateX}deg) rotateY(${currentTransform.rotateY}deg) scale(${currentTransform.scale})`;
+        }
+      }
+      
+      function handleMouseMove(e) {
+        const rect = logo.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        // Calculate relative position from -1 to 1
+        const relX = (e.clientX - centerX) / (rect.width / 2);
+        const relY = (e.clientY - centerY) / (rect.height / 2);
+        // Clamp rotation range between -12 and 12 degrees
+        const maxTilt = 14;
+        let rotY = relX * maxTilt;
+        let rotX = -relY * maxTilt;
+        // Add slight scale effect on hover + tilt
+        currentTransform.rotateX = Math.min(Math.max(rotX, -maxTilt), maxTilt);
+        currentTransform.rotateY = Math.min(Math.max(rotY, -maxTilt), maxTilt);
+        currentTransform.scale = 1.08;
+        if (animFrame) cancelAnimationFrame(animFrame);
+        animFrame = requestAnimationFrame(updateTransform);
+      }
+      
+      function handleMouseLeave() {
+        // Smooth return to normal with transition
+        currentTransform.rotateX = 0;
+        currentTransform.rotateY = 0;
+        currentTransform.scale = 1;
+        if (animFrame) cancelAnimationFrame(animFrame);
+        animFrame = requestAnimationFrame(updateTransform);
+        // Also ensure background glow remains only during hover
+        logo.style.transition = 'transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+        setTimeout(() => { if (logo) logo.style.transition = ''; }, 300);
+      }
+      
+      function handleMouseEnter() {
+        logo.style.transition = 'transform 0.05s linear';
+      }
+      
+      logo.addEventListener('mousemove', handleMouseMove);
+      logo.addEventListener('mouseleave', handleMouseLeave);
+      logo.addEventListener('mouseenter', handleMouseEnter);
+      // initial reset style for consistent 3D
+      logo.style.transformStyle = 'preserve-3d';
+      updateTransform();
+    }
+    
+    // ---- copy buttons functionality (unchanged) ----
     document.querySelectorAll('.btn').forEach(btn=>{
       btn.addEventListener('click', async ()=> {
         const id = btn.getAttribute('data-target');
