@@ -17,7 +17,7 @@
     }
     html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;}
     header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
-    /* Logo container with interactive mouse-reactive effect */
+    /* Logo container - enhanced reactive */
     .logo-globe {
       display: inline-flex;
       align-items: center;
@@ -25,25 +25,47 @@
       width: 56px;
       height: 56px;
       background: rgba(255,255,255,0.2);
-      border-radius: 18px;
+      border-radius: 20px;
       backdrop-filter: blur(4px);
-      transition: box-shadow 0.25s ease, background 0.2s;
+      transition: box-shadow 0.2s ease, background 0.2s;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       will-change: transform;
       cursor: pointer;
+      position: relative;
+      overflow: visible;
     }
-    .logo-globe {
-      transition: transform 0.1s ease-out, box-shadow 0.2s ease, background 0.2s;
+    /* Outer glow ring animation on hover (extra reactive) */
+    .logo-globe::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 24px;
+      background: radial-gradient(circle, rgba(255,215,0,0.6), rgba(43,108,176,0));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .logo-globe:hover::before {
+      opacity: 1;
+      animation: pulseGlow 0.8s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.3; transform: scale(0.98);}
+      100% { opacity: 0.8; transform: scale(1.05);}
     }
     .logo-svg {
       width: 48px;
       height: 48px;
       display: block;
-      transition: filter 0.2s;
+      transition: filter 0.2s, transform 0.1s;
     }
     .logo-globe:hover {
-      background: rgba(255,255,255,0.35);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 0 0 3px rgba(255,215,0,0.5);
+      background: rgba(255,255,255,0.4);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 0 4px rgba(255,215,0,0.6);
     }
     .title-group {
       display: flex;
@@ -218,20 +240,14 @@
 </div>
 
   <header>
-    <!-- New logo: coffee cup with code brackets (modern Java brand) -->
-    <div class="logo-globe" id="interactiveLogo" aria-label="Java World Logo - coffee cup with angle brackets">
+    <!-- Enhanced reactive logo -->
+    <div class="logo-globe" id="interactiveLogo" aria-label="Java World Logo - ultra reactive">
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Background (rounded) -->
         <rect x="8" y="8" width="84" height="84" rx="18" fill="white" stroke="#2b6cb0" stroke-width="2.5"/>
-        <!-- Coffee cup body -->
         <path d="M32 32 L68 32 L65 68 L55 74 L45 74 L35 68 L32 32 Z" fill="#2b6cb0" stroke="#1f4f7a" stroke-width="1.5"/>
-        <!-- Cup handle -->
         <path d="M68 42 L74 42 C78 42 78 54 74 54 L68 54" fill="none" stroke="#2b6cb0" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Steam lines -->
         <path d="M40 28 L40 20 M50 26 L50 18 M60 28 L60 20" stroke="#2b6cb0" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"/>
-        <!-- Angle brackets (code symbol) -->
         <text x="50" y="58" font-size="20" text-anchor="middle" fill="white" font-weight="bold" font-family="monospace">&lt;/&gt;</text>
-        <!-- Small coffee bean on cup -->
         <circle cx="50" cy="50" r="4" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
       </svg>
     </div>
@@ -257,7 +273,7 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE. Every code block has been verified for correct Java syntax.</p>
 
-        <!-- All existing code examples unchanged, exactly as before -->
+        <!-- All existing code examples unchanged -->
         <div class="example" id="hello">
           <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
@@ -703,43 +719,60 @@ public class ExceptionDemo {
   </footer>
 
   <script>
-    // Mouse-reactive 3D tilt for logo (same interactive behavior)
+    // ULTRA REACTIVE LOGO: stronger tilt, faster response, additional scale and rotation effect
     const logo = document.getElementById('interactiveLogo');
     if (logo) {
-      let currentTransform = { rotateX: 0, rotateY: 0, scale: 1 };
+      let currentTransform = { rotateX: 0, rotateY: 0, scale: 1, rotate: 0 };
       let animFrame = null;
+      let hoverActive = false;
+      
       function updateTransform() {
         if (logo) {
-          logo.style.transform = `perspective(600px) rotateX(${currentTransform.rotateX}deg) rotateY(${currentTransform.rotateY}deg) scale(${currentTransform.scale})`;
+          // Apply a more dramatic 3D tilt + slight rotation + scale
+          logo.style.transform = `perspective(800px) rotateX(${currentTransform.rotateX}deg) rotateY(${currentTransform.rotateY}deg) rotate(${currentTransform.rotate}deg) scale(${currentTransform.scale})`;
         }
       }
+      
       function handleMouseMove(e) {
+        if (!hoverActive) return;
         const rect = logo.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
+        // Increase sensitivity: wider range for tilt (-20 to 20 degrees)
         const relX = (e.clientX - centerX) / (rect.width / 2);
         const relY = (e.clientY - centerY) / (rect.height / 2);
-        const maxTilt = 14;
+        const maxTilt = 22;   // more dramatic
+        const maxRotate = 8;  // slight extra spin
         let rotY = relX * maxTilt;
         let rotX = -relY * maxTilt;
+        let extraRot = relX * maxRotate;
         currentTransform.rotateX = Math.min(Math.max(rotX, -maxTilt), maxTilt);
         currentTransform.rotateY = Math.min(Math.max(rotY, -maxTilt), maxTilt);
-        currentTransform.scale = 1.08;
+        currentTransform.rotate = extraRot * 0.5;
+        currentTransform.scale = 1.12;  // larger scale on hover
         if (animFrame) cancelAnimationFrame(animFrame);
         animFrame = requestAnimationFrame(updateTransform);
       }
+      
       function handleMouseLeave() {
+        hoverActive = false;
         currentTransform.rotateX = 0;
         currentTransform.rotateY = 0;
+        currentTransform.rotate = 0;
         currentTransform.scale = 1;
         if (animFrame) cancelAnimationFrame(animFrame);
         animFrame = requestAnimationFrame(updateTransform);
-        logo.style.transition = 'transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-        setTimeout(() => { if (logo) logo.style.transition = ''; }, 300);
+        // Smooth return transition
+        logo.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
+        setTimeout(() => { if (logo) logo.style.transition = ''; }, 400);
       }
+      
       function handleMouseEnter() {
-        logo.style.transition = 'transform 0.05s linear';
+        hoverActive = true;
+        logo.style.transition = 'transform 0.03s linear';
+        // Also add a subtle pulse class (handled by CSS)
       }
+      
       logo.addEventListener('mousemove', handleMouseMove);
       logo.addEventListener('mouseleave', handleMouseLeave);
       logo.addEventListener('mouseenter', handleMouseEnter);
