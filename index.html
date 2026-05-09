@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Java World</title>
-  <!-- favicon matching new logo -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232b6cb0'/%3E%3Cpath d='M35 45 L65 45 L65 55 L55 60 L45 60 L35 55 Z' fill='white'/%3E%3Cpath d='M65 48 L70 48 C72 48 72 52 70 52 L65 52' fill='none' stroke='white' stroke-width='2'/%3E%3Cpath d='M42 38 L42 45 M50 36 L50 45 M58 38 L58 45' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Ctext x='50' y='80' font-size='14' fill='white' font-weight='bold' text-anchor='middle'%3E☕%3C/text%3E%3C/svg%3E">
+  <!-- custom favicon - nano arc reactor style -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230d2b4a' stroke='%232b6cb0' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='36' fill='none' stroke='%2341b0ee' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%2341b0ee'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3Cpath d='M50 14 L50 26 M50 74 L50 86 M14 50 L26 50 M74 50 L86 50' stroke='%2341b0ee' stroke-width='2'/%3E%3C/svg%3E">
   <style>
     :root{
       --bg:#f6f7fb;
@@ -17,7 +17,7 @@
     }
     html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;}
     header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:2;}
-    /* Logo container - Claude style ultra-reactive */
+    /* Logo container - nano arc reactor style */
     .logo-globe {
       display: inline-flex;
       align-items: center;
@@ -25,7 +25,7 @@
       width: 64px;
       height: 64px;
       background: rgba(255,255,255,0.18);
-      border-radius: 24px;
+      border-radius: 50%;
       backdrop-filter: blur(4px);
       transition: box-shadow 0.2s ease, background 0.2s;
       box-shadow: 0 6px 14px rgba(0,0,0,0.15);
@@ -35,14 +35,14 @@
       overflow: visible;
       z-index: 10;
     }
-    /* ripple ring overlay (canvas will be used for dynamic cursor ripple) */
+    /* ripple ring canvas */
     .logo-ripple-canvas {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 24px;
+      border-radius: 50%;
       pointer-events: none;
       z-index: 20;
     }
@@ -54,25 +54,22 @@
       position: relative;
       z-index: 5;
     }
-    /* steam animation for coffee cup */
-    @keyframes steamDrift {
-      0% { transform: translateY(0) scale(1); opacity: 0.6; }
-      100% { transform: translateY(-12px) scale(1.3); opacity: 0; }
+    /* energy pulse animation */
+    @keyframes reactorPulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.2); opacity: 0; }
     }
-    .steam-particle {
+    .energy-particle {
       position: absolute;
-      background: rgba(255,255,255,0.7);
-      width: 4px;
-      height: 4px;
+      background: rgba(65, 176, 238, 0.8);
       border-radius: 50%;
-      filter: blur(1px);
       pointer-events: none;
       z-index: 15;
-      animation: steamDrift 1.2s ease-out forwards;
+      animation: reactorPulse 1s ease-out forwards;
     }
     .logo-globe:hover {
       background: rgba(255,255,255,0.35);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 0 4px rgba(255,215,0,0.5);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 0 4px rgba(65,176,238,0.6);
     }
     .title-group {
       display: flex;
@@ -247,21 +244,31 @@
 </div>
 
   <header>
-    <!-- Claude-style interactive logo with canvas ripple + steam -->
+    <!-- Nano Arc Reactor Logo with interactive effects -->
     <div class="logo-globe" id="interactiveLogo" style="position: relative;">
       <canvas id="rippleCanvas" class="logo-ripple-canvas" width="64" height="64"></canvas>
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="8" y="8" width="84" height="84" rx="18" fill="white" stroke="#2b6cb0" stroke-width="2.5"/>
-        <!-- coffee cup body -->
-        <path d="M32 32 L68 32 L65 68 L55 74 L45 74 L35 68 L32 32 Z" fill="#2b6cb0" stroke="#1f4f7a" stroke-width="1.5"/>
-        <!-- handle -->
-        <path d="M68 42 L74 42 C78 42 78 54 74 54 L68 54" fill="none" stroke="#2b6cb0" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- steam dashes -->
-        <path d="M40 28 L40 20 M50 26 L50 18 M60 28 L60 20" stroke="#2b6cb0" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"/>
-        <!-- angle brackets (code) -->
-        <text x="50" y="58" font-size="20" text-anchor="middle" fill="white" font-weight="bold" font-family="monospace">&lt;/&gt;</text>
-        <!-- coffee bean accent -->
-        <circle cx="50" cy="50" r="4" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+        <!-- Outer ring -->
+        <circle cx="50" cy="50" r="46" fill="#0d2b4a" stroke="#2b6cb0" stroke-width="2.5"/>
+        <!-- Middle glowing ring -->
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#41b0ee" stroke-width="2.5" stroke-dasharray="4 3"/>
+        <!-- Inner energy core -->
+        <circle cx="50" cy="50" r="24" fill="none" stroke="#41b0ee" stroke-width="2"/>
+        <!-- Central blue glow -->
+        <circle cx="50" cy="50" r="14" fill="#41b0ee" opacity="0.8"/>
+        <circle cx="50" cy="50" r="6" fill="white"/>
+        <!-- Crosshair / arc reactor details -->
+        <line x1="50" y1="16" x2="50" y2="24" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="50" y1="76" x2="50" y2="84" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="16" y1="50" x2="24" y2="50" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="76" y1="50" x2="84" y2="50" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Corner accents -->
+        <path d="M30 30 L36 36 M70 30 L64 36 M30 70 L36 64 M70 70 L64 64" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
+        <!-- Small energy dots -->
+        <circle cx="50" cy="32" r="2" fill="#41b0ee"/>
+        <circle cx="50" cy="68" r="2" fill="#41b0ee"/>
+        <circle cx="32" cy="50" r="2" fill="#41b0ee"/>
+        <circle cx="68" cy="50" r="2" fill="#41b0ee"/>
       </svg>
     </div>
     <div class="title-group">
@@ -286,7 +293,7 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE. Every code block has been verified for correct Java syntax.</p>
 
-        <!-- (All existing code examples remain exactly the same, unchanged) -->
+        <!-- All existing Java examples unchanged -->
         <div class="example" id="hello">
           <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
@@ -732,7 +739,7 @@ public class ExceptionDemo {
   </footer>
 
   <script>
-    // Claude-style reactive logo: 3D tilt + dynamic canvas ripple + steam particles
+    // Claude-style reactive logo: 3D tilt + ripple canvas + energy particles
     const logo = document.getElementById('interactiveLogo');
     const canvas = document.getElementById('rippleCanvas');
     const ctx = canvas.getContext('2d');
@@ -741,7 +748,6 @@ public class ExceptionDemo {
     let rippleAlpha = 0;
     let animationFrameRipple = null;
     
-    // resize canvas to match logo dimensions
     function resizeCanvas() {
       const rect = logo.getBoundingClientRect();
       canvas.width = rect.width;
@@ -752,15 +758,14 @@ public class ExceptionDemo {
     window.addEventListener('resize', () => { resizeCanvas(); });
     resizeCanvas();
     
-    // Draw ripple effect based on mouse position
     function drawRipple(x, y) {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (rippleRadius > 0 && rippleAlpha > 0) {
         const gradient = ctx.createRadialGradient(x, y, 2, x, y, rippleRadius);
-        gradient.addColorStop(0, `rgba(255, 215, 0, ${rippleAlpha * 0.8})`);
+        gradient.addColorStop(0, `rgba(65, 176, 238, ${rippleAlpha * 0.9})`);
         gradient.addColorStop(0.6, `rgba(43, 108, 176, ${rippleAlpha * 0.5})`);
-        gradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
+        gradient.addColorStop(1, 'rgba(65, 176, 238, 0)');
         ctx.fillStyle = gradient;
         ctx.arc(x, y, rippleRadius, 0, Math.PI * 2);
         ctx.fill();
@@ -773,7 +778,7 @@ public class ExceptionDemo {
         return;
       }
       if (rippleActive) {
-        rippleRadius += 6;
+        rippleRadius += 5;
         rippleAlpha -= 0.02;
         if (rippleRadius > 70 || rippleAlpha <= 0) {
           rippleActive = false;
@@ -804,7 +809,6 @@ public class ExceptionDemo {
       animationFrameRipple = requestAnimationFrame(animateRipple);
     }
     
-    // 3D tilt transform for logo (ultra reactive)
     let currentTransform = { rotateX: 0, rotateY: 0, scale: 1 };
     let animFrameTilt = null;
     function updateTransform() {
@@ -830,7 +834,6 @@ public class ExceptionDemo {
       if (animFrameTilt) cancelAnimationFrame(animFrameTilt);
       animFrameTilt = requestAnimationFrame(updateTransform);
       
-      // Ripple at cursor relative to logo
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
       if (mouseX >= 0 && mouseX <= rect.width && mouseY >= 0 && mouseY <= rect.height) {
@@ -842,18 +845,18 @@ public class ExceptionDemo {
         drawRipple(mouseX, mouseY);
         if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
         animateRipple();
-      }
-      
-      // Generate steam particle occasionally
-      if (Math.random() < 0.3) {
-        const steam = document.createElement('div');
-        steam.className = 'steam-particle';
-        const offsetX = (Math.random() * 30) + 15;
-        const offsetY = (Math.random() * 20) + 10;
-        steam.style.left = `${offsetX}px`;
-        steam.style.top = `${offsetY}px`;
-        logo.appendChild(steam);
-        setTimeout(() => steam.remove(), 1200);
+        
+        // energy particles
+        if (Math.random() < 0.4) {
+          const particle = document.createElement('div');
+          particle.className = 'energy-particle';
+          particle.style.width = '6px';
+          particle.style.height = '6px';
+          particle.style.left = `${mouseX}px`;
+          particle.style.top = `${mouseY}px`;
+          logo.appendChild(particle);
+          setTimeout(() => particle.remove(), 1000);
+        }
       }
     }
     
@@ -866,7 +869,6 @@ public class ExceptionDemo {
       animFrameTilt = requestAnimationFrame(updateTransform);
       logo.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
       setTimeout(() => { if (logo) logo.style.transition = ''; }, 400);
-      // fade out ripple
       if (rippleActive) {
         rippleActive = false;
         animateRipple();
@@ -884,7 +886,7 @@ public class ExceptionDemo {
     logo.addEventListener('mouseenter', handleMouseEnter);
     updateTransform();
     
-    // Copy button logic (unchanged)
+    // Copy buttons logic (unchanged)
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-target');
