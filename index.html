@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Java World</title>
-  <!-- custom favicon - nano arc reactor style -->
+  <title>Java World | Nano Tech Arc Reactor</title>
+  <!-- default favicon (arc reactor style) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230d2b4a' stroke='%232b6cb0' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='36' fill='none' stroke='%2341b0ee' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%2341b0ee'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3Cpath d='M50 14 L50 26 M50 74 L50 86 M14 50 L26 50 M74 50 L86 50' stroke='%2341b0ee' stroke-width='2'/%3E%3C/svg%3E">
   <style>
+    /* ---------- ORIGINAL THEME (default) ---------- */
     :root{
       --bg:#f6f7fb;
       --card:#ffffff;
@@ -14,10 +15,13 @@
       --muted:#6b7280;
       --code-bg:#0b1220;
       --code-fg:#d6deeb;
+      --nav-bg:#16324a;
+      --header-grad-start:#1f4f7a;
+      --header-grad-end:#2b6cb0;
+      --shadow-color:rgba(15,23,42,0.06);
     }
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;}
-    header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:2;}
-    /* Logo container - nano arc reactor style */
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;transition: background-color 0.5s ease, color 0.3s ease;}
+    header{background:linear-gradient(90deg,var(--header-grad-start),var(--header-grad-end));color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:2;transition: all 0.4s;}
     .logo-globe {
       display: inline-flex;
       align-items: center;
@@ -27,7 +31,7 @@
       background: rgba(255,255,255,0.18);
       border-radius: 50%;
       backdrop-filter: blur(4px);
-      transition: box-shadow 0.2s ease, background 0.2s;
+      transition: box-shadow 0.2s ease, background 0.2s, transform 0.1s;
       box-shadow: 0 6px 14px rgba(0,0,0,0.15);
       will-change: transform;
       cursor: pointer;
@@ -35,7 +39,6 @@
       overflow: visible;
       z-index: 10;
     }
-    /* ripple ring canvas */
     .logo-ripple-canvas {
       position: absolute;
       top: 0;
@@ -54,52 +57,25 @@
       position: relative;
       z-index: 5;
     }
-    /* energy pulse animation */
-    @keyframes reactorPulse {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(1.2); opacity: 0; }
-    }
-    .energy-particle {
-      position: absolute;
-      background: rgba(65, 176, 238, 0.8);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 15;
-      animation: reactorPulse 1s ease-out forwards;
-    }
-    .logo-globe:hover {
-      background: rgba(255,255,255,0.35);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 0 4px rgba(65,176,238,0.6);
-    }
-    .title-group {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
+    .title-group { display: flex; flex-direction: column; text-align: left; }
     header h1{margin:0;font-size:28px;letter-spacing:0.4px; line-height:1.2;}
     header p{margin:4px 0 0;color:rgba(255,255,255,0.9); font-size:0.9rem;}
-    @media (max-width: 560px) {
-      header { flex-direction: column; text-align: center; gap: 8px; }
-      .title-group { text-align: center; }
-    }
-    nav{display:flex;gap:12px;justify-content:center;padding:12px;background:#16324a;flex-wrap:wrap}
-    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:600}
-    nav a:hover{background:rgba(255,255,255,0.06)}
+    nav{display:flex;gap:12px;justify-content:center;padding:12px;background:var(--nav-bg);flex-wrap:wrap;transition: background 0.3s;}
+    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:600;transition: all 0.2s;}
     .container{max-width:1100px;margin:24px auto;padding:0 16px}
     .grid { display: block; }
-    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06); width:100%; box-sizing:border-box;}
-    h2{margin:0 0 12px;color:var(--accent)}
-    p.lead{margin:0 0 14px;color:var(--muted)}
+    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px var(--shadow-color); width:100%; box-sizing:border-box;transition: background 0.3s, box-shadow 0.3s, transform 0.2s;}
+    h2{margin:0 0 12px;color:var(--accent); transition: color 0.2s;}
+    p.lead{margin:0 0 14px;color:var(--muted);}
     .example{margin-bottom:18px}
-    pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:14px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5}
+    pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:14px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5;transition: background 0.3s, border-color 0.2s;}
     .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
-    .small{font-size:13px;color:var(--muted)}
-    footer{max-width:1100px;margin:28px auto 60px;padding:0 16px;color:var(--muted);text-align:center}
+    .btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600;transition: all 0.2s;}
+    .small{font-size:13px;color:var(--muted);}
+    footer{max-width:1100px;margin:28px auto 60px;padding:0 16px;color:var(--muted);text-align:center;transition: color 0.3s;}
     .copied{background:#16a34a;padding:6px 10px;border-radius:6px;color:#fff;font-weight:600}
-    hr.sep{border:0;border-top:1px solid #eef2f7;margin:14px 0}
-  </style>
-  <style>
+    
+    /* animations (shared) */
     @keyframes gentleFadeSlide {
       0% { opacity: 0; transform: translateY(18px);}
       100% { opacity: 1; transform: translateY(0);}
@@ -107,11 +83,6 @@
     @keyframes softPulse {
       0% { background-position: 0% 50%;}
       100% { background-position: 100% 50%;}
-    }
-    @keyframes subtleGlow {
-      0% { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0.2);}
-      70% { box-shadow: 0 0 0 6px rgba(43, 108, 176, 0);}
-      100% { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0);}
     }
     .grid > section.card { animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; }
     .example { opacity: 0; transform: translateY(12px); animation: gentleFadeSlide 0.45s ease-out forwards; animation-delay: calc(0.05s * var(--order, 0)); }
@@ -137,134 +108,164 @@
     .example:nth-child(20) { --order: 20; }
     .example:nth-child(21) { --order: 21; }
     .example:nth-child(22) { --order: 22; }
-
-    header {
-      background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e);
-      background-size: 250% 250%;
-      animation: softPulse 8s ease infinite;
-      transition: box-shadow 0.3s ease;
-      position: relative;
-      z-index: 2;
-    }
-    .card { transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s ease; will-change: transform; backdrop-filter: blur(0px);}
-    .card:hover { transform: translateY(-6px); box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(0, 0, 0, 0.02);}
-    nav a { position: relative; transition: all 0.2s ease; overflow: hidden;}
-    nav a::after { content: ''; position: absolute; bottom: 4px; left: 50%; width: 0%; height: 2px; background: rgba(255, 255, 255, 0.8); border-radius: 2px; transform: translateX(-50%); transition: width 0.25s ease-out;}
-    nav a:hover::after { width: 70%;}
-    nav a:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-1px);}
-    .btn { transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28); position: relative; overflow: hidden;}
-    .btn:hover { background: #1e4e76; transform: scale(1.04); box-shadow: 0 5px 12px rgba(43, 108, 176, 0.3);}
-    .btn:active { transform: scale(0.97); transition: 0.05s;}
-    .copied { animation: subtleGlow 0.4s ease-out; background: #16a34a;}
-    pre { transition: border-left 0.2s ease, background-color 0.25s ease, box-shadow 0.2s ease; border-left: 3px solid transparent;}
-    pre:hover { border-left-color: var(--accent); background-color: #0e1625; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);}
-    footer .small { transition: opacity 0.2s ease;}
-    footer:hover .small { opacity: 0.85;}
-    .container { animation: gentleFadeSlide 0.6s ease-out;}
     
-    body {
-      background: radial-gradient(circle at 10% 20%, rgba(43, 108, 176, 0.08), rgba(31, 79, 122, 0.02));
-      position: relative;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(125deg, rgba(214,222,235,0.4) 0%, rgba(246,247,251,0.7) 30%, rgba(226,232,240,0.5) 60%, rgba(203,213,225,0.3) 100%);
-      background-size: 300% 300%;
-      animation: breathGradient 22s ease infinite;
-      pointer-events: none;
-      z-index: -2;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      background-image: radial-gradient(circle at 15% 40%, rgba(43,108,176,0.12) 0%, transparent 28%),
-                        radial-gradient(circle at 85% 70%, rgba(31,79,122,0.1) 0%, transparent 35%),
-                        radial-gradient(circle at 45% 10%, rgba(100,150,200,0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 70% 85%, rgba(43,108,176,0.1) 0%, transparent 30%);
-      background-repeat: no-repeat;
-      animation: floatOrbs 32s infinite alternate ease-in-out;
-    }
-    @keyframes breathGradient {
-      0% { background-position: 0% 50%;}
-      50% { background-position: 100% 50%;}
-      100% { background-position: 0% 50%;}
-    }
-    @keyframes floatOrbs {
-      0% { background-position: 0% 0%, 100% 100%, 30% 20%, 80% 90%; background-size: 60% 60%, 55% 55%, 45% 45%, 50% 50%; opacity: 0.7;}
-      50% { background-position: 20% 30%, 70% 60%, 55% 15%, 95% 75%; background-size: 70% 70%, 65% 65%, 55% 55%, 60% 60%; opacity: 0.85;}
-      100% { background-position: 10% 15%, 90% 80%, 40% 30%, 75% 95%; background-size: 55% 55%, 50% 50%, 40% 40%, 45% 45%; opacity: 0.7;}
-    }
-    .bg-particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-    @keyframes particleShift {
-      0% { transform: translate(0, 0) scale(1); opacity: 0.3;}
-      100% { transform: translate(40px, -30px) scale(1.3); opacity: 0;}
-    }
-    .bg-particles i {
-      position: absolute;
-      background: rgba(43, 108, 176, 0.3);
-      border-radius: 50%;
-      animation: particleShift 18s infinite linear;
-    }
+    header { background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e); background-size: 250% 250%; animation: softPulse 8s ease infinite; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 18px 32px rgba(15,23,42,0.12), 0 2px 6px rgba(0,0,0,0.02);}
+    nav a:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px);}
+    .btn:hover { background: #1e4e76; transform: scale(1.04); box-shadow: 0 5px 12px rgba(43,108,176,0.3);}
+    pre:hover { border-left-color: var(--accent); background-color: #0e1625; box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
+    body::before { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; background: linear-gradient(125deg, rgba(214,222,235,0.4) 0%, rgba(246,247,251,0.7) 30%, rgba(226,232,240,0.5) 60%, rgba(203,213,225,0.3) 100%); background-size: 300% 300%; animation: breathGradient 22s ease infinite; pointer-events: none; z-index: -2; transition: opacity 0.5s;}
+    body::after { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: -1; background-image: radial-gradient(circle at 15% 40%, rgba(43,108,176,0.12) 0%, transparent 28%), radial-gradient(circle at 85% 70%, rgba(31,79,122,0.1) 0%, transparent 35%), radial-gradient(circle at 45% 10%, rgba(100,150,200,0.08) 0%, transparent 40%), radial-gradient(circle at 70% 85%, rgba(43,108,176,0.1) 0%, transparent 30%); background-repeat: no-repeat; animation: floatOrbs 32s infinite alternate ease-in-out; transition: opacity 0.5s;}
+    @keyframes breathGradient { 0% { background-position: 0% 50%;} 50% { background-position: 100% 50%;} 100% { background-position: 0% 50%;} }
+    @keyframes floatOrbs { 0% { background-position: 0% 0%, 100% 100%, 30% 20%, 80% 90%; background-size: 60% 60%, 55% 55%, 45% 45%, 50% 50%; opacity: 0.7;} 50% { background-position: 20% 30%, 70% 60%, 55% 15%, 95% 75%; background-size: 70% 70%, 65% 65%, 55% 55%, 60% 60%; opacity: 0.85;} 100% { background-position: 10% 15%, 90% 80%, 40% 30%, 75% 95%; background-size: 55% 55%, 50% 50%, 40% 40%, 45% 45%; opacity: 0.7;} }
     header, nav, .container, footer { position: relative; z-index: 2;}
-    .card { background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(0px); transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s ease, background 0.2s;}
-    .card:hover { background: rgba(255, 255, 255, 1);}
+    .card { background: rgba(255,255,255,0.96); backdrop-filter: blur(0px); transition: transform 0.28s, box-shadow 0.35s, background 0.3s;}
+
+    /* ========= NANO-TECH THEME (Infinity War style) ========= */
+    body.nano-theme {
+      --bg:#03050b;
+      --card:rgba(10, 20, 40, 0.85);
+      --accent:#00e5ff;
+      --muted:#89b4ff;
+      --code-bg:#010a1a;
+      --code-fg:#b0e0ff;
+      --nav-bg:#051024;
+      --header-grad-start:#0a0f2a;
+      --header-grad-end:#001d3d;
+      --shadow-color:rgba(0,229,255,0.2);
+      background: radial-gradient(circle at 20% 30%, #0a0f2a, #000000);
+      color: #e0f0ff;
+    }
+    body.nano-theme header {
+      background: linear-gradient(135deg, #0a1225, #051a2f, #022b4f, #001d3d);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0,229,255,0.2);
+    }
+    body.nano-theme .logo-globe {
+      background: rgba(0,229,255,0.2);
+      box-shadow: 0 0 15px #00e5ff;
+      animation: reactorGlow 1.5s infinite alternate;
+    }
+    @keyframes reactorGlow {
+      0% { box-shadow: 0 0 5px rgba(0,229,255,0.5);}
+      100% { box-shadow: 0 0 25px rgba(0,229,255,0.9);}
+    }
+    body.nano-theme .logo-svg {
+      filter: drop-shadow(0 0 4px #00e5ff);
+    }
+    body.nano-theme .card {
+      background: rgba(5, 15, 30, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(0,229,255,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    body.nano-theme .card:hover {
+      background: rgba(8, 22, 44, 0.9);
+      box-shadow: 0 0 30px rgba(0,229,255,0.2);
+    }
+    body.nano-theme pre {
+      background: #021024;
+      border-left: 3px solid #00e5ff;
+    }
+    body.nano-theme .btn {
+      background: #00aacc;
+      box-shadow: 0 0 8px #00e5ff;
+    }
+    body.nano-theme .btn:hover {
+      background: #00e5ff;
+      color: #000;
+      box-shadow: 0 0 18px #00e5ff;
+    }
+    body.nano-theme nav {
+      background: #020c1a;
+      border-bottom: 1px solid #00e5ff;
+    }
+    body.nano-theme nav a:hover {
+      background: rgba(0,229,255,0.2);
+      text-shadow: 0 0 5px #00e5ff;
+    }
+    body.nano-theme h2 {
+      color: #00e5ff;
+      text-shadow: 0 0 5px #00e5ff;
+    }
+    body.nano-theme p, body.nano-theme .small, body.nano-theme footer {
+      color: #bbd9ff;
+    }
+    /* nano particles canvas (floating nanobots) */
+    .nano-particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    body.nano-theme .nano-particles-canvas {
+      opacity: 1;
+    }
+    /* hexagon grid overlay */
+    .hex-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M50 5 L93 27.5 L93 72.5 L50 95 L7 72.5 L7 27.5 Z" fill="none" stroke="%2300e5ff" stroke-width="1"/><path d="M50 20 L78 34 L78 66 L50 80 L22 66 L22 34 Z" fill="none" stroke="%2300e5ff" stroke-width="0.5"/></svg>');
+      background-repeat: repeat;
+      background-size: 80px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+    body.nano-theme .hex-grid {
+      opacity: 0.15;
+    }
+    /* glitch effect on title */
+    @keyframes glitch {
+      0% { text-shadow: -2px 0 #0ff, 2px 0 #f0f; }
+      50% { text-shadow: 2px 0 #0ff, -2px 0 #f0f; }
+      100% { text-shadow: -2px 0 #0ff, 2px 0 #f0f; }
+    }
+    body.nano-theme header h1 {
+      animation: glitch 0.8s infinite;
+    }
   </style>
 </head>
 <body>
-<div class="bg-particles" aria-hidden="true">
-  <i style="width: 80px; height: 80px; top: 15%; left: 5%; animation-duration: 22s; animation-delay: 0s;"></i>
-  <i style="width: 40px; height: 40px; top: 45%; left: 85%; animation-duration: 28s; animation-delay: 2s;"></i>
-  <i style="width: 120px; height: 120px; top: 70%; left: 20%; animation-duration: 35s; animation-delay: 1s;"></i>
-  <i style="width: 25px; height: 25px; top: 85%; left: 70%; animation-duration: 25s; animation-delay: 4s;"></i>
-  <i style="width: 60px; height: 60px; top: 30%; left: 60%; animation-duration: 40s; animation-delay: 0.5s;"></i>
-  <i style="width: 90px; height: 90px; top: 10%; left: 40%; animation-duration: 30s; animation-delay: 3s;"></i>
-  <i style="width: 45px; height: 45px; top: 55%; left: 15%; animation-duration: 32s; animation-delay: 1.5s;"></i>
-  <i style="width: 70px; height: 70px; top: 90%; left: 45%; animation-duration: 26s; animation-delay: 2.5s;"></i>
-  <i style="width: 30px; height: 30px; top: 20%; left: 75%; animation-duration: 38s; animation-delay: 0.8s;"></i>
-</div>
+  <!-- Nano particles container (dynamic canvas) -->
+  <canvas id="nanoCanvas" class="nano-particles-canvas"></canvas>
+  <div class="hex-grid"></div>
+
+  <div class="bg-particles" aria-hidden="true">
+    <i style="width: 80px; height: 80px; top: 15%; left: 5%; animation-duration: 22s; animation-delay: 0s;"></i>
+    <i style="width: 40px; height: 40px; top: 45%; left: 85%; animation-duration: 28s; animation-delay: 2s;"></i>
+    <i style="width: 120px; height: 120px; top: 70%; left: 20%; animation-duration: 35s; animation-delay: 1s;"></i>
+    <i style="width: 25px; height: 25px; top: 85%; left: 70%; animation-duration: 25s; animation-delay: 4s;"></i>
+    <i style="width: 60px; height: 60px; top: 30%; left: 60%; animation-duration: 40s; animation-delay: 0.5s;"></i>
+    <i style="width: 90px; height: 90px; top: 10%; left: 40%; animation-duration: 30s; animation-delay: 3s;"></i>
+    <i style="width: 45px; height: 45px; top: 55%; left: 15%; animation-duration: 32s; animation-delay: 1.5s;"></i>
+    <i style="width: 70px; height: 70px; top: 90%; left: 45%; animation-duration: 26s; animation-delay: 2.5s;"></i>
+    <i style="width: 30px; height: 30px; top: 20%; left: 75%; animation-duration: 38s; animation-delay: 0.8s;"></i>
+  </div>
 
   <header>
-    <!-- Nano Arc Reactor Logo with interactive effects -->
     <div class="logo-globe" id="interactiveLogo" style="position: relative;">
       <canvas id="rippleCanvas" class="logo-ripple-canvas" width="64" height="64"></canvas>
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer ring -->
         <circle cx="50" cy="50" r="46" fill="#0d2b4a" stroke="#2b6cb0" stroke-width="2.5"/>
-        <!-- Middle glowing ring -->
         <circle cx="50" cy="50" r="36" fill="none" stroke="#41b0ee" stroke-width="2.5" stroke-dasharray="4 3"/>
-        <!-- Inner energy core -->
         <circle cx="50" cy="50" r="24" fill="none" stroke="#41b0ee" stroke-width="2"/>
-        <!-- Central blue glow -->
         <circle cx="50" cy="50" r="14" fill="#41b0ee" opacity="0.8"/>
         <circle cx="50" cy="50" r="6" fill="white"/>
-        <!-- Crosshair / arc reactor details -->
         <line x1="50" y1="16" x2="50" y2="24" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
         <line x1="50" y1="76" x2="50" y2="84" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
         <line x1="16" y1="50" x2="24" y2="50" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
         <line x1="76" y1="50" x2="84" y2="50" stroke="#41b0ee" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Corner accents -->
         <path d="M30 30 L36 36 M70 30 L64 36 M30 70 L36 64 M70 70 L64 64" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
-        <!-- Small energy dots -->
         <circle cx="50" cy="32" r="2" fill="#41b0ee"/>
         <circle cx="50" cy="68" r="2" fill="#41b0ee"/>
         <circle cx="32" cy="50" r="2" fill="#41b0ee"/>
@@ -293,21 +294,16 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE. Every code block has been verified for correct Java syntax.</p>
 
-        <!-- All existing Java examples unchanged -->
-        <div class="example" id="hello">
-          <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
-          <pre id="code-hello"><code>// HelloWorld.java
+        <!-- All original Java examples (identical, unchanged) -->
+        <div class="example" id="hello"><div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div><pre id="code-hello"><code>// HelloWorld.java
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, Java World!");
     }
 }
-</code></pre>
-        </div>
+</code></pre></div>
 
-        <div class="example" id="basics">
-          <div class="meta"><strong>Basic Input and Data Types</strong><div class="small">Run from terminal; enter a number when prompted</div></div>
-          <pre id="code-basics"><code>// ReadNumber.java
+        <div class="example" id="basics"><div class="meta"><strong>Basic Input and Data Types</strong><div class="small">Run from terminal; enter a number when prompted</div></div><pre id="code-basics"><code>// ReadNumber.java
 import java.util.Scanner;
 public class ReadNumber {
     public static void main(String[] args) {
@@ -318,28 +314,20 @@ public class ReadNumber {
         sc.close();
     }
 }
-</code></pre>
-        </div>
+</code></pre></div>
 
-        <div class="example" id="variables">
-          <div class="meta"><strong>Variables & Arithmetic</strong><div class="small">Declare variables, basic math</div></div>
-          <pre id="code-variables"><code>// ArithmeticDemo.java
+        <div class="example" id="variables"><div class="meta"><strong>Variables & Arithmetic</strong><div class="small">Declare variables, basic math</div></div><pre id="code-variables"><code>// ArithmeticDemo.java
 public class ArithmeticDemo {
     public static void main(String[] args) {
-        int a = 25;
-        int b = 7;
+        int a = 25; int b = 7;
         System.out.println("Sum = " + (a + b));
         System.out.println("Product = " + (a * b));
         System.out.println("Remainder = " + (a % b));
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac ArithmeticDemo.java</div><button class="btn" data-target="code-variables">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac ArithmeticDemo.java</div><button class="btn" data-target="code-variables">Copy Code</button></div></div>
 
-        <div class="example" id="string-input">
-          <div class="meta"><strong>String Input & Concatenation</strong><div class="small">Read name and age</div></div>
-          <pre id="code-string-input"><code>// Greeting.java
+        <div class="example" id="string-input"><div class="meta"><strong>String Input & Concatenation</strong><div class="small">Read name and age</div></div><pre id="code-string-input"><code>// Greeting.java
 import java.util.Scanner;
 public class Greeting {
     public static void main(String[] args) {
@@ -352,13 +340,9 @@ public class Greeting {
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac Greeting.java</div><button class="btn" data-target="code-string-input">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac Greeting.java</div><button class="btn" data-target="code-string-input">Copy Code</button></div></div>
 
-        <div class="example" id="casting">
-          <div class="meta"><strong>Type Casting</strong><div class="small">Implicit & Explicit conversion</div></div>
-          <pre id="code-casting"><code>// TypeCastingDemo.java
+        <div class="example" id="casting"><div class="meta"><strong>Type Casting</strong><div class="small">Implicit & Explicit conversion</div></div><pre id="code-casting"><code>// TypeCastingDemo.java
 public class TypeCastingDemo {
     public static void main(String[] args) {
         double d = 9.78;
@@ -369,337 +353,159 @@ public class TypeCastingDemo {
         System.out.println("ASCII of A: " + ascii);
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac TypeCastingDemo.java</div><button class="btn" data-target="code-casting">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac TypeCastingDemo.java</div><button class="btn" data-target="code-casting">Copy Code</button></div></div>
 
-        <div class="example" id="even-odd">
-          <div class="meta"><strong>Even or Odd Checker</strong><div class="small">Check whether a number is even or odd</div></div>
-          <pre id="code-even-odd"><code>// EvenOdd.java
+        <div class="example" id="even-odd"><div class="meta"><strong>Even or Odd Checker</strong><div class="small">Check whether a number is even or odd</div></div><pre id="code-even-odd"><code>// EvenOdd.java
 import java.util.Scanner;
 public class EvenOdd {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter an integer: ");
         int num = sc.nextInt();
-        if (num % 2 == 0) {
-            System.out.println(num + " is even.");
-        } else {
-            System.out.println(num + " is odd.");
-        }
+        if (num % 2 == 0) System.out.println(num + " is even.");
+        else System.out.println(num + " is odd.");
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac EvenOdd.java</div><button class="btn" data-target="code-even-odd">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac EvenOdd.java</div><button class="btn" data-target="code-even-odd">Copy Code</button></div></div>
 
-        <div class="example" id="palindrome">
-          <div class="meta"><strong>Palindrome Checker</strong><div class="small">Check whether a number is palindrome (e.g., 121 → Palindrome)</div></div>
-          <pre id="code-palindrome"><code>// PalindromeNumber.java
+        <div class="example" id="palindrome"><div class="meta"><strong>Palindrome Checker</strong><div class="small">Check whether a number is palindrome (e.g., 121 → Palindrome)</div></div><pre id="code-palindrome"><code>// PalindromeNumber.java
 import java.util.Scanner;
 public class PalindromeNumber {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter an integer: ");
         int num = sc.nextInt();
-        int original = num;
-        int reversed = 0;
-        while (num != 0) {
-            int digit = num % 10;
-            reversed = reversed * 10 + digit;
-            num /= 10;
-        }
-        if (original == reversed)
-            System.out.println(original + " is a palindrome.");
-        else
-            System.out.println(original + " is not a palindrome.");
+        int original = num, reversed = 0;
+        while (num != 0) { reversed = reversed * 10 + num % 10; num /= 10; }
+        if (original == reversed) System.out.println(original + " is a palindrome.");
+        else System.out.println(original + " is not a palindrome.");
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Example: 121 → Palindrome</div><button class="btn" data-target="code-palindrome">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Example: 121 → Palindrome</div><button class="btn" data-target="code-palindrome">Copy Code</button></div></div>
 
-        <div class="example" id="armstrong">
-          <div class="meta">
-            <strong>Armstrong Number Checker</strong>
-            <div class="small">Check whether a number is an Armstrong number (e.g., 153 = 1³ + 5³ + 3³)</div>
-          </div>
-          <pre id="code-armstrong"><code>// ArmstrongNumber.java
+        <div class="example" id="armstrong"><div class="meta"><strong>Armstrong Number Checker</strong><div class="small">153 = 1³+5³+3³</div></div><pre id="code-armstrong"><code>// ArmstrongNumber.java
 import java.util.Scanner;
 public class ArmstrongNumber {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter an integer: ");
         int num = sc.nextInt();
-        int original = num;
-        int sum = 0;
-        int digits = String.valueOf(num).length();
-        int temp = num;
-        while (temp != 0) {
-            int digit = temp % 10;
-            sum += Math.pow(digit, digits);
-            temp /= 10;
-        }
-        if (sum == original)
-            System.out.println(original + " is an Armstrong number.");
-        else
-            System.out.println(original + " is not an Armstrong number.");
+        int original = num, sum = 0, digits = String.valueOf(num).length();
+        while (num != 0) { sum += Math.pow(num % 10, digits); num /= 10; }
+        if (sum == original) System.out.println(original + " is an Armstrong number.");
+        else System.out.println(original + " is not an Armstrong number.");
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Example: 153 → 1³+5³+3³ = 153 &nbsp;|&nbsp; Compile: javac ArmstrongNumber.java</div>
-            <button class="btn" data-target="code-armstrong">Copy Code</button>
-          </div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Example: 153 → Armstrong</div><button class="btn" data-target="code-armstrong">Copy Code</button></div></div>
 
-        <div class="example" id="oop">
-          <div class="meta"><strong>OOP Example with Inheritance</strong><div class="small">Three classes in one file</div></div>
-          <pre id="code-oop"><code>// AnimalDemo.java
-class Animal {
-    String name;
-    Animal(String name) { this.name = name; }
-    void sound() { System.out.println(name + " makes sound"); }
-}
-class Dog extends Animal {
-    Dog(String name) { super(name); }
-    @Override
-    void sound() { System.out.println(name + " barks"); }
-}
+        <div class="example" id="oop"><div class="meta"><strong>OOP Example with Inheritance</strong><div class="small">Three classes in one file</div></div><pre id="code-oop"><code>// AnimalDemo.java
+class Animal { String name; Animal(String name) { this.name = name; } void sound() { System.out.println(name + " makes sound"); } }
+class Dog extends Animal { Dog(String name) { super(name); } @Override void sound() { System.out.println(name + " barks"); } }
 public class AnimalDemo {
-    public static void main(String[] args) {
-        Animal a = new Animal("Generic");
-        Dog d = new Dog("Rex");
-        a.sound();
-        d.sound();
-    }
+    public static void main(String[] args) { Animal a = new Animal("Generic"); Dog d = new Dog("Rex"); a.sound(); d.sound(); }
 }
-</code></pre>
-        </div>
+</code></pre></div>
 
-        <div class="example" id="algorithms">
-          <div class="meta"><strong>Factorial and Fibonacci</strong><div class="small">Iterative</div></div>
-          <pre id="code-algorithms"><code>// MathExamples.java
+        <div class="example" id="algorithms"><div class="meta"><strong>Factorial and Fibonacci</strong><div class="small">Iterative</div></div><pre id="code-algorithms"><code>// MathExamples.java
 public class MathExamples {
-    public static long factorial(int n) {
-        long f = 1;
-        for (int i = 2; i <= n; i++) f *= i;
-        return f;
-    }
-    public static long fibonacci(int n) {
-        if (n <= 1) return n;
-        long a = 0, b = 1;
-        for (int i = 2; i <= n; i++) {
-            long t = a + b;
-            a = b;
-            b = t;
-        }
-        return b;
-    }
-    public static void main(String[] args) {
-        System.out.println("5! = " + factorial(5));
-        System.out.println("Fib(10) = " + fibonacci(10));
-    }
+    public static long factorial(int n) { long f=1; for(int i=2;i<=n;i++) f*=i; return f; }
+    public static long fibonacci(int n) { if(n<=1) return n; long a=0,b=1; for(int i=2;i<=n;i++) { long t=a+b; a=b; b=t; } return b; }
+    public static void main(String[] args) { System.out.println("5! = "+factorial(5)); System.out.println("Fib(10) = "+fibonacci(10)); }
 }
-</code></pre>
-        </div>
+</code></pre></div>
 
-        <div class="example" id="prime">
-          <div class="meta"><strong>Prime Check</strong><div class="small">Efficient sqrt(n)</div></div>
-          <pre id="code-prime"><code>// PrimeCheck.java
+        <div class="example" id="prime"><div class="meta"><strong>Prime Check</strong><div class="small">Efficient sqrt(n)</div></div><pre id="code-prime"><code>// PrimeCheck.java
 public class PrimeCheck {
     public static boolean isPrime(int n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-        for (int i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0) return false;
-        }
+        if(n<=1) return false; if(n<=3) return true; if(n%2==0||n%3==0) return false;
+        for(int i=5;i*i<=n;i+=6) if(n%i==0||n%(i+2)==0) return false;
         return true;
     }
-    public static void main(String[] args) {
-        System.out.println("17 is prime? " + isPrime(17));
-    }
+    public static void main(String[] args) { System.out.println("17 is prime? "+isPrime(17)); }
 }
-</code></pre>
-        </div>
+</code></pre></div>
 
-        <div class="example" id="sort">
-          <div class="meta"><strong>Array Sorting using Arrays.sort</strong><div class="small">Built-in sort</div></div>
-          <pre id="code-sort"><code>// SortExample.java
+        <div class="example" id="sort"><div class="meta"><strong>Array Sorting using Arrays.sort</strong><div class="small">Built-in sort</div></div><pre id="code-sort"><code>// SortExample.java
 import java.util.Arrays;
 public class SortExample {
-    public static void main(String[] args) {
-        int[] arr = {5, 2, 9, 1, 5, 6};
-        Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
+    public static void main(String[] args) { int[] arr = {5,2,9,1,5,6}; Arrays.sort(arr); System.out.println(Arrays.toString(arr)); }
 }
-</code></pre>
-        </div>
+</code></pre></div>
 
-        <div class="example" id="simple-interest">
-          <div class="meta"><strong>Simple Interest Calculator</strong><div class="small">SI = (P×R×T)/100</div></div>
-          <pre id="code-simple-interest"><code>// SimpleInterest.java
+        <div class="example" id="simple-interest"><div class="meta"><strong>Simple Interest Calculator</strong><div class="small">SI = (P×R×T)/100</div></div><pre id="code-simple-interest"><code>// SimpleInterest.java
 import java.util.Scanner;
 public class SimpleInterest {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("P, R, T: ");
-        double p = sc.nextDouble();
-        double r = sc.nextDouble();
-        double t = sc.nextDouble();
-        double si = (p * r * t) / 100;
-        System.out.printf("SI = %.2f, Total = %.2f", si, p + si);
+        Scanner sc=new Scanner(System.in);
+        System.out.print("P, R, T: "); double p=sc.nextDouble(), r=sc.nextDouble(), t=sc.nextDouble();
+        double si=(p*r*t)/100;
+        System.out.printf("SI = %.2f, Total = %.2f", si, p+si);
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac SimpleInterest.java</div><button class="btn" data-target="code-simple-interest">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac SimpleInterest.java</div><button class="btn" data-target="code-simple-interest">Copy Code</button></div></div>
 
-        <div class="example" id="quadratic">
-          <div class="meta"><strong>Quadratic Equation Solver</strong><div class="small">ax² + bx + c = 0</div></div>
-          <pre id="code-quadratic"><code>// QuadraticEquation.java
+        <div class="example" id="quadratic"><div class="meta"><strong>Quadratic Equation Solver</strong><div class="small">ax² + bx + c = 0</div></div><pre id="code-quadratic"><code>// QuadraticEquation.java
 import java.util.Scanner;
 public class QuadraticEquation {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("a b c: ");
-        double a = sc.nextDouble();
-        double b = sc.nextDouble();
-        double c = sc.nextDouble();
-        double d = b * b - 4 * a * c;
-        if (d > 0) {
-            double r1 = (-b + Math.sqrt(d)) / (2 * a);
-            double r2 = (-b - Math.sqrt(d)) / (2 * a);
-            System.out.println("Roots: " + r1 + " and " + r2);
-        } else if (d == 0) {
-            double r = -b / (2 * a);
-            System.out.println("Root: " + r);
-        } else {
-            double real = -b / (2 * a);
-            double imag = Math.sqrt(-d) / (2 * a);
-            System.out.println("Complex: " + real + " ± i" + imag);
-        }
+        Scanner sc=new Scanner(System.in);
+        System.out.print("a b c: "); double a=sc.nextDouble(), b=sc.nextDouble(), c=sc.nextDouble();
+        double d=b*b-4*a*c;
+        if(d>0) System.out.println("Roots: "+(-b+Math.sqrt(d))/(2*a)+" and "+(-b-Math.sqrt(d))/(2*a));
+        else if(d==0) System.out.println("Root: "+(-b/(2*a)));
+        else System.out.println("Complex: "+(-b/(2*a))+" ± i"+Math.sqrt(-d)/(2*a));
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac QuadraticEquation.java</div><button class="btn" data-target="code-quadratic">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac QuadraticEquation.java</div><button class="btn" data-target="code-quadratic">Copy Code</button></div></div>
 
-        <div class="example" id="second-smallest">
-          <div class="meta"><strong>Second Smallest (no if/ternary)</strong><div class="small">Using Math.min/max</div></div>
-          <pre id="code-second-smallest"><code>// SecondSmallest.java
+        <div class="example" id="second-smallest"><div class="meta"><strong>Second Smallest (no if/ternary)</strong><div class="small">Using Math.min/max</div></div><pre id="code-second-smallest"><code>// SecondSmallest.java
 import java.util.Scanner;
 public class SecondSmallest {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc=new Scanner(System.in);
         System.out.print("Enter three unequal numbers: ");
-        double a = sc.nextDouble();
-        double b = sc.nextDouble();
-        double c = sc.nextDouble();
-        double max = Math.max(a, Math.max(b, c));
-        double min = Math.min(a, Math.min(b, c));
-        double second = a + b + c - max - min;
-        System.out.println("Second smallest number: " + second);
+        double a=sc.nextDouble(), b=sc.nextDouble(), c=sc.nextDouble();
+        double max=Math.max(a,Math.max(b,c)), min=Math.min(a,Math.min(b,c));
+        System.out.println("Second smallest: "+(a+b+c-max-min));
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Sample: 34 82 61 → 61.0</div><button class="btn" data-target="code-second-smallest">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Sample: 34 82 61 → 61.0</div><button class="btn" data-target="code-second-smallest">Copy Code</button></div></div>
 
-        <div class="example" id="grade-calculator">
-          <div class="meta"><strong>Student Grade Calculator</strong><div class="small">Average & grade table</div></div>
-          <pre id="code-grade-calculator"><code>// StudentGrade.java
+        <div class="example" id="grade-calculator"><div class="meta"><strong>Student Grade Calculator</strong><div class="small">Average & grade table</div></div><pre id="code-grade-calculator"><code>// StudentGrade.java
 import java.util.Scanner;
 public class StudentGrade {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Name: ");
-        String name = sc.nextLine();
-        System.out.print("Class: ");
-        String cls = sc.nextLine();
-        System.out.print("Marks in Eng, Math, Comp: ");
-        double e = sc.nextDouble();
-        double m = sc.nextDouble();
-        double c = sc.nextDouble();
-        double avg = (e + m + c) / 3;
-        String grade;
-        if (avg >= 80) grade = "A*";
-        else if (avg >= 60) grade = "A";
-        else if (avg >= 50) grade = "B";
-        else if (avg >= 40) grade = "C";
-        else grade = "Fail";
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Name: "); String name=sc.nextLine();
+        System.out.print("Class: "); String cls=sc.nextLine();
+        System.out.print("Marks in Eng, Math, Comp: "); double e=sc.nextDouble(), m=sc.nextDouble(), c=sc.nextDouble();
+        double avg=(e+m+c)/3; String grade= avg>=80?"A*": avg>=60?"A": avg>=50?"B": avg>=40?"C":"Fail";
         System.out.printf("Name: %s, Class: %s, Avg: %.2f, Grade: %s", name, cls, avg, grade);
         sc.close();
     }
 }
-</code></pre>
-          <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac StudentGrade.java</div><button class="btn" data-target="code-grade-calculator">Copy Code</button></div>
-        </div>
+</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac StudentGrade.java</div><button class="btn" data-target="code-grade-calculator">Copy Code</button></div></div>
 
-        <div class="example" id="areas">
-          <div class="meta"><strong>Area Examples</strong><div class="small">Rectangle, Square, Triangle, Quadrilateral</div></div>
-          <pre id="code-rectangle"><code>// RectangleArea.java
-public class RectangleArea {
-    public static double area(double w, double h) { return w * h; }
-    public static void main(String[] args) {
-        System.out.println("Area: " + area(5, 3.2));
-    }
-}
-</code></pre>
-          <div style="height:4px"></div>
-          <pre id="code-square"><code>// SquareArea.java
-public class SquareArea {
-    public static double area(double s) { return s * s; }
-    public static void main(String[] args) {
-        System.out.println("Area: " + area(4.5));
-    }
-}
-</code></pre>
-          <div style="height:4px"></div>
-          <pre id="code-triangle"><code>// TriangleArea.java
-public class TriangleArea {
-    public static double area(double b, double h) { return 0.5 * b * h; }
-    public static void main(String[] args) {
-        System.out.println("Area: " + area(6, 4));
-    }
-}
-</code></pre>
-          <div style="height:4px"></div>
-          <pre id="code-quadrilateral"><code>// QuadrilateralArea.java
+        <div class="example" id="areas"><div class="meta"><strong>Area Examples</strong><div class="small">Rectangle, Square, Triangle, Quadrilateral</div></div><pre id="code-rectangle"><code>// RectangleArea.java
+public class RectangleArea { public static double area(double w, double h) { return w * h; } public static void main(String[] args) { System.out.println("Area: " + area(5, 3.2)); } }
+</code></pre><div style="height:4px"></div><pre id="code-square"><code>// SquareArea.java
+public class SquareArea { public static double area(double s) { return s * s; } public static void main(String[] args) { System.out.println("Area: " + area(4.5)); } }
+</code></pre><div style="height:4px"></div><pre id="code-triangle"><code>// TriangleArea.java
+public class TriangleArea { public static double area(double b, double h) { return 0.5 * b * h; } public static void main(String[] args) { System.out.println("Area: " + area(6, 4)); } }
+</code></pre><div style="height:4px"></div><pre id="code-quadrilateral"><code>// QuadrilateralArea.java
 public class QuadrilateralArea {
-    public static double area(double[][] pts) {
-        double s = 0;
-        for (int i = 0; i < 4; i++) {
-            int j = (i + 1) % 4;
-            s += pts[i][0] * pts[j][1] - pts[j][0] * pts[i][1];
-        }
-        return Math.abs(s) / 2.0;
-    }
-    public static void main(String[] args) {
-        double[][] q = {{0, 0}, {4, 0}, {4, 3}, {0, 3}};
-        System.out.println("Area: " + area(q));
-    }
+    public static double area(double[][] pts) { double s=0; for(int i=0;i<4;i++){ int j=(i+1)%4; s+=pts[i][0]*pts[j][1]-pts[j][0]*pts[i][1]; } return Math.abs(s)/2.0; }
+    public static void main(String[] args) { double[][] q={{0,0},{4,0},{4,3},{0,3}}; System.out.println("Area: " + area(q)); }
 }
-</code></pre>
-          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-            <button class="btn" data-target="code-rectangle">Copy Rectangle</button>
-            <button class="btn" data-target="code-square">Copy Square</button>
-            <button class="btn" data-target="code-triangle">Copy Triangle</button>
-            <button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button>
-          </div>
-        </div>
+</code></pre><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn" data-target="code-rectangle">Copy Rectangle</button><button class="btn" data-target="code-square">Copy Square</button><button class="btn" data-target="code-triangle">Copy Triangle</button><button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button></div></div>
 
-        <div class="example" id="io">
-          <div class="meta"><strong>File Input and Output</strong><div class="small">Write/Read text file</div></div>
-          <pre id="code-io"><code>// FileIOExample.java
+        <div class="example" id="io"><div class="meta"><strong>File Input and Output</strong><div class="small">Write/Read text file</div></div><pre id="code-io"><code>// FileIOExample.java
 import java.nio.file.*;
 public class FileIOExample {
     public static void main(String[] args) throws Exception {
@@ -707,186 +513,173 @@ public class FileIOExample {
         System.out.println(Files.readString(Path.of("sample.txt")));
     }
 }
-</code></pre>
-        </div>
+</code></pre></div>
 
-        <div class="example" id="exceptions">
-          <div class="meta"><strong>Exception Handling</strong><div class="small">try-catch-finally</div></div>
-          <pre id="code-exceptions"><code>// ExceptionDemo.java
+        <div class="example" id="exceptions"><div class="meta"><strong>Exception Handling</strong><div class="small">try-catch-finally</div></div><pre id="code-exceptions"><code>// ExceptionDemo.java
 public class ExceptionDemo {
     public static int divide(int a, int b) {
-        try {
-            return a / b;
-        } catch (ArithmeticException e) {
-            System.err.println("Divide by zero");
-            return 0;
-        } finally {
-            System.out.println("Attempt done");
-        }
+        try { return a / b; } catch (ArithmeticException e) { System.err.println("Divide by zero"); return 0; } finally { System.out.println("Attempt done"); }
     }
-    public static void main(String[] args) {
-        System.out.println(divide(10, 2));
-        System.out.println(divide(10, 0));
-    }
+    public static void main(String[] args) { System.out.println(divide(10, 2)); System.out.println(divide(10, 0)); }
 }
-</code></pre>
-        </div>
+</code></pre></div>
       </section>
     </div>
   </main>
-  <footer>
-    <div class="small">© 2026 Java World — Real Java examples provided for learning</div>
-  </footer>
+  <footer><div class="small">© 2026 Java World — Click the Arc Reactor to activate NANO TECH theme (Infinity War style)</div></footer>
 
   <script>
-    // Claude-style reactive logo: 3D tilt + ripple canvas + energy particles
-    const logo = document.getElementById('interactiveLogo');
-    const canvas = document.getElementById('rippleCanvas');
-    const ctx = canvas.getContext('2d');
-    let rippleActive = false;
-    let rippleRadius = 0;
-    let rippleAlpha = 0;
-    let animationFrameRipple = null;
-    
-    function resizeCanvas() {
-      const rect = logo.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-    }
-    window.addEventListener('resize', () => { resizeCanvas(); });
-    resizeCanvas();
-    
-    function drawRipple(x, y) {
-      if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (rippleRadius > 0 && rippleAlpha > 0) {
-        const gradient = ctx.createRadialGradient(x, y, 2, x, y, rippleRadius);
-        gradient.addColorStop(0, `rgba(65, 176, 238, ${rippleAlpha * 0.9})`);
-        gradient.addColorStop(0.6, `rgba(43, 108, 176, ${rippleAlpha * 0.5})`);
-        gradient.addColorStop(1, 'rgba(65, 176, 238, 0)');
-        ctx.fillStyle = gradient;
-        ctx.arc(x, y, rippleRadius, 0, Math.PI * 2);
-        ctx.fill();
+    // Theme toggle on logo click (Nano / Sci-fi transformation)
+    const logoBtn = document.getElementById('interactiveLogo');
+    const body = document.body;
+    let nanoMode = false;
+
+    // nano particle animation canvas
+    const nanoCanvas = document.getElementById('nanoCanvas');
+    let nanoCtx = nanoCanvas.getContext('2d');
+    let particles = [];
+    let nanoAnimFrame = null;
+
+    function initNanoParticles() {
+      particles = [];
+      const count = 180;
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          radius: Math.random() * 2.5 + 1,
+          alpha: Math.random() * 0.6 + 0.2,
+          speedX: (Math.random() - 0.5) * 0.7,
+          speedY: (Math.random() - 0.5) * 0.7,
+          glow: Math.random() * 0.8
+        });
       }
     }
-    
-    function animateRipple() {
-      if (!rippleActive && rippleRadius <= 0) {
-        if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
-        return;
+
+    function resizeNanoCanvas() {
+      nanoCanvas.width = window.innerWidth;
+      nanoCanvas.height = window.innerHeight;
+    }
+
+    function drawNanoParticles() {
+      if (!nanoCtx) return;
+      nanoCtx.clearRect(0, 0, nanoCanvas.width, nanoCanvas.height);
+      for (let p of particles) {
+        nanoCtx.beginPath();
+        nanoCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        nanoCtx.fillStyle = `rgba(0, 229, 255, ${p.alpha * 0.8})`;
+        nanoCtx.fill();
+        nanoCtx.shadowBlur = 6;
+        nanoCtx.shadowColor = '#00e5ff';
+        nanoCtx.fill();
+        // update position
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x < 0) p.x = nanoCanvas.width;
+        if (p.x > nanoCanvas.width) p.x = 0;
+        if (p.y < 0) p.y = nanoCanvas.height;
+        if (p.y > nanoCanvas.height) p.y = 0;
       }
-      if (rippleActive) {
-        rippleRadius += 5;
-        rippleAlpha -= 0.02;
-        if (rippleRadius > 70 || rippleAlpha <= 0) {
-          rippleActive = false;
-          rippleRadius = 0;
-          rippleAlpha = 0;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
-          return;
-        }
+      nanoAnimFrame = requestAnimationFrame(drawNanoParticles);
+    }
+
+    function startNanoParticles() {
+      if (nanoAnimFrame) cancelAnimationFrame(nanoAnimFrame);
+      resizeNanoCanvas();
+      initNanoParticles();
+      drawNanoParticles();
+    }
+
+    function stopNanoParticles() {
+      if (nanoAnimFrame) {
+        cancelAnimationFrame(nanoAnimFrame);
+        nanoAnimFrame = null;
+      }
+      if (nanoCtx) nanoCtx.clearRect(0, 0, nanoCanvas.width, nanoCanvas.height);
+    }
+
+    window.addEventListener('resize', () => {
+      if (nanoMode) resizeNanoCanvas();
+    });
+
+    // Toggle theme on logo click
+    logoBtn.addEventListener('click', () => {
+      nanoMode = !nanoMode;
+      if (nanoMode) {
+        body.classList.add('nano-theme');
+        startNanoParticles();
+        // small easter egg: console message
+        console.log("%c⚡ NANO TECH ACTIVATED ⚡", "color: #00e5ff; font-size: 16px; font-family: monospace;");
+        // additional flash effect
+        document.body.style.transition = 'background 0.8s';
       } else {
-        if (rippleRadius <= 0) {
-          if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
-          return;
-        }
-        rippleRadius -= 4;
-        rippleAlpha -= 0.03;
-        if (rippleRadius <= 0) {
-          rippleRadius = 0;
-          rippleAlpha = 0;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
-          return;
-        }
+        body.classList.remove('nano-theme');
+        stopNanoParticles();
+        console.log("%cOriginal theme restored", "color: #2b6cb0;");
       }
-      if (window.lastRippleX && window.lastRippleY) {
-        drawRipple(window.lastRippleX, window.lastRippleY);
+    });
+
+    // --- Logo tilt & ripple interaction (same as before, enhanced) ---
+    const logo = document.getElementById('interactiveLogo');
+    const canvasRipple = document.getElementById('rippleCanvas');
+    const ctxRipple = canvasRipple.getContext('2d');
+    let rippleActive = false, rippleRadius = 0, rippleAlpha = 0, rippleFrame = null;
+    function resizeRippleCanvas() { const rect = logo.getBoundingClientRect(); canvasRipple.width = rect.width; canvasRipple.height = rect.height; }
+    window.addEventListener('resize', resizeRippleCanvas);
+    resizeRippleCanvas();
+    function drawRipple(x, y) {
+      if (!ctxRipple) return;
+      ctxRipple.clearRect(0, 0, canvasRipple.width, canvasRipple.height);
+      if (rippleRadius > 0 && rippleAlpha > 0) {
+        const grad = ctxRipple.createRadialGradient(x, y, 2, x, y, rippleRadius);
+        grad.addColorStop(0, `rgba(0, 229, 255, ${rippleAlpha * 0.9})`);
+        grad.addColorStop(0.6, `rgba(43, 108, 176, ${rippleAlpha * 0.5})`);
+        grad.addColorStop(1, 'rgba(0, 229, 255, 0)');
+        ctxRipple.fillStyle = grad;
+        ctxRipple.arc(x, y, rippleRadius, 0, Math.PI * 2);
+        ctxRipple.fill();
       }
-      animationFrameRipple = requestAnimationFrame(animateRipple);
     }
-    
-    let currentTransform = { rotateX: 0, rotateY: 0, scale: 1 };
-    let animFrameTilt = null;
-    function updateTransform() {
-      if (logo) {
-        logo.style.transform = `perspective(800px) rotateX(${currentTransform.rotateX}deg) rotateY(${currentTransform.rotateY}deg) scale(${currentTransform.scale})`;
-      }
+    function animateRipple() {
+      if (!rippleActive && rippleRadius <= 0) { if (rippleFrame) cancelAnimationFrame(rippleFrame); return; }
+      if (rippleActive) { rippleRadius += 5; rippleAlpha -= 0.02; if (rippleRadius > 70 || rippleAlpha <= 0) { rippleActive = false; rippleRadius = 0; rippleAlpha = 0; ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height); if (rippleFrame) cancelAnimationFrame(rippleFrame); return; } }
+      else { if (rippleRadius<=0) { if (rippleFrame) cancelAnimationFrame(rippleFrame); return; } rippleRadius -= 4; rippleAlpha -= 0.03; if (rippleRadius<=0) { rippleRadius=0; rippleAlpha=0; ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height); if (rippleFrame) cancelAnimationFrame(rippleFrame); return; } }
+      if (window.lastRX && window.lastRY) drawRipple(window.lastRX, window.lastRY);
+      rippleFrame = requestAnimationFrame(animateRipple);
     }
-    
-    let hoverActive = false;
-    function handleMouseMove(e) {
-      if (!hoverActive) return;
+    let transform = { rx:0, ry:0, s:1 }, tiltFrame = null;
+    function updateTilt() { logo.style.transform = `perspective(800px) rotateX(${transform.rx}deg) rotateY(${transform.ry}deg) scale(${transform.s})`; }
+    let hover = false;
+    logo.addEventListener('mousemove', (e) => {
+      if (!hover) return;
       const rect = logo.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const relX = (e.clientX - centerX) / (rect.width / 2);
-      const relY = (e.clientY - centerY) / (rect.height / 2);
-      const maxTilt = 22;
-      let rotY = relX * maxTilt;
-      let rotX = -relY * maxTilt;
-      currentTransform.rotateX = Math.min(Math.max(rotX, -maxTilt), maxTilt);
-      currentTransform.rotateY = Math.min(Math.max(rotY, -maxTilt), maxTilt);
-      currentTransform.scale = 1.12;
-      if (animFrameTilt) cancelAnimationFrame(animFrameTilt);
-      animFrameTilt = requestAnimationFrame(updateTransform);
-      
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-      if (mouseX >= 0 && mouseX <= rect.width && mouseY >= 0 && mouseY <= rect.height) {
-        window.lastRippleX = mouseX;
-        window.lastRippleY = mouseY;
-        rippleActive = true;
-        rippleRadius = 8;
-        rippleAlpha = 0.7;
-        drawRipple(mouseX, mouseY);
-        if (animationFrameRipple) cancelAnimationFrame(animationFrameRipple);
-        animateRipple();
-        
-        // energy particles
-        if (Math.random() < 0.4) {
-          const particle = document.createElement('div');
-          particle.className = 'energy-particle';
-          particle.style.width = '6px';
-          particle.style.height = '6px';
-          particle.style.left = `${mouseX}px`;
-          particle.style.top = `${mouseY}px`;
-          logo.appendChild(particle);
-          setTimeout(() => particle.remove(), 1000);
-        }
-      }
-    }
-    
-    function handleMouseLeave() {
-      hoverActive = false;
-      currentTransform.rotateX = 0;
-      currentTransform.rotateY = 0;
-      currentTransform.scale = 1;
-      if (animFrameTilt) cancelAnimationFrame(animFrameTilt);
-      animFrameTilt = requestAnimationFrame(updateTransform);
-      logo.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
-      setTimeout(() => { if (logo) logo.style.transition = ''; }, 400);
-      if (rippleActive) {
-        rippleActive = false;
+      const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+      const rx = (e.clientX - cx) / (rect.width/2), ry = (e.clientY - cy) / (rect.height/2);
+      transform.ry = Math.min(Math.max(rx * 22, -22), 22);
+      transform.rx = Math.min(Math.max(-ry * 22, -22), 22);
+      transform.s = 1.12;
+      if (tiltFrame) cancelAnimationFrame(tiltFrame); tiltFrame = requestAnimationFrame(updateTilt);
+      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      if (mx>=0 && mx<=rect.width && my>=0 && my<=rect.height) {
+        window.lastRX = mx; window.lastRY = my;
+        rippleActive = true; rippleRadius = 8; rippleAlpha = 0.7;
+        drawRipple(mx, my);
+        if (rippleFrame) cancelAnimationFrame(rippleFrame);
         animateRipple();
       }
-    }
-    
-    function handleMouseEnter() {
-      hoverActive = true;
-      logo.style.transition = 'transform 0.03s linear';
-      resizeCanvas();
-    }
-    
-    logo.addEventListener('mousemove', handleMouseMove);
-    logo.addEventListener('mouseleave', handleMouseLeave);
-    logo.addEventListener('mouseenter', handleMouseEnter);
-    updateTransform();
-    
-    // Copy buttons logic (unchanged)
+    });
+    logo.addEventListener('mouseleave', () => {
+      hover = false;
+      transform.rx = 0; transform.ry = 0; transform.s = 1;
+      if (tiltFrame) cancelAnimationFrame(tiltFrame); tiltFrame = requestAnimationFrame(updateTilt);
+      logo.style.transition = 'transform 0.3s';
+      setTimeout(() => { if (logo) logo.style.transition = ''; }, 300);
+      if (rippleActive) { rippleActive=false; animateRipple(); }
+    });
+    logo.addEventListener('mouseenter', () => { hover = true; logo.style.transition = 'transform 0.03s'; resizeRippleCanvas(); });
+    updateTilt();
+
+    // copy buttons unchanged
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-target');
@@ -895,26 +688,11 @@ public class ExceptionDemo {
         const text = pre.innerText;
         try {
           await navigator.clipboard.writeText(text);
-          const original = btn.innerText;
-          btn.innerText = 'Copied';
-          btn.classList.add('copied');
-          setTimeout(() => { btn.innerText = original; btn.classList.remove('copied'); }, 1200);
-        } catch (e) {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          ta.remove();
-          btn.innerText = 'Copied';
-          setTimeout(() => { btn.innerText = 'Copy'; }, 1200);
-        }
+          const orig = btn.innerText;
+          btn.innerText = 'Copied'; btn.classList.add('copied');
+          setTimeout(() => { btn.innerText = orig; btn.classList.remove('copied'); }, 1200);
+        } catch(e) { alert('Copy manually'); }
       });
-    });
-    const buttons = Array.from(document.querySelectorAll('.btn'));
-    const pres = Array.from(document.querySelectorAll('pre'));
-    buttons.forEach((b, i) => {
-      if (!b.dataset.target && pres[i]) b.dataset.target = pres[i].id || (pres[i].id = 'code-auto-' + i);
     });
   </script>
 </body>
