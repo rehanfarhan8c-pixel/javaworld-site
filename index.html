@@ -32,7 +32,6 @@
       will-change: transform;
       cursor: pointer;
     }
-    /* will be controlled by JS for 3D tilt + scale on hover, but also provide base smoothness */
     .logo-globe {
       transition: transform 0.1s ease-out, box-shadow 0.2s ease, background 0.2s;
     }
@@ -42,7 +41,6 @@
       display: block;
       transition: filter 0.2s;
     }
-    /* interactive glow when mouse is near/on the logo (reactive) */
     .logo-globe:hover {
       background: rgba(255,255,255,0.35);
       box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 0 0 3px rgba(255,215,0,0.5);
@@ -76,7 +74,7 @@
     .copied{background:#16a34a;padding:6px 10px;border-radius:6px;color:#fff;font-weight:600}
     hr.sep{border:0;border-top:1px solid #eef2f7;margin:14px 0}
   </style>
-  <!-- existing animations + background (unchanged except logo enhancements) -->
+  <!-- existing animations + background (unchanged) -->
   <style>
     @keyframes gentleFadeSlide {
       0% { opacity: 0; transform: translateY(18px);}
@@ -113,6 +111,7 @@
     .example:nth-child(17) { --order: 17; }
     .example:nth-child(18) { --order: 18; }
     .example:nth-child(19) { --order: 19; }
+    .example:nth-child(20) { --order: 20; }  /* Support for new even-odd example */
 
     header {
       background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e);
@@ -139,7 +138,7 @@
     footer:hover .small { opacity: 0.85;}
     .container { animation: gentleFadeSlide 0.6s ease-out;}
     
-    /* Enhanced background animations (same as before, kept intact) */
+    /* Enhanced background animations */
     body {
       background: radial-gradient(circle at 10% 20%, rgba(43, 108, 176, 0.08), rgba(31, 79, 122, 0.02));
       position: relative;
@@ -222,7 +221,6 @@
 </div>
 
   <header>
-    <!-- Interactive Mouse-Reactive Logo: 3D tilt + scale + glow when cursor moves near -->
     <div class="logo-globe" id="interactiveLogo" aria-label="Java World Logo - reactive to mouse">
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="50" r="46" fill="white" stroke="#2b6cb0" stroke-width="2.5"/>
@@ -254,6 +252,7 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into an IDE.</p>
 
+        <!-- Existing examples unchanged -->
         <div class="example" id="hello">
           <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
@@ -330,6 +329,36 @@ public class TypeCastingDemo {
 }
 </code></pre>
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac TypeCastingDemo.java</div><button class="btn" data-target="code-casting">Copy Code</button></div>
+        </div>
+
+        <!-- NEW: Even or Odd Checker  (added without altering existing examples) -->
+        <div class="example" id="even-odd">
+          <div class="meta">
+            <strong>Even or Odd Checker</strong>
+            <div class="small">Check whether a number is even or odd using modulo operator</div>
+          </div>
+          <pre id="code-even-odd"><code>// EvenOdd.java
+import java.util.Scanner;
+
+public class EvenOdd {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter an integer: ");
+        int num = sc.nextInt();
+        
+        if (num % 2 == 0) {
+            System.out.println(num + " is even.");
+        } else {
+            System.out.println(num + " is odd.");
+        }
+        sc.close();
+    }
+}
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Compile: javac EvenOdd.java &nbsp;&nbsp; Run: java EvenOdd</div>
+            <button class="btn" data-target="code-even-odd">Copy Code</button>
+          </div>
         </div>
 
         <div class="example" id="oop">
@@ -497,8 +526,9 @@ public class ExceptionDemo {
           <h2>Quick Actions</h2>
           <p class="small">Use the copy buttons to copy a complete class to clipboard. Save as &lt;PublicClass&gt;.java and run:</p>
           <ol class="small"><li><code>javac FileName.java</code></li><li><code>java ClassName</code></li></ol>
-          <hr class="sep"><p class="small"><strong>Interactive Logo</strong> — Move your mouse cursor near the globe logo: it will tilt, scale smoothly, and glow. This is a reactive mouse animation similar to modern interactive UIs.</p>
-          <hr class="sep"><p class="small"><strong>All code examples remain unchanged, only visual logo interactivity added.</strong></p>
+          <hr class="sep"><p class="small"><strong>Interactive Logo</strong> — Move your mouse cursor near the globe logo: it will tilt, scale smoothly, and glow.</p>
+          <hr class="sep"><p class="small"><strong>Even or Odd Checker</strong> (new): Simple program using modulo operator to check if a number is even or odd.</p>
+          <p class="small">All previous code examples remain unchanged.</p>
         </div>
       </aside>
     </div>
@@ -506,63 +536,50 @@ public class ExceptionDemo {
   <footer><div class="small">© 2026 Java World — Real Java examples provided for learning</div></footer>
 
   <script>
-    // ----- Mouse-reactive 3D tilt effect for the logo (Claude-like interaction) -----
+    // Mouse-reactive 3D tilt for logo
     const logo = document.getElementById('interactiveLogo');
     if (logo) {
-      // Smooth out the transform
       let currentTransform = { rotateX: 0, rotateY: 0, scale: 1 };
       let animFrame = null;
-      
       function updateTransform() {
         if (logo) {
           logo.style.transform = `perspective(600px) rotateX(${currentTransform.rotateX}deg) rotateY(${currentTransform.rotateY}deg) scale(${currentTransform.scale})`;
         }
       }
-      
       function handleMouseMove(e) {
         const rect = logo.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        // Calculate relative position from -1 to 1
         const relX = (e.clientX - centerX) / (rect.width / 2);
         const relY = (e.clientY - centerY) / (rect.height / 2);
-        // Clamp rotation range between -12 and 12 degrees
         const maxTilt = 14;
         let rotY = relX * maxTilt;
         let rotX = -relY * maxTilt;
-        // Add slight scale effect on hover + tilt
         currentTransform.rotateX = Math.min(Math.max(rotX, -maxTilt), maxTilt);
         currentTransform.rotateY = Math.min(Math.max(rotY, -maxTilt), maxTilt);
         currentTransform.scale = 1.08;
         if (animFrame) cancelAnimationFrame(animFrame);
         animFrame = requestAnimationFrame(updateTransform);
       }
-      
       function handleMouseLeave() {
-        // Smooth return to normal with transition
         currentTransform.rotateX = 0;
         currentTransform.rotateY = 0;
         currentTransform.scale = 1;
         if (animFrame) cancelAnimationFrame(animFrame);
         animFrame = requestAnimationFrame(updateTransform);
-        // Also ensure background glow remains only during hover
         logo.style.transition = 'transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
         setTimeout(() => { if (logo) logo.style.transition = ''; }, 300);
       }
-      
       function handleMouseEnter() {
         logo.style.transition = 'transform 0.05s linear';
       }
-      
       logo.addEventListener('mousemove', handleMouseMove);
       logo.addEventListener('mouseleave', handleMouseLeave);
       logo.addEventListener('mouseenter', handleMouseEnter);
-      // initial reset style for consistent 3D
-      logo.style.transformStyle = 'preserve-3d';
       updateTransform();
     }
     
-    // ---- copy buttons functionality (unchanged) ----
+    // Copy buttons logic (unchanged)
     document.querySelectorAll('.btn').forEach(btn=>{
       btn.addEventListener('click', async ()=> {
         const id = btn.getAttribute('data-target');
