@@ -7,7 +7,7 @@
   <!-- favicon: arc reactor icon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230d2b4a' stroke='%232b6cb0' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='36' fill='none' stroke='%2341b0ee' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%2341b0ee'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
   <style>
-    /* ---------- ORIGINAL THEME (default) ---------- */
+    /* ---------- ORIGINAL THEME (default, lightweight) ---------- */
     :root{
       --bg:#f6f7fb;
       --card:#ffffff;
@@ -20,8 +20,8 @@
       --header-grad-end:#2b6cb0;
       --shadow-color:rgba(15,23,42,0.06);
     }
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;transition: background-color 0.5s ease, color 0.3s ease;}
-    header{background:linear-gradient(90deg,var(--header-grad-start),var(--header-grad-end));color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:2;transition: all 0.4s;}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;transition: background-color 0.4s ease, color 0.3s ease;}
+    header{background:linear-gradient(90deg,var(--header-grad-start),var(--header-grad-end));color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:2;transition: all 0.3s;}
     /* Logo container - arc reactor style */
     .logo-globe {
       display: inline-flex;
@@ -32,8 +32,8 @@
       background: rgba(0,0,0,0.2);
       border-radius: 50%;
       backdrop-filter: blur(2px);
-      transition: box-shadow 0.2s ease, background 0.2s, transform 0.1s;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      transition: box-shadow 0.2s ease, background 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       will-change: transform;
       cursor: pointer;
       position: relative;
@@ -76,7 +76,7 @@
     footer{max-width:1100px;margin:28px auto 60px;padding:0 16px;color:var(--muted);text-align:center;transition: color 0.3s;}
     .copied{background:#16a34a;padding:6px 10px;border-radius:6px;color:#fff;font-weight:600}
     
-    /* shared animations */
+    /* minimal animations */
     @keyframes gentleFadeSlide {
       0% { opacity: 0; transform: translateY(18px);}
       100% { opacity: 1; transform: translateY(0);}
@@ -86,7 +86,7 @@
       100% { background-position: 100% 50%;}
     }
     .grid > section.card { animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; }
-    .example { opacity: 0; transform: translateY(12px); animation: gentleFadeSlide 0.45s ease-out forwards; animation-delay: calc(0.05s * var(--order, 0)); }
+    .example { opacity: 0; transform: translateY(12px); animation: gentleFadeSlide 0.45s ease-out forwards; animation-delay: calc(0.02s * var(--order, 0)); }
     .example:nth-child(1) { --order: 1; }
     .example:nth-child(2) { --order: 2; }
     .example:nth-child(3) { --order: 3; }
@@ -111,18 +111,18 @@
     .example:nth-child(22) { --order: 22; }
     
     header { background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e); background-size: 250% 250%; animation: softPulse 8s ease infinite; }
-    .card:hover { transform: translateY(-6px); box-shadow: 0 18px 32px rgba(15,23,42,0.12), 0 2px 6px rgba(0,0,0,0.02);}
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(15,23,42,0.1);}
     nav a:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px);}
-    .btn:hover { background: #1e4e76; transform: scale(1.04); box-shadow: 0 5px 12px rgba(43,108,176,0.3);}
-    pre:hover { border-left-color: var(--accent); background-color: #0e1625; box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
+    .btn:hover { background: #1e4e76; transform: scale(1.02);}
+    pre:hover { border-left-color: var(--accent); background-color: #0e1625;}
     body::before { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; background: linear-gradient(125deg, rgba(214,222,235,0.4) 0%, rgba(246,247,251,0.7) 30%, rgba(226,232,240,0.5) 60%, rgba(203,213,225,0.3) 100%); background-size: 300% 300%; animation: breathGradient 22s ease infinite; pointer-events: none; z-index: -2; transition: opacity 0.5s;}
     body::after { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: -1; background-image: radial-gradient(circle at 15% 40%, rgba(43,108,176,0.12) 0%, transparent 28%), radial-gradient(circle at 85% 70%, rgba(31,79,122,0.1) 0%, transparent 35%), radial-gradient(circle at 45% 10%, rgba(100,150,200,0.08) 0%, transparent 40%), radial-gradient(circle at 70% 85%, rgba(43,108,176,0.1) 0%, transparent 30%); background-repeat: no-repeat; animation: floatOrbs 32s infinite alternate ease-in-out; transition: opacity 0.5s;}
     @keyframes breathGradient { 0% { background-position: 0% 50%;} 50% { background-position: 100% 50%;} 100% { background-position: 0% 50%;} }
     @keyframes floatOrbs { 0% { background-position: 0% 0%, 100% 100%, 30% 20%, 80% 90%; background-size: 60% 60%, 55% 55%, 45% 45%, 50% 50%; opacity: 0.7;} 50% { background-position: 20% 30%, 70% 60%, 55% 15%, 95% 75%; background-size: 70% 70%, 65% 65%, 55% 55%, 60% 60%; opacity: 0.85;} 100% { background-position: 10% 15%, 90% 80%, 40% 30%, 75% 95%; background-size: 55% 55%, 50% 50%, 40% 40%, 45% 45%; opacity: 0.7;} }
     header, nav, .container, footer { position: relative; z-index: 2;}
-    .card { background: rgba(255,255,255,0.96); backdrop-filter: blur(0px); transition: transform 0.28s, box-shadow 0.35s, background 0.3s;}
+    .card { background: rgba(255,255,255,0.96); backdrop-filter: blur(0px); transition: transform 0.2s, box-shadow 0.2s, background 0.3s;}
 
-    /* ========= NANO-TECH THEME (Infinity War + microchip lines) ========= */
+    /* ========= NANO-THEME (optimized, still stunning) ========= */
     body.nano-theme {
       --bg:#03050b;
       --card:rgba(10, 20, 40, 0.85);
@@ -140,59 +140,27 @@
     body.nano-theme header {
       background: linear-gradient(135deg, #0a1225, #051a2f, #022b4f, #001d3d);
       border-bottom: 1px solid rgba(0, 229, 255, 0.4);
-      box-shadow: 0 0 20px rgba(0,229,255,0.2);
+      box-shadow: 0 0 15px rgba(0,229,255,0.2);
     }
     body.nano-theme .logo-globe {
       background: rgba(0,229,255,0.2);
-      box-shadow: 0 0 15px #00e5ff;
       animation: reactorGlow 1.5s infinite alternate;
     }
     @keyframes reactorGlow {
       0% { box-shadow: 0 0 5px rgba(0,229,255,0.5);}
-      100% { box-shadow: 0 0 25px rgba(0,229,255,0.9);}
-    }
-    body.nano-theme .logo-svg {
-      filter: drop-shadow(0 0 4px #00e5ff);
+      100% { box-shadow: 0 0 20px rgba(0,229,255,0.9);}
     }
     body.nano-theme .card {
       background: rgba(5, 15, 30, 0.75);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(4px);
       border: 1px solid rgba(0,229,255,0.3);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     }
-    body.nano-theme .card:hover {
-      background: rgba(8, 22, 44, 0.9);
-      box-shadow: 0 0 30px rgba(0,229,255,0.2);
-    }
-    body.nano-theme pre {
-      background: #021024;
-      border-left: 3px solid #00e5ff;
-    }
-    body.nano-theme .btn {
-      background: #00aacc;
-      box-shadow: 0 0 8px #00e5ff;
-    }
-    body.nano-theme .btn:hover {
-      background: #00e5ff;
-      color: #000;
-      box-shadow: 0 0 18px #00e5ff;
-    }
-    body.nano-theme nav {
-      background: #020c1a;
-      border-bottom: 1px solid #00e5ff;
-    }
-    body.nano-theme nav a:hover {
-      background: rgba(0,229,255,0.2);
-      text-shadow: 0 0 5px #00e5ff;
-    }
-    body.nano-theme h2 {
-      color: #00e5ff;
-      text-shadow: 0 0 5px #00e5ff;
-    }
-    body.nano-theme p, body.nano-theme .small, body.nano-theme footer {
-      color: #bbd9ff;
-    }
-    /* MICROCHIP CIRCUIT LINES (visible only in nano theme) */
+    body.nano-theme pre { background: #021024; border-left: 3px solid #00e5ff; }
+    body.nano-theme .btn { background: #00aacc; box-shadow: 0 0 6px #00e5ff; }
+    body.nano-theme .btn:hover { background: #00e5ff; color: #000; }
+    body.nano-theme nav { background: #020c1a; border-bottom: 1px solid #00e5ff; }
+    body.nano-theme h2 { color: #00e5ff; text-shadow: 0 0 3px #00e5ff; }
+    /* Microchip circuit lines (visible only in nano theme, lightweight) */
     .circuit-lines {
       position: fixed;
       top: 0;
@@ -202,29 +170,13 @@
       pointer-events: none;
       z-index: 0;
       opacity: 0;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.5s ease;
       background-image: 
-        repeating-linear-gradient(90deg, rgba(0,229,255,0.08) 0px, rgba(0,229,255,0.08) 2px, transparent 2px, transparent 40px),
-        repeating-linear-gradient(0deg, rgba(0,229,255,0.08) 0px, rgba(0,229,255,0.08) 2px, transparent 2px, transparent 40px);
-      background-size: 40px 40px;
+        repeating-linear-gradient(90deg, rgba(0,229,255,0.1) 0px, rgba(0,229,255,0.1) 1px, transparent 1px, transparent 50px),
+        repeating-linear-gradient(0deg, rgba(0,229,255,0.1) 0px, rgba(0,229,255,0.1) 1px, transparent 1px, transparent 50px);
     }
-    /* additional diagonal traces */
-    .circuit-lines::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(45deg, rgba(0,229,255,0.06) 1px, transparent 1px),
-        linear-gradient(-45deg, rgba(0,229,255,0.06) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-    body.nano-theme .circuit-lines {
-      opacity: 0.5;
-    }
-    /* nano particles canvas */
+    body.nano-theme .circuit-lines { opacity: 0.45; }
+    /* Nano particles canvas (fewer particles) */
     .nano-particles-canvas {
       position: fixed;
       top: 0;
@@ -234,90 +186,62 @@
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.5s;
     }
-    body.nano-theme .nano-particles-canvas {
-      opacity: 1;
-    }
-    /* hex grid overlay (optional) */
+    body.nano-theme .nano-particles-canvas { opacity: 1; }
+    /* Hex grid (optional, lighter) */
     .hex-grid {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.04"><path d="M50 5 L93 27.5 L93 72.5 L50 95 L7 72.5 L7 27.5 Z" fill="none" stroke="%2300e5ff" stroke-width="1"/><path d="M50 20 L78 34 L78 66 L50 80 L22 66 L22 34 Z" fill="none" stroke="%2300e5ff" stroke-width="0.5"/></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><path d="M50 5 L93 27.5 L93 72.5 L50 95 L7 72.5 L7 27.5 Z" fill="none" stroke="%2300e5ff" stroke-width="1"/><path d="M50 20 L78 34 L78 66 L50 80 L22 66 L22 34 Z" fill="none" stroke="%2300e5ff" stroke-width="0.5"/></svg>');
       background-repeat: repeat;
       background-size: 80px;
       pointer-events: none;
       z-index: 0;
       opacity: 0;
-      transition: opacity 0.8s;
+      transition: opacity 0.5s;
     }
-    body.nano-theme .hex-grid {
-      opacity: 0.12;
-    }
-    /* glitch effect on title */
-    @keyframes glitch {
-      0% { text-shadow: -2px 0 #0ff, 2px 0 #f0f; }
-      50% { text-shadow: 2px 0 #0ff, -2px 0 #f0f; }
-      100% { text-shadow: -2px 0 #0ff, 2px 0 #f0f; }
-    }
-    body.nano-theme header h1 {
-      animation: glitch 0.8s infinite;
-    }
+    body.nano-theme .hex-grid { opacity: 0.1; }
+    /* Glitch effect (light) */
+    @keyframes glitch { 0% { text-shadow: -1px 0 #0ff, 1px 0 #f0f; } 50% { text-shadow: 1px 0 #0ff, -1px 0 #f0f; } 100% { text-shadow: -1px 0 #0ff, 1px 0 #f0f; } }
+    body.nano-theme header h1 { animation: glitch 1s infinite; }
   </style>
 </head>
 <body>
-  <!-- circuit lines overlay (microchip style) -->
+  <!-- Overlays (lightweight, do not impact content) -->
   <div class="circuit-lines"></div>
   <div class="hex-grid"></div>
   <canvas id="nanoCanvas" class="nano-particles-canvas"></canvas>
 
-  <div class="bg-particles" aria-hidden="true">
-    <i style="width: 80px; height: 80px; top: 15%; left: 5%; animation-duration: 22s; animation-delay: 0s;"></i>
-    <i style="width: 40px; height: 40px; top: 45%; left: 85%; animation-duration: 28s; animation-delay: 2s;"></i>
-    <i style="width: 120px; height: 120px; top: 70%; left: 20%; animation-duration: 35s; animation-delay: 1s;"></i>
-    <i style="width: 25px; height: 25px; top: 85%; left: 70%; animation-duration: 25s; animation-delay: 4s;"></i>
-    <i style="width: 60px; height: 60px; top: 30%; left: 60%; animation-duration: 40s; animation-delay: 0.5s;"></i>
-    <i style="width: 90px; height: 90px; top: 10%; left: 40%; animation-duration: 30s; animation-delay: 3s;"></i>
-    <i style="width: 45px; height: 45px; top: 55%; left: 15%; animation-duration: 32s; animation-delay: 1.5s;"></i>
-    <i style="width: 70px; height: 70px; top: 90%; left: 45%; animation-duration: 26s; animation-delay: 2.5s;"></i>
-    <i style="width: 30px; height: 30px; top: 20%; left: 75%; animation-duration: 38s; animation-delay: 0.8s;"></i>
-  </div>
+  <div class="bg-particles" aria-hidden="true" style="display:none;"></div> <!-- removed heavy particles -->
 
   <header>
     <div class="logo-globe" id="interactiveLogo" style="position: relative;">
       <canvas id="rippleCanvas" class="logo-ripple-canvas" width="70" height="70"></canvas>
-      <!-- REALISTIC ARC REACTOR SVG (detailed image) -->
+      <!-- Detailed Arc Reactor SVG -->
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer dark ring -->
         <circle cx="50" cy="50" r="46" fill="#0a1428" stroke="#2b6cb0" stroke-width="2"/>
-        <!-- Second ring mechanical -->
         <circle cx="50" cy="50" r="40" fill="none" stroke="#41b0ee" stroke-width="1.5" stroke-dasharray="6 4"/>
         <circle cx="50" cy="50" r="34" fill="none" stroke="#1f6392" stroke-width="2"/>
-        <!-- Inner energy core -->
         <circle cx="50" cy="50" r="26" fill="#0d2b4a" stroke="#00e5ff" stroke-width="1.5"/>
         <circle cx="50" cy="50" r="18" fill="none" stroke="#41b0ee" stroke-width="1.5" stroke-dasharray="3 3"/>
-        <!-- Central glowing core -->
         <circle cx="50" cy="50" r="12" fill="#00e5ff" opacity="0.9"/>
         <circle cx="50" cy="50" r="6" fill="white"/>
-        <!-- Metallic supports (triangular) -->
         <polygon points="50,12 56,24 44,24" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
         <polygon points="50,88 56,76 44,76" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
         <polygon points="12,50 24,44 24,56" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
         <polygon points="88,50 76,44 76,56" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
-        <!-- Crosshair details -->
         <line x1="50" y1="20" x2="50" y2="28" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
         <line x1="50" y1="72" x2="50" y2="80" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
         <line x1="20" y1="50" x2="28" y2="50" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
         <line x1="72" y1="50" x2="80" y2="50" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
-        <!-- Small energy nodes -->
         <circle cx="50" cy="34" r="2.5" fill="#00e5ff"/>
         <circle cx="50" cy="66" r="2.5" fill="#00e5ff"/>
         <circle cx="34" cy="50" r="2.5" fill="#00e5ff"/>
         <circle cx="66" cy="50" r="2.5" fill="#00e5ff"/>
-        <!-- Arc reactor text lines -->
         <path d="M42 42 L58 58 M58 42 L42 58" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
       </svg>
     </div>
@@ -341,9 +265,9 @@
     <div class="grid">
       <section class="card" aria-labelledby="examples-title">
         <h2 id="examples-title">Code Examples</h2>
-        <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE. Every code block has been verified for correct Java syntax.</p>
+        <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE.</p>
 
-        <!-- All original Java examples (identical, untouched) -->
+        <!-- ALL ORIGINAL JAVA EXAMPLES (unchanged content) -->
         <div class="example" id="hello"><div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div><pre id="code-hello"><code>// HelloWorld.java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -541,18 +465,24 @@ public class StudentGrade {
 }
 </code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac StudentGrade.java</div><button class="btn" data-target="code-grade-calculator">Copy Code</button></div></div>
 
-        <div class="example" id="areas"><div class="meta"><strong>Area Examples</strong><div class="small">Rectangle, Square, Triangle, Quadrilateral</div></div><pre id="code-rectangle"><code>// RectangleArea.java
+        <div class="example" id="areas"><div class="meta"><strong>Area Examples</strong><div class="small">Rectangle, Square, Triangle, Quadrilateral</div></div>
+          <pre id="code-rectangle"><code>// RectangleArea.java
 public class RectangleArea { public static double area(double w, double h) { return w * h; } public static void main(String[] args) { System.out.println("Area: " + area(5, 3.2)); } }
-</code></pre><div style="height:4px"></div><pre id="code-square"><code>// SquareArea.java
+</code></pre><div style="height:4px"></div>
+          <pre id="code-square"><code>// SquareArea.java
 public class SquareArea { public static double area(double s) { return s * s; } public static void main(String[] args) { System.out.println("Area: " + area(4.5)); } }
-</code></pre><div style="height:4px"></div><pre id="code-triangle"><code>// TriangleArea.java
+</code></pre><div style="height:4px"></div>
+          <pre id="code-triangle"><code>// TriangleArea.java
 public class TriangleArea { public static double area(double b, double h) { return 0.5 * b * h; } public static void main(String[] args) { System.out.println("Area: " + area(6, 4)); } }
-</code></pre><div style="height:4px"></div><pre id="code-quadrilateral"><code>// QuadrilateralArea.java
+</code></pre><div style="height:4px"></div>
+          <pre id="code-quadrilateral"><code>// QuadrilateralArea.java
 public class QuadrilateralArea {
     public static double area(double[][] pts) { double s=0; for(int i=0;i<4;i++){ int j=(i+1)%4; s+=pts[i][0]*pts[j][1]-pts[j][0]*pts[i][1]; } return Math.abs(s)/2.0; }
     public static void main(String[] args) { double[][] q={{0,0},{4,0},{4,3},{0,3}}; System.out.println("Area: " + area(q)); }
 }
-</code></pre><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn" data-target="code-rectangle">Copy Rectangle</button><button class="btn" data-target="code-square">Copy Square</button><button class="btn" data-target="code-triangle">Copy Triangle</button><button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button></div></div>
+</code></pre>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn" data-target="code-rectangle">Copy Rectangle</button><button class="btn" data-target="code-square">Copy Square</button><button class="btn" data-target="code-triangle">Copy Triangle</button><button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button></div>
+        </div>
 
         <div class="example" id="io"><div class="meta"><strong>File Input and Output</strong><div class="small">Write/Read text file</div></div><pre id="code-io"><code>// FileIOExample.java
 import java.nio.file.*;
@@ -575,7 +505,7 @@ public class ExceptionDemo {
       </section>
     </div>
   </main>
-  <footer><div class="small">© 2026 Java World — Click the Arc Reactor to activate NANO TECH theme (microchip lines + Sci‑Fi)</div></footer>
+  <footer><div class="small">© 2026 Java World — Click the Arc Reactor to activate NANO TECH theme</div></footer>
 
   <script>
     // Theme toggle on arc reactor click
@@ -583,23 +513,24 @@ public class ExceptionDemo {
     const body = document.body;
     let nanoMode = false;
 
-    // nano particle animation canvas (floating nanobots)
+    // Nano particles (optimized: fewer particles, throttled drawing)
     const nanoCanvas = document.getElementById('nanoCanvas');
     let nanoCtx = nanoCanvas.getContext('2d');
     let particles = [];
     let nanoAnimFrame = null;
+    let lastTimestamp = 0;
+    const PARTICLE_COUNT = 80; // Reduced from 180 for performance
 
     function initNanoParticles() {
       particles = [];
-      const count = 180;
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
         particles.push({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          radius: Math.random() * 2.5 + 1,
-          alpha: Math.random() * 0.6 + 0.2,
-          speedX: (Math.random() - 0.5) * 0.7,
-          speedY: (Math.random() - 0.5) * 0.7,
+          radius: Math.random() * 2 + 1,
+          alpha: Math.random() * 0.5 + 0.2,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
         });
       }
     }
@@ -609,16 +540,19 @@ public class ExceptionDemo {
       nanoCanvas.height = window.innerHeight;
     }
 
-    function drawNanoParticles() {
+    function drawNanoParticles(now) {
       if (!nanoCtx) return;
+      // Throttle to 30fps for background particles to save CPU
+      if (now - lastTimestamp < 33) {
+        nanoAnimFrame = requestAnimationFrame(drawNanoParticles);
+        return;
+      }
+      lastTimestamp = now;
       nanoCtx.clearRect(0, 0, nanoCanvas.width, nanoCanvas.height);
       for (let p of particles) {
         nanoCtx.beginPath();
         nanoCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        nanoCtx.fillStyle = `rgba(0, 229, 255, ${p.alpha * 0.8})`;
-        nanoCtx.fill();
-        nanoCtx.shadowBlur = 6;
-        nanoCtx.shadowColor = '#00e5ff';
+        nanoCtx.fillStyle = `rgba(0, 229, 255, ${p.alpha * 0.7})`;
         nanoCtx.fill();
         p.x += p.speedX;
         p.y += p.speedY;
@@ -634,7 +568,8 @@ public class ExceptionDemo {
       if (nanoAnimFrame) cancelAnimationFrame(nanoAnimFrame);
       resizeNanoCanvas();
       initNanoParticles();
-      drawNanoParticles();
+      lastTimestamp = 0;
+      nanoAnimFrame = requestAnimationFrame(drawNanoParticles);
     }
 
     function stopNanoParticles() {
@@ -655,15 +590,14 @@ public class ExceptionDemo {
       if (nanoMode) {
         body.classList.add('nano-theme');
         startNanoParticles();
-        console.log("%c⚡ NANO TECH ACTIVATED ⚡", "color: #00e5ff; font-size: 16px;");
+        console.log("NANO TECH ACTIVATED");
       } else {
         body.classList.remove('nano-theme');
         stopNanoParticles();
-        console.log("%cOriginal theme restored", "color: #2b6cb0;");
       }
     });
 
-    // --- Logo tilt & ripple interaction (kept original interactive) ---
+    // --- Logo tilt & ripple (optimized, no heavy animations when inactive) ---
     const logo = document.getElementById('interactiveLogo');
     const canvasRipple = document.getElementById('rippleCanvas');
     const ctxRipple = canvasRipple.getContext('2d');
@@ -671,42 +605,64 @@ public class ExceptionDemo {
     function resizeRippleCanvas() { const rect = logo.getBoundingClientRect(); canvasRipple.width = rect.width; canvasRipple.height = rect.height; }
     window.addEventListener('resize', resizeRippleCanvas);
     resizeRippleCanvas();
+    
     function drawRipple(x, y) {
       if (!ctxRipple) return;
       ctxRipple.clearRect(0, 0, canvasRipple.width, canvasRipple.height);
       if (rippleRadius > 0 && rippleAlpha > 0) {
         const grad = ctxRipple.createRadialGradient(x, y, 2, x, y, rippleRadius);
-        grad.addColorStop(0, `rgba(0, 229, 255, ${rippleAlpha * 0.9})`);
-        grad.addColorStop(0.6, `rgba(43, 108, 176, ${rippleAlpha * 0.5})`);
+        grad.addColorStop(0, `rgba(0, 229, 255, ${rippleAlpha * 0.8})`);
         grad.addColorStop(1, 'rgba(0, 229, 255, 0)');
         ctxRipple.fillStyle = grad;
         ctxRipple.arc(x, y, rippleRadius, 0, Math.PI * 2);
         ctxRipple.fill();
       }
     }
+    
     function animateRipple() {
       if (!rippleActive && rippleRadius <= 0) { if (rippleFrame) cancelAnimationFrame(rippleFrame); return; }
-      if (rippleActive) { rippleRadius += 5; rippleAlpha -= 0.02; if (rippleRadius > 70 || rippleAlpha <= 0) { rippleActive = false; rippleRadius = 0; rippleAlpha = 0; ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height); if (rippleFrame) cancelAnimationFrame(rippleFrame); return; } }
-      else { if (rippleRadius<=0) { if (rippleFrame) cancelAnimationFrame(rippleFrame); return; } rippleRadius -= 4; rippleAlpha -= 0.03; if (rippleRadius<=0) { rippleRadius=0; rippleAlpha=0; ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height); if (rippleFrame) cancelAnimationFrame(rippleFrame); return; } }
+      if (rippleActive) {
+        rippleRadius += 4;
+        rippleAlpha -= 0.03;
+        if (rippleRadius > 50 || rippleAlpha <= 0) {
+          rippleActive = false;
+          rippleRadius = 0;
+          rippleAlpha = 0;
+          ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height);
+          if (rippleFrame) cancelAnimationFrame(rippleFrame);
+          return;
+        }
+      } else {
+        if (rippleRadius<=0) { if (rippleFrame) cancelAnimationFrame(rippleFrame); return; }
+        rippleRadius -= 3;
+        rippleAlpha -= 0.04;
+        if (rippleRadius<=0) {
+          rippleRadius=0; rippleAlpha=0;
+          ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height);
+          if (rippleFrame) cancelAnimationFrame(rippleFrame);
+          return;
+        }
+      }
       if (window.lastRX && window.lastRY) drawRipple(window.lastRX, window.lastRY);
       rippleFrame = requestAnimationFrame(animateRipple);
     }
+    
     let transform = { rx:0, ry:0, s:1 }, tiltFrame = null;
-    function updateTilt() { logo.style.transform = `perspective(800px) rotateX(${transform.rx}deg) rotateY(${transform.ry}deg) scale(${transform.s})`; }
+    function updateTilt() { logo.style.transform = `perspective(600px) rotateX(${transform.rx}deg) rotateY(${transform.ry}deg) scale(${transform.s})`; }
     let hover = false;
     logo.addEventListener('mousemove', (e) => {
       if (!hover) return;
       const rect = logo.getBoundingClientRect();
       const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
       const rx = (e.clientX - cx) / (rect.width/2), ry = (e.clientY - cy) / (rect.height/2);
-      transform.ry = Math.min(Math.max(rx * 22, -22), 22);
-      transform.rx = Math.min(Math.max(-ry * 22, -22), 22);
-      transform.s = 1.12;
+      transform.ry = Math.min(Math.max(rx * 16, -16), 16);
+      transform.rx = Math.min(Math.max(-ry * 16, -16), 16);
+      transform.s = 1.08;
       if (tiltFrame) cancelAnimationFrame(tiltFrame); tiltFrame = requestAnimationFrame(updateTilt);
       const mx = e.clientX - rect.left, my = e.clientY - rect.top;
       if (mx>=0 && mx<=rect.width && my>=0 && my<=rect.height) {
         window.lastRX = mx; window.lastRY = my;
-        rippleActive = true; rippleRadius = 8; rippleAlpha = 0.7;
+        rippleActive = true; rippleRadius = 6; rippleAlpha = 0.6;
         drawRipple(mx, my);
         if (rippleFrame) cancelAnimationFrame(rippleFrame);
         animateRipple();
@@ -716,14 +672,14 @@ public class ExceptionDemo {
       hover = false;
       transform.rx = 0; transform.ry = 0; transform.s = 1;
       if (tiltFrame) cancelAnimationFrame(tiltFrame); tiltFrame = requestAnimationFrame(updateTilt);
-      logo.style.transition = 'transform 0.3s';
-      setTimeout(() => { if (logo) logo.style.transition = ''; }, 300);
+      logo.style.transition = 'transform 0.25s';
+      setTimeout(() => { if (logo) logo.style.transition = ''; }, 250);
       if (rippleActive) { rippleActive=false; animateRipple(); }
     });
     logo.addEventListener('mouseenter', () => { hover = true; logo.style.transition = 'transform 0.03s'; resizeRippleCanvas(); });
     updateTilt();
 
-    // Copy buttons (unchanged)
+    // Copy buttons (standard)
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-target');
@@ -734,8 +690,8 @@ public class ExceptionDemo {
           await navigator.clipboard.writeText(text);
           const orig = btn.innerText;
           btn.innerText = 'Copied'; btn.classList.add('copied');
-          setTimeout(() => { btn.innerText = orig; btn.classList.remove('copied'); }, 1200);
-        } catch(e) { alert('Manual copy needed'); }
+          setTimeout(() => { btn.innerText = orig; btn.classList.remove('copied'); }, 1000);
+        } catch(e) { alert('Manual copy'); }
       });
     });
   </script>
