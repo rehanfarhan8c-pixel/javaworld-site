@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Java World</title>
-  <!-- custom favicon (logo in browser tab) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%232b6cb0' stroke='%231f4f7a' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3Cpath d='M50 20 L50 80 M20 50 L80 50' stroke='%23ffffff' stroke-width='2'/%3E%3Cpath d='M30 30 A40 40 0 0 1 70 70 M70 30 A40 40 0 0 0 30 70' stroke='%23ffffff' fill='none' stroke-width='2'/%3E%3Ctext x='50' y='68' font-size='20' text-anchor='middle' fill='%23ffffff' font-weight='bold'%3E☕%3C/text%3E%3C/svg%3E">
+  <!-- custom favicon (new coffee + code logo) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232b6cb0'/%3E%3Cpath d='M35 45 L65 45 L65 55 L55 60 L45 60 L35 55 Z' fill='white'/%3E%3Cpath d='M65 48 L70 48 C72 48 72 52 70 52 L65 52' fill='none' stroke='white' stroke-width='2'/%3E%3Cpath d='M42 38 L42 45 M50 36 L50 45 M58 38 L58 45' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Ctext x='50' y='80' font-size='14' fill='white' font-weight='bold' text-anchor='middle'%3E☕%3C/text%3E%3C/svg%3E">
   <style>
     :root{
       --bg:#f6f7fb;
@@ -24,8 +24,8 @@
       justify-content: center;
       width: 56px;
       height: 56px;
-      background: rgba(255,255,255,0.18);
-      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border-radius: 18px;
       backdrop-filter: blur(4px);
       transition: box-shadow 0.25s ease, background 0.2s;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -36,8 +36,8 @@
       transition: transform 0.1s ease-out, box-shadow 0.2s ease, background 0.2s;
     }
     .logo-svg {
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       display: block;
       transition: filter 0.2s;
     }
@@ -60,7 +60,6 @@
     nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:600}
     nav a:hover{background:rgba(255,255,255,0.06)}
     .container{max-width:1100px;margin:24px auto;padding:0 16px}
-    /* Removed grid, now single column layout */
     .grid { display: block; }
     .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06); width:100%; box-sizing:border-box;}
     h2{margin:0 0 12px;color:var(--accent)}
@@ -219,13 +218,21 @@
 </div>
 
   <header>
-    <div class="logo-globe" id="interactiveLogo" aria-label="Java World Logo - reactive to mouse">
+    <!-- New logo: coffee cup with code brackets (modern Java brand) -->
+    <div class="logo-globe" id="interactiveLogo" aria-label="Java World Logo - coffee cup with angle brackets">
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" fill="white" stroke="#2b6cb0" stroke-width="2.5"/>
-        <circle cx="50" cy="50" r="18" fill="none" stroke="#1f4f7a" stroke-width="2.5"/>
-        <path d="M50 24 L50 76 M24 50 L76 50" stroke="#2b6cb0" stroke-width="2" stroke-linecap="round"/>
-        <path d="M33 33 A40 40 0 0 1 67 67 M67 33 A40 40 0 0 0 33 67" stroke="#1f4f7a" fill="none" stroke-width="2"/>
-        <text x="50" y="67" font-size="22" text-anchor="middle" fill="#2b6cb0" font-weight="bold" font-family="Arial">☕</text>
+        <!-- Background (rounded) -->
+        <rect x="8" y="8" width="84" height="84" rx="18" fill="white" stroke="#2b6cb0" stroke-width="2.5"/>
+        <!-- Coffee cup body -->
+        <path d="M32 32 L68 32 L65 68 L55 74 L45 74 L35 68 L32 32 Z" fill="#2b6cb0" stroke="#1f4f7a" stroke-width="1.5"/>
+        <!-- Cup handle -->
+        <path d="M68 42 L74 42 C78 42 78 54 74 54 L68 54" fill="none" stroke="#2b6cb0" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Steam lines -->
+        <path d="M40 28 L40 20 M50 26 L50 18 M60 28 L60 20" stroke="#2b6cb0" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <!-- Angle brackets (code symbol) -->
+        <text x="50" y="58" font-size="20" text-anchor="middle" fill="white" font-weight="bold" font-family="monospace">&lt;/&gt;</text>
+        <!-- Small coffee bean on cup -->
+        <circle cx="50" cy="50" r="4" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
       </svg>
     </div>
     <div class="title-group">
@@ -250,7 +257,7 @@
         <h2 id="examples-title">Code Examples</h2>
         <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE. Every code block has been verified for correct Java syntax.</p>
 
-        <!-- Example 1: Hello World -->
+        <!-- All existing code examples unchanged, exactly as before -->
         <div class="example" id="hello">
           <div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div>
           <pre id="code-hello"><code>// HelloWorld.java
@@ -262,7 +269,6 @@ public class HelloWorld {
 </code></pre>
         </div>
 
-        <!-- Example 2: Basic Input -->
         <div class="example" id="basics">
           <div class="meta"><strong>Basic Input and Data Types</strong><div class="small">Run from terminal; enter a number when prompted</div></div>
           <pre id="code-basics"><code>// ReadNumber.java
@@ -279,7 +285,6 @@ public class ReadNumber {
 </code></pre>
         </div>
 
-        <!-- Example 3: Variables & Arithmetic -->
         <div class="example" id="variables">
           <div class="meta"><strong>Variables & Arithmetic</strong><div class="small">Declare variables, basic math</div></div>
           <pre id="code-variables"><code>// ArithmeticDemo.java
@@ -296,7 +301,6 @@ public class ArithmeticDemo {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac ArithmeticDemo.java</div><button class="btn" data-target="code-variables">Copy Code</button></div>
         </div>
 
-        <!-- Example 4: String input -->
         <div class="example" id="string-input">
           <div class="meta"><strong>String Input & Concatenation</strong><div class="small">Read name and age</div></div>
           <pre id="code-string-input"><code>// Greeting.java
@@ -316,7 +320,6 @@ public class Greeting {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac Greeting.java</div><button class="btn" data-target="code-string-input">Copy Code</button></div>
         </div>
 
-        <!-- Example 5: Type casting -->
         <div class="example" id="casting">
           <div class="meta"><strong>Type Casting</strong><div class="small">Implicit & Explicit conversion</div></div>
           <pre id="code-casting"><code>// TypeCastingDemo.java
@@ -334,7 +337,6 @@ public class TypeCastingDemo {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac TypeCastingDemo.java</div><button class="btn" data-target="code-casting">Copy Code</button></div>
         </div>
 
-        <!-- Example 6: Even or Odd -->
         <div class="example" id="even-odd">
           <div class="meta"><strong>Even or Odd Checker</strong><div class="small">Check whether a number is even or odd</div></div>
           <pre id="code-even-odd"><code>// EvenOdd.java
@@ -356,7 +358,6 @@ public class EvenOdd {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac EvenOdd.java</div><button class="btn" data-target="code-even-odd">Copy Code</button></div>
         </div>
 
-        <!-- Example 7: Palindrome -->
         <div class="example" id="palindrome">
           <div class="meta"><strong>Palindrome Checker</strong><div class="small">Check whether a number is palindrome (e.g., 121 → Palindrome)</div></div>
           <pre id="code-palindrome"><code>// PalindromeNumber.java
@@ -384,7 +385,6 @@ public class PalindromeNumber {
           <div class="meta" style="margin-top:8px;"><div class="small">Example: 121 → Palindrome</div><button class="btn" data-target="code-palindrome">Copy Code</button></div>
         </div>
 
-        <!-- Example 8: Armstrong Number -->
         <div class="example" id="armstrong">
           <div class="meta">
             <strong>Armstrong Number Checker</strong>
@@ -420,7 +420,6 @@ public class ArmstrongNumber {
           </div>
         </div>
 
-        <!-- Example 9: OOP inheritance -->
         <div class="example" id="oop">
           <div class="meta"><strong>OOP Example with Inheritance</strong><div class="small">Three classes in one file</div></div>
           <pre id="code-oop"><code>// AnimalDemo.java
@@ -445,7 +444,6 @@ public class AnimalDemo {
 </code></pre>
         </div>
 
-        <!-- Example 10: Factorial & Fibonacci -->
         <div class="example" id="algorithms">
           <div class="meta"><strong>Factorial and Fibonacci</strong><div class="small">Iterative</div></div>
           <pre id="code-algorithms"><code>// MathExamples.java
@@ -473,7 +471,6 @@ public class MathExamples {
 </code></pre>
         </div>
 
-        <!-- Example 11: Prime Check -->
         <div class="example" id="prime">
           <div class="meta"><strong>Prime Check</strong><div class="small">Efficient sqrt(n)</div></div>
           <pre id="code-prime"><code>// PrimeCheck.java
@@ -494,7 +491,6 @@ public class PrimeCheck {
 </code></pre>
         </div>
 
-        <!-- Example 12: Sort -->
         <div class="example" id="sort">
           <div class="meta"><strong>Array Sorting using Arrays.sort</strong><div class="small">Built-in sort</div></div>
           <pre id="code-sort"><code>// SortExample.java
@@ -509,7 +505,6 @@ public class SortExample {
 </code></pre>
         </div>
 
-        <!-- Example 13: Simple Interest -->
         <div class="example" id="simple-interest">
           <div class="meta"><strong>Simple Interest Calculator</strong><div class="small">SI = (P×R×T)/100</div></div>
           <pre id="code-simple-interest"><code>// SimpleInterest.java
@@ -530,7 +525,6 @@ public class SimpleInterest {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac SimpleInterest.java</div><button class="btn" data-target="code-simple-interest">Copy Code</button></div>
         </div>
 
-        <!-- Example 14: Quadratic -->
         <div class="example" id="quadratic">
           <div class="meta"><strong>Quadratic Equation Solver</strong><div class="small">ax² + bx + c = 0</div></div>
           <pre id="code-quadratic"><code>// QuadraticEquation.java
@@ -562,7 +556,6 @@ public class QuadraticEquation {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac QuadraticEquation.java</div><button class="btn" data-target="code-quadratic">Copy Code</button></div>
         </div>
 
-        <!-- Example 15: Second Smallest -->
         <div class="example" id="second-smallest">
           <div class="meta"><strong>Second Smallest (no if/ternary)</strong><div class="small">Using Math.min/max</div></div>
           <pre id="code-second-smallest"><code>// SecondSmallest.java
@@ -585,7 +578,6 @@ public class SecondSmallest {
           <div class="meta" style="margin-top:8px;"><div class="small">Sample: 34 82 61 → 61.0</div><button class="btn" data-target="code-second-smallest">Copy Code</button></div>
         </div>
 
-        <!-- Example 16: Student Grade -->
         <div class="example" id="grade-calculator">
           <div class="meta"><strong>Student Grade Calculator</strong><div class="small">Average & grade table</div></div>
           <pre id="code-grade-calculator"><code>// StudentGrade.java
@@ -616,7 +608,6 @@ public class StudentGrade {
           <div class="meta" style="margin-top:8px;"><div class="small">Compile: javac StudentGrade.java</div><button class="btn" data-target="code-grade-calculator">Copy Code</button></div>
         </div>
 
-        <!-- Example 17-20: Area examples -->
         <div class="example" id="areas">
           <div class="meta"><strong>Area Examples</strong><div class="small">Rectangle, Square, Triangle, Quadrilateral</div></div>
           <pre id="code-rectangle"><code>// RectangleArea.java
@@ -670,7 +661,6 @@ public class QuadrilateralArea {
           </div>
         </div>
 
-        <!-- Example 21: File IO -->
         <div class="example" id="io">
           <div class="meta"><strong>File Input and Output</strong><div class="small">Write/Read text file</div></div>
           <pre id="code-io"><code>// FileIOExample.java
@@ -684,7 +674,6 @@ public class FileIOExample {
 </code></pre>
         </div>
 
-        <!-- Example 22: Exception handling -->
         <div class="example" id="exceptions">
           <div class="meta"><strong>Exception Handling</strong><div class="small">try-catch-finally</div></div>
           <pre id="code-exceptions"><code>// ExceptionDemo.java
@@ -714,7 +703,7 @@ public class ExceptionDemo {
   </footer>
 
   <script>
-    // Mouse-reactive 3D tilt for logo
+    // Mouse-reactive 3D tilt for logo (same interactive behavior)
     const logo = document.getElementById('interactiveLogo');
     if (logo) {
       let currentTransform = { rotateX: 0, rotateY: 0, scale: 1 };
@@ -757,7 +746,7 @@ public class ExceptionDemo {
       updateTransform();
     }
     
-    // Copy buttons
+    // Copy buttons (unchanged)
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-target');
