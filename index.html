@@ -3,11 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Java World | Arc Reactor</title>
-  <!-- favicon: arc reactor icon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230d2b4a' stroke='%232b6cb0' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='36' fill='none' stroke='%2341b0ee' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%2341b0ee'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
+  <title>Java World</title>
   <style>
-    /* ---------- ORIGINAL THEME (default, lightweight) ---------- */
     :root{
       --bg:#f6f7fb;
       --card:#ffffff;
@@ -15,78 +12,95 @@
       --muted:#6b7280;
       --code-bg:#0b1220;
       --code-fg:#d6deeb;
-      --nav-bg:#16324a;
-      --header-grad-start:#1f4f7a;
-      --header-grad-end:#2b6cb0;
-      --shadow-color:rgba(15,23,42,0.06);
     }
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;transition: background-color 0.4s ease, color 0.3s ease;}
-    header{background:linear-gradient(90deg,var(--header-grad-start),var(--header-grad-end));color:#fff;padding:28px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:2;transition: all 0.3s;}
-    /* Logo container - arc reactor style */
-    .logo-globe {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 70px;
-      height: 70px;
-      background: rgba(0,0,0,0.2);
-      border-radius: 50%;
-      backdrop-filter: blur(2px);
-      transition: box-shadow 0.2s ease, background 0.2s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      will-change: transform;
-      cursor: pointer;
-      position: relative;
-      overflow: visible;
-      z-index: 10;
-    }
-    .logo-ripple-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 20;
-    }
-    .logo-svg {
-      width: 62px;
-      height: 62px;
-      display: block;
-      transition: filter 0.2s;
-      position: relative;
-      z-index: 5;
-    }
-    .title-group { display: flex; flex-direction: column; text-align: left; }
-    header h1{margin:0;font-size:28px;letter-spacing:0.4px; line-height:1.2;}
-    header p{margin:4px 0 0;color:rgba(255,255,255,0.9); font-size:0.9rem;}
-    nav{display:flex;gap:12px;justify-content:center;padding:12px;background:var(--nav-bg);flex-wrap:wrap;transition: background 0.3s;}
-    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:600;transition: all 0.2s;}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111;}
+    header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center}
+    header h1{margin:0;font-size:28px;letter-spacing:0.4px}
+    header p{margin:6px 0 0;color:rgba(255,255,255,0.9)}
+    nav{display:flex;gap:12px;justify-content:center;padding:12px;background:#16324a;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:600}
+    nav a:hover{background:rgba(255,255,255,0.06)}
     .container{max-width:1100px;margin:24px auto;padding:0 16px}
-    .grid { display: block; }
-    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px var(--shadow-color); width:100%; box-sizing:border-box;transition: background 0.3s, box-shadow 0.3s, transform 0.2s;}
-    h2{margin:0 0 12px;color:var(--accent); transition: color 0.2s;}
-    p.lead{margin:0 0 14px;color:var(--muted);}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    h2{margin:0 0 12px;color:var(--accent)}
+    p.lead{margin:0 0 14px;color:var(--muted)}
     .example{margin-bottom:18px}
-    pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:14px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5;transition: background 0.3s, border-color 0.2s;}
+    pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:14px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5}
     .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600;transition: all 0.2s;}
-    .small{font-size:13px;color:var(--muted);}
-    footer{max-width:1100px;margin:28px auto 60px;padding:0 16px;color:var(--muted);text-align:center;transition: color 0.3s;}
+    .btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
+    .small{font-size:13px;color:var(--muted)}
+    aside .card{position:sticky;top:20px}
+    footer{max-width:1100px;margin:28px auto 60px;padding:0 16px;color:var(--muted);text-align:center}
     .copied{background:#16a34a;padding:6px 10px;border-radius:6px;color:#fff;font-weight:600}
-    
-    /* minimal animations */
+    hr.sep{border:0;border-top:1px solid #eef2f7;margin:14px 0}
+  </style>
+  <!-- ANIMATIONS STYLES (added without changing content) -->
+  <style>
+    /* ----- GLOBAL PAGE LOAD ANIMATIONS ----- */
     @keyframes gentleFadeSlide {
-      0% { opacity: 0; transform: translateY(18px);}
-      100% { opacity: 1; transform: translateY(0);}
+      0% {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes softPulse {
-      0% { background-position: 0% 50%;}
-      100% { background-position: 100% 50%;}
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
     }
-    .grid > section.card { animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; }
-    .example { opacity: 0; transform: translateY(12px); animation: gentleFadeSlide 0.45s ease-out forwards; animation-delay: calc(0.02s * var(--order, 0)); }
+
+    @keyframes subtleGlow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(43, 108, 176, 0.2);
+      }
+      70% {
+        box-shadow: 0 0 0 6px rgba(43, 108, 176, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(43, 108, 176, 0);
+      }
+    }
+
+    @keyframes borderSlide {
+      0% {
+        width: 0;
+        opacity: 0;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    /* entrance animations for cards and examples */
+    .grid > section.card {
+      animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+    }
+
+    aside .card {
+      animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.1s forwards;
+      opacity: 0;
+      transform: translateY(18px);
+      animation-fill-mode: forwards;
+    }
+
+    .example {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: gentleFadeSlide 0.45s ease-out forwards;
+      animation-delay: calc(0.05s * var(--order, 0));
+    }
+
+    /* assign staggered delay for .example children dynamically */
     .example:nth-child(1) { --order: 1; }
     .example:nth-child(2) { --order: 2; }
     .example:nth-child(3) { --order: 3; }
@@ -106,149 +120,277 @@
     .example:nth-child(17) { --order: 17; }
     .example:nth-child(18) { --order: 18; }
     .example:nth-child(19) { --order: 19; }
-    .example:nth-child(20) { --order: 20; }
-    .example:nth-child(21) { --order: 21; }
-    .example:nth-child(22) { --order: 22; }
-    
-    header { background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e); background-size: 250% 250%; animation: softPulse 8s ease infinite; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(15,23,42,0.1);}
-    nav a:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px);}
-    .btn:hover { background: #1e4e76; transform: scale(1.02);}
-    pre:hover { border-left-color: var(--accent); background-color: #0e1625;}
-    body::before { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; background: linear-gradient(125deg, rgba(214,222,235,0.4) 0%, rgba(246,247,251,0.7) 30%, rgba(226,232,240,0.5) 60%, rgba(203,213,225,0.3) 100%); background-size: 300% 300%; animation: breathGradient 22s ease infinite; pointer-events: none; z-index: -2; transition: opacity 0.5s;}
-    body::after { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: -1; background-image: radial-gradient(circle at 15% 40%, rgba(43,108,176,0.12) 0%, transparent 28%), radial-gradient(circle at 85% 70%, rgba(31,79,122,0.1) 0%, transparent 35%), radial-gradient(circle at 45% 10%, rgba(100,150,200,0.08) 0%, transparent 40%), radial-gradient(circle at 70% 85%, rgba(43,108,176,0.1) 0%, transparent 30%); background-repeat: no-repeat; animation: floatOrbs 32s infinite alternate ease-in-out; transition: opacity 0.5s;}
-    @keyframes breathGradient { 0% { background-position: 0% 50%;} 50% { background-position: 100% 50%;} 100% { background-position: 0% 50%;} }
-    @keyframes floatOrbs { 0% { background-position: 0% 0%, 100% 100%, 30% 20%, 80% 90%; background-size: 60% 60%, 55% 55%, 45% 45%, 50% 50%; opacity: 0.7;} 50% { background-position: 20% 30%, 70% 60%, 55% 15%, 95% 75%; background-size: 70% 70%, 65% 65%, 55% 55%, 60% 60%; opacity: 0.85;} 100% { background-position: 10% 15%, 90% 80%, 40% 30%, 75% 95%; background-size: 55% 55%, 50% 50%, 40% 40%, 45% 45%; opacity: 0.7;} }
-    header, nav, .container, footer { position: relative; z-index: 2;}
-    .card { background: rgba(255,255,255,0.96); backdrop-filter: blur(0px); transition: transform 0.2s, box-shadow 0.2s, background 0.3s;}
+    .example:nth-child(20) { --order: 20; }   /* new for month name example */
 
-    /* ========= NANO-THEME (optimized, still stunning) ========= */
-    body.nano-theme {
-      --bg:#03050b;
-      --card:rgba(10, 20, 40, 0.85);
-      --accent:#00e5ff;
-      --muted:#89b4ff;
-      --code-bg:#010a1a;
-      --code-fg:#b0e0ff;
-      --nav-bg:#051024;
-      --header-grad-start:#0a0f2a;
-      --header-grad-end:#001d3d;
-      --shadow-color:rgba(0,229,255,0.2);
-      background: radial-gradient(circle at 20% 30%, #0a0f2a, #000000);
-      color: #e0f0ff;
+    /* animated gradient for header (smooth moving shimmer) */
+    header {
+      background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e);
+      background-size: 250% 250%;
+      animation: softPulse 8s ease infinite;
+      transition: box-shadow 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
-    body.nano-theme header {
-      background: linear-gradient(135deg, #0a1225, #051a2f, #022b4f, #001d3d);
-      border-bottom: 1px solid rgba(0, 229, 255, 0.4);
-      box-shadow: 0 0 15px rgba(0,229,255,0.2);
+
+    header:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
     }
-    body.nano-theme .logo-globe {
-      background: rgba(0,229,255,0.2);
-      animation: reactorGlow 1.5s infinite alternate;
+
+    /* card micro-interactions: lift & soft shadow */
+    .card {
+      transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s ease;
+      will-change: transform;
+      backdrop-filter: blur(0px); /* keep crisp */
     }
-    @keyframes reactorGlow {
-      0% { box-shadow: 0 0 5px rgba(0,229,255,0.5);}
-      100% { box-shadow: 0 0 20px rgba(0,229,255,0.9);}
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(0, 0, 0, 0.02);
     }
-    body.nano-theme .card {
-      background: rgba(5, 15, 30, 0.75);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(0,229,255,0.3);
+
+    /* aside sticky card - subtle hover (no sticky conflict) */
+    aside .card:hover {
+      transform: translateY(-4px);
     }
-    body.nano-theme pre { background: #021024; border-left: 3px solid #00e5ff; }
-    body.nano-theme .btn { background: #00aacc; box-shadow: 0 0 6px #00e5ff; }
-    body.nano-theme .btn:hover { background: #00e5ff; color: #000; }
-    body.nano-theme nav { background: #020c1a; border-bottom: 1px solid #00e5ff; }
-    body.nano-theme h2 { color: #00e5ff; text-shadow: 0 0 3px #00e5ff; }
-    /* Microchip circuit lines (visible only in nano theme, lightweight) */
-    .circuit-lines {
+
+    /* nav link hover animations: underline slide + background glow */
+    nav a {
+      position: relative;
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      width: 0%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      transform: translateX(-50%);
+      transition: width 0.25s ease-out;
+    }
+
+    nav a:hover::after {
+      width: 70%;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* Buttons micro-animations */
+    .btn {
+      transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      background: #1e4e76;
+      transform: scale(1.04);
+      box-shadow: 0 5px 12px rgba(43, 108, 176, 0.3);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+      transition: 0.05s;
+    }
+
+    /* subtle pulse effect on copy "Copied" (without altering content) */
+    .copied {
+      animation: subtleGlow 0.4s ease-out;
+      background: #16a34a;
+    }
+
+    /* code block animations + smoother look + border glow on hover */
+    pre {
+      transition: border-left 0.2s ease, background-color 0.25s ease, box-shadow 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    pre:hover {
+      border-left-color: var(--accent);
+      background-color: #0e1625;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* smooth typography link animation for anchors inside but nothing changed */
+    a {
+      transition: color 0.15s ease, text-shadow 0.1s ease;
+    }
+
+    /* footer tiny hover (pure aesthetic) */
+    footer .small {
+      transition: opacity 0.2s ease;
+    }
+
+    footer:hover .small {
+      opacity: 0.85;
+    }
+
+    /* custom scroll reveal / additional smoothness */
+    .container {
+      animation: gentleFadeSlide 0.6s ease-out;
+    }
+
+    /* area-specific group copy buttons - preserve style but add micro effect */
+    .example .btn,
+    div[style*="display:flex;gap:8px"] .btn {
+      transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    /* additional smooth code line readability */
+    code {
+      transition: all 0.1s;
+    }
+
+    /* ========== ADDED BACKGROUND ANIMATIONS ========== */
+    /* Animated gradient background for the whole page */
+    body {
+      background: radial-gradient(circle at 10% 20%, rgba(43, 108, 176, 0.08), rgba(31, 79, 122, 0.02));
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Create a pseudo-element for the moving gradient backdrop */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(125deg, 
+        rgba(214, 222, 235, 0.4) 0%, 
+        rgba(246, 247, 251, 0.7) 30%,
+        rgba(226, 232, 240, 0.5) 60%,
+        rgba(203, 213, 225, 0.3) 100%);
+      background-size: 300% 300%;
+      animation: breathGradient 22s ease infinite;
+      pointer-events: none;
+      z-index: -2;
+    }
+    
+    /* floating orb animations (background blobs) */
+    body::after {
+      content: "";
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+      z-index: -1;
       background-image: 
-        repeating-linear-gradient(90deg, rgba(0,229,255,0.1) 0px, rgba(0,229,255,0.1) 1px, transparent 1px, transparent 50px),
-        repeating-linear-gradient(0deg, rgba(0,229,255,0.1) 0px, rgba(0,229,255,0.1) 1px, transparent 1px, transparent 50px);
+        radial-gradient(circle at 15% 40%, rgba(43, 108, 176, 0.12) 0%, transparent 28%),
+        radial-gradient(circle at 85% 70%, rgba(31, 79, 122, 0.1) 0%, transparent 35%),
+        radial-gradient(circle at 45% 10%, rgba(100, 150, 200, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 70% 85%, rgba(43, 108, 176, 0.1) 0%, transparent 30%);
+      background-repeat: no-repeat;
+      animation: floatOrbs 32s infinite alternate ease-in-out;
     }
-    body.nano-theme .circuit-lines { opacity: 0.45; }
-    /* Nano particles canvas (fewer particles) */
-    .nano-particles-canvas {
+    
+    /* Keyframes for soft gradient movement */
+    @keyframes breathGradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    /* Keyframes for floating background blobs */
+    @keyframes floatOrbs {
+      0% {
+        background-position: 0% 0%, 100% 100%, 30% 20%, 80% 90%;
+        background-size: 60% 60%, 55% 55%, 45% 45%, 50% 50%;
+        opacity: 0.7;
+      }
+      50% {
+        background-position: 20% 30%, 70% 60%, 55% 15%, 95% 75%;
+        background-size: 70% 70%, 65% 65%, 55% 55%, 60% 60%;
+        opacity: 0.85;
+      }
+      100% {
+        background-position: 10% 15%, 90% 80%, 40% 30%, 75% 95%;
+        background-size: 55% 55%, 50% 50%, 40% 40%, 45% 45%;
+        opacity: 0.7;
+      }
+    }
+    
+    /* Additional flowing light particles (tiny moving dots) */
+    .bg-particles {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.5s;
+      z-index: -1;
     }
-    body.nano-theme .nano-particles-canvas { opacity: 1; }
-    /* Hex grid (optional, lighter) */
-    .hex-grid {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><path d="M50 5 L93 27.5 L93 72.5 L50 95 L7 72.5 L7 27.5 Z" fill="none" stroke="%2300e5ff" stroke-width="1"/><path d="M50 20 L78 34 L78 66 L50 80 L22 66 L22 34 Z" fill="none" stroke="%2300e5ff" stroke-width="0.5"/></svg>');
-      background-repeat: repeat;
-      background-size: 80px;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.5s;
+    
+    /* Add animated sparkle effect with pseudo-elements */
+    @keyframes particleShift {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translate(40px, -30px) scale(1.3);
+        opacity: 0;
+      }
     }
-    body.nano-theme .hex-grid { opacity: 0.1; }
-    /* Glitch effect (light) */
-    @keyframes glitch { 0% { text-shadow: -1px 0 #0ff, 1px 0 #f0f; } 50% { text-shadow: 1px 0 #0ff, -1px 0 #f0f; } 100% { text-shadow: -1px 0 #0ff, 1px 0 #f0f; } }
-    body.nano-theme header h1 { animation: glitch 1s infinite; }
+    
+    .bg-particles i {
+      position: absolute;
+      background: rgba(43, 108, 176, 0.3);
+      border-radius: 50%;
+      animation: particleShift 18s infinite linear;
+    }
+    
+    /* Ensure main content has higher stacking context for readability */
+    header, nav, .container, footer {
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Make cards background slightly more opaque but maintain design */
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(0px);
+      transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s ease, background 0.2s;
+    }
+    
+    .card:hover {
+      background: rgba(255, 255, 255, 1);
+    }
   </style>
 </head>
 <body>
-  <!-- Overlays (lightweight, do not impact content) -->
-  <div class="circuit-lines"></div>
-  <div class="hex-grid"></div>
-  <canvas id="nanoCanvas" class="nano-particles-canvas"></canvas>
-
-  <div class="bg-particles" aria-hidden="true" style="display:none;"></div> <!-- removed heavy particles -->
+<!-- Additional decorative particles container (background only) -->
+<div class="bg-particles" aria-hidden="true">
+  <i style="width: 80px; height: 80px; top: 15%; left: 5%; animation-duration: 22s; animation-delay: 0s;"></i>
+  <i style="width: 40px; height: 40px; top: 45%; left: 85%; animation-duration: 28s; animation-delay: 2s;"></i>
+  <i style="width: 120px; height: 120px; top: 70%; left: 20%; animation-duration: 35s; animation-delay: 1s;"></i>
+  <i style="width: 25px; height: 25px; top: 85%; left: 70%; animation-duration: 25s; animation-delay: 4s;"></i>
+  <i style="width: 60px; height: 60px; top: 30%; left: 60%; animation-duration: 40s; animation-delay: 0.5s;"></i>
+  <i style="width: 90px; height: 90px; top: 10%; left: 40%; animation-duration: 30s; animation-delay: 3s;"></i>
+  <i style="width: 45px; height: 45px; top: 55%; left: 15%; animation-duration: 32s; animation-delay: 1.5s;"></i>
+  <i style="width: 70px; height: 70px; top: 90%; left: 45%; animation-duration: 26s; animation-delay: 2.5s;"></i>
+  <i style="width: 30px; height: 30px; top: 20%; left: 75%; animation-duration: 38s; animation-delay: 0.8s;"></i>
+</div>
 
   <header>
-    <div class="logo-globe" id="interactiveLogo" style="position: relative;">
-      <canvas id="rippleCanvas" class="logo-ripple-canvas" width="70" height="70"></canvas>
-      <!-- Detailed Arc Reactor SVG -->
-      <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" fill="#0a1428" stroke="#2b6cb0" stroke-width="2"/>
-        <circle cx="50" cy="50" r="40" fill="none" stroke="#41b0ee" stroke-width="1.5" stroke-dasharray="6 4"/>
-        <circle cx="50" cy="50" r="34" fill="none" stroke="#1f6392" stroke-width="2"/>
-        <circle cx="50" cy="50" r="26" fill="#0d2b4a" stroke="#00e5ff" stroke-width="1.5"/>
-        <circle cx="50" cy="50" r="18" fill="none" stroke="#41b0ee" stroke-width="1.5" stroke-dasharray="3 3"/>
-        <circle cx="50" cy="50" r="12" fill="#00e5ff" opacity="0.9"/>
-        <circle cx="50" cy="50" r="6" fill="white"/>
-        <polygon points="50,12 56,24 44,24" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
-        <polygon points="50,88 56,76 44,76" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
-        <polygon points="12,50 24,44 24,56" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
-        <polygon points="88,50 76,44 76,56" fill="#1f6392" stroke="#41b0ee" stroke-width="1"/>
-        <line x1="50" y1="20" x2="50" y2="28" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
-        <line x1="50" y1="72" x2="50" y2="80" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
-        <line x1="20" y1="50" x2="28" y2="50" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
-        <line x1="72" y1="50" x2="80" y2="50" stroke="#41b0ee" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="50" cy="34" r="2.5" fill="#00e5ff"/>
-        <circle cx="50" cy="66" r="2.5" fill="#00e5ff"/>
-        <circle cx="34" cy="50" r="2.5" fill="#00e5ff"/>
-        <circle cx="66" cy="50" r="2.5" fill="#00e5ff"/>
-        <path d="M42 42 L58 58 M58 42 L42 58" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-      </svg>
-    </div>
-    <div class="title-group">
-      <h1>Java World</h1>
-      <p>Real, runnable Java examples for beginners — copy and paste into your IDE</p>
-    </div>
+    <h1>Java World</h1>
+    <p>Real, runnable Java examples for beginners, copy and paste into your IDE</p>
   </header>
 
   <nav>
@@ -265,19 +407,33 @@
     <div class="grid">
       <section class="card" aria-labelledby="examples-title">
         <h2 id="examples-title">Code Examples</h2>
-        <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into your IDE.</p>
+        <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into an IDE.</p>
 
-        <!-- ALL ORIGINAL JAVA EXAMPLES (unchanged content) -->
-        <div class="example" id="hello"><div class="meta"><strong>Hello World</strong><div><button class="btn" data-target="code-hello">Copy</button></div></div><pre id="code-hello"><code>// HelloWorld.java
+        <!-- All existing examples unchanged, plus new month name program added after grade calculator -->
+        <div class="example" id="hello">
+          <div class="meta">
+            <strong>Hello World</strong>
+            <div>
+              <button class="btn" data-target="code-hello">Copy</button>
+            </div>
+          </div>
+          <pre id="code-hello"><code>// HelloWorld.java
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, Java World!");
     }
 }
-</code></pre></div>
+</code></pre>
+        </div>
 
-        <div class="example" id="basics"><div class="meta"><strong>Basic Input and Data Types</strong><div class="small">Run from terminal; enter a number when prompted</div></div><pre id="code-basics"><code>// ReadNumber.java
+        <div class="example" id="basics">
+          <div class="meta">
+            <strong>Basic Input and Data Types</strong>
+            <div class="small">Run from terminal; enter a number when prompted</div>
+          </div>
+          <pre id="code-basics"><code>// ReadNumber.java
 import java.util.Scanner;
+
 public class ReadNumber {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -287,412 +443,638 @@ public class ReadNumber {
         sc.close();
     }
 }
-</code></pre></div>
+</code></pre>
+        </div>
 
-        <div class="example" id="variables"><div class="meta"><strong>Variables & Arithmetic</strong><div class="small">Declare variables, basic math</div></div><pre id="code-variables"><code>// ArithmeticDemo.java
+        <!-- Variables & Arithmetic -->
+        <div class="example" id="variables">
+          <div class="meta">
+            <strong>Variables & Arithmetic</strong>
+            <div class="small">Declare variables, perform basic math operations</div>
+          </div>
+          <pre id="code-variables"><code>// ArithmeticDemo.java
 public class ArithmeticDemo {
     public static void main(String[] args) {
-        int a = 25; int b = 7;
-        System.out.println("Sum = " + (a + b));
-        System.out.println("Product = " + (a * b));
-        System.out.println("Remainder = " + (a % b));
+        int a = 25;
+        int b = 7;
+        int sum = a + b;
+        int diff = a - b;
+        int product = a * b;
+        int quotient = a / b;
+        int remainder = a % b;
+        
+        System.out.println("a = " + a + ", b = " + b);
+        System.out.println("Sum = " + sum);
+        System.out.println("Difference = " + diff);
+        System.out.println("Product = " + product);
+        System.out.println("Quotient = " + quotient);
+        System.out.println("Remainder = " + remainder);
     }
 }
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac ArithmeticDemo.java</div><button class="btn" data-target="code-variables">Copy Code</button></div></div>
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Compile: javac ArithmeticDemo.java &nbsp; Run: java ArithmeticDemo</div>
+            <button class="btn" data-target="code-variables">Copy Code</button>
+          </div>
+        </div>
 
-        <div class="example" id="string-input"><div class="meta"><strong>String Input & Concatenation</strong><div class="small">Read name and age</div></div><pre id="code-string-input"><code>// Greeting.java
+        <!-- String Input & Concatenation -->
+        <div class="example" id="string-input">
+          <div class="meta">
+            <strong>String Input & Concatenation</strong>
+            <div class="small">Read name and age, display formatted message</div>
+          </div>
+          <pre id="code-string-input"><code>// Greeting.java
 import java.util.Scanner;
+
 public class Greeting {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter name: ");
+        System.out.print("Enter your name: ");
         String name = sc.nextLine();
-        System.out.print("Enter age: ");
+        System.out.print("Enter your age: ");
         int age = sc.nextInt();
-        System.out.println("Hello " + name + ", age " + age);
+        
+        System.out.println("Hello, " + name + "! You are " + age + " years old.");
+        System.out.println("Next year you will be " + (age + 1) + ".");
         sc.close();
     }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac Greeting.java</div><button class="btn" data-target="code-string-input">Copy Code</button></div></div>
-
-        <div class="example" id="casting"><div class="meta"><strong>Type Casting</strong><div class="small">Implicit & Explicit conversion</div></div><pre id="code-casting"><code>// TypeCastingDemo.java
-public class TypeCastingDemo {
-    public static void main(String[] args) {
-        double d = 9.78;
-        int i = (int) d;
-        System.out.println("Double to int: " + i);
-        char ch = 'A';
-        int ascii = ch;
-        System.out.println("ASCII of A: " + ascii);
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac TypeCastingDemo.java</div><button class="btn" data-target="code-casting">Copy Code</button></div></div>
-
-        <div class="example" id="even-odd"><div class="meta"><strong>Even or Odd Checker</strong><div class="small">Check whether a number is even or odd</div></div><pre id="code-even-odd"><code>// EvenOdd.java
-import java.util.Scanner;
-public class EvenOdd {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter an integer: ");
-        int num = sc.nextInt();
-        if (num % 2 == 0) System.out.println(num + " is even.");
-        else System.out.println(num + " is odd.");
-        sc.close();
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac EvenOdd.java</div><button class="btn" data-target="code-even-odd">Copy Code</button></div></div>
-
-        <div class="example" id="palindrome"><div class="meta"><strong>Palindrome Checker</strong><div class="small">Check whether a number is palindrome (e.g., 121 → Palindrome)</div></div><pre id="code-palindrome"><code>// PalindromeNumber.java
-import java.util.Scanner;
-public class PalindromeNumber {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter an integer: ");
-        int num = sc.nextInt();
-        int original = num, reversed = 0;
-        while (num != 0) { reversed = reversed * 10 + num % 10; num /= 10; }
-        if (original == reversed) System.out.println(original + " is a palindrome.");
-        else System.out.println(original + " is not a palindrome.");
-        sc.close();
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Example: 121 → Palindrome</div><button class="btn" data-target="code-palindrome">Copy Code</button></div></div>
-
-        <div class="example" id="armstrong"><div class="meta"><strong>Armstrong Number Checker</strong><div class="small">153 = 1³+5³+3³</div></div><pre id="code-armstrong"><code>// ArmstrongNumber.java
-import java.util.Scanner;
-public class ArmstrongNumber {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter an integer: ");
-        int num = sc.nextInt();
-        int original = num, sum = 0, digits = String.valueOf(num).length();
-        while (num != 0) { sum += Math.pow(num % 10, digits); num /= 10; }
-        if (sum == original) System.out.println(original + " is an Armstrong number.");
-        else System.out.println(original + " is not an Armstrong number.");
-        sc.close();
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Example: 153 → Armstrong</div><button class="btn" data-target="code-armstrong">Copy Code</button></div></div>
-
-        <div class="example" id="oop"><div class="meta"><strong>OOP Example with Inheritance</strong><div class="small">Three classes in one file</div></div><pre id="code-oop"><code>// AnimalDemo.java
-class Animal { String name; Animal(String name) { this.name = name; } void sound() { System.out.println(name + " makes sound"); } }
-class Dog extends Animal { Dog(String name) { super(name); } @Override void sound() { System.out.println(name + " barks"); } }
-public class AnimalDemo {
-    public static void main(String[] args) { Animal a = new Animal("Generic"); Dog d = new Dog("Rex"); a.sound(); d.sound(); }
-}
-</code></pre></div>
-
-        <div class="example" id="algorithms"><div class="meta"><strong>Factorial and Fibonacci</strong><div class="small">Iterative</div></div><pre id="code-algorithms"><code>// MathExamples.java
-public class MathExamples {
-    public static long factorial(int n) { long f=1; for(int i=2;i<=n;i++) f*=i; return f; }
-    public static long fibonacci(int n) { if(n<=1) return n; long a=0,b=1; for(int i=2;i<=n;i++) { long t=a+b; a=b; b=t; } return b; }
-    public static void main(String[] args) { System.out.println("5! = "+factorial(5)); System.out.println("Fib(10) = "+fibonacci(10)); }
-}
-</code></pre></div>
-
-        <div class="example" id="prime"><div class="meta"><strong>Prime Check</strong><div class="small">Efficient sqrt(n)</div></div><pre id="code-prime"><code>// PrimeCheck.java
-public class PrimeCheck {
-    public static boolean isPrime(int n) {
-        if(n<=1) return false; if(n<=3) return true; if(n%2==0||n%3==0) return false;
-        for(int i=5;i*i<=n;i+=6) if(n%i==0||n%(i+2)==0) return false;
-        return true;
-    }
-    public static void main(String[] args) { System.out.println("17 is prime? "+isPrime(17)); }
-}
-</code></pre></div>
-
-        <div class="example" id="sort"><div class="meta"><strong>Array Sorting using Arrays.sort</strong><div class="small">Built-in sort</div></div><pre id="code-sort"><code>// SortExample.java
-import java.util.Arrays;
-public class SortExample {
-    public static void main(String[] args) { int[] arr = {5,2,9,1,5,6}; Arrays.sort(arr); System.out.println(Arrays.toString(arr)); }
-}
-</code></pre></div>
-
-        <div class="example" id="simple-interest"><div class="meta"><strong>Simple Interest Calculator</strong><div class="small">SI = (P×R×T)/100</div></div><pre id="code-simple-interest"><code>// SimpleInterest.java
-import java.util.Scanner;
-public class SimpleInterest {
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        System.out.print("P, R, T: "); double p=sc.nextDouble(), r=sc.nextDouble(), t=sc.nextDouble();
-        double si=(p*r*t)/100;
-        System.out.printf("SI = %.2f, Total = %.2f", si, p+si);
-        sc.close();
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac SimpleInterest.java</div><button class="btn" data-target="code-simple-interest">Copy Code</button></div></div>
-
-        <div class="example" id="quadratic"><div class="meta"><strong>Quadratic Equation Solver</strong><div class="small">ax² + bx + c = 0</div></div><pre id="code-quadratic"><code>// QuadraticEquation.java
-import java.util.Scanner;
-public class QuadraticEquation {
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        System.out.print("a b c: "); double a=sc.nextDouble(), b=sc.nextDouble(), c=sc.nextDouble();
-        double d=b*b-4*a*c;
-        if(d>0) System.out.println("Roots: "+(-b+Math.sqrt(d))/(2*a)+" and "+(-b-Math.sqrt(d))/(2*a));
-        else if(d==0) System.out.println("Root: "+(-b/(2*a)));
-        else System.out.println("Complex: "+(-b/(2*a))+" ± i"+Math.sqrt(-d)/(2*a));
-        sc.close();
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac QuadraticEquation.java</div><button class="btn" data-target="code-quadratic">Copy Code</button></div></div>
-
-        <div class="example" id="second-smallest"><div class="meta"><strong>Second Smallest (no if/ternary)</strong><div class="small">Using Math.min/max</div></div><pre id="code-second-smallest"><code>// SecondSmallest.java
-import java.util.Scanner;
-public class SecondSmallest {
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Enter three unequal numbers: ");
-        double a=sc.nextDouble(), b=sc.nextDouble(), c=sc.nextDouble();
-        double max=Math.max(a,Math.max(b,c)), min=Math.min(a,Math.min(b,c));
-        System.out.println("Second smallest: "+(a+b+c-max-min));
-        sc.close();
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Sample: 34 82 61 → 61.0</div><button class="btn" data-target="code-second-smallest">Copy Code</button></div></div>
-
-        <div class="example" id="grade-calculator"><div class="meta"><strong>Student Grade Calculator</strong><div class="small">Average & grade table</div></div><pre id="code-grade-calculator"><code>// StudentGrade.java
-import java.util.Scanner;
-public class StudentGrade {
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Name: "); String name=sc.nextLine();
-        System.out.print("Class: "); String cls=sc.nextLine();
-        System.out.print("Marks in Eng, Math, Comp: "); double e=sc.nextDouble(), m=sc.nextDouble(), c=sc.nextDouble();
-        double avg=(e+m+c)/3; String grade= avg>=80?"A*": avg>=60?"A": avg>=50?"B": avg>=40?"C":"Fail";
-        System.out.printf("Name: %s, Class: %s, Avg: %.2f, Grade: %s", name, cls, avg, grade);
-        sc.close();
-    }
-}
-</code></pre><div class="meta" style="margin-top:8px;"><div class="small">Compile: javac StudentGrade.java</div><button class="btn" data-target="code-grade-calculator">Copy Code</button></div></div>
-
-        <div class="example" id="areas"><div class="meta"><strong>Area Examples</strong><div class="small">Rectangle, Square, Triangle, Quadrilateral</div></div>
-          <pre id="code-rectangle"><code>// RectangleArea.java
-public class RectangleArea { public static double area(double w, double h) { return w * h; } public static void main(String[] args) { System.out.println("Area: " + area(5, 3.2)); } }
-</code></pre><div style="height:4px"></div>
-          <pre id="code-square"><code>// SquareArea.java
-public class SquareArea { public static double area(double s) { return s * s; } public static void main(String[] args) { System.out.println("Area: " + area(4.5)); } }
-</code></pre><div style="height:4px"></div>
-          <pre id="code-triangle"><code>// TriangleArea.java
-public class TriangleArea { public static double area(double b, double h) { return 0.5 * b * h; } public static void main(String[] args) { System.out.println("Area: " + area(6, 4)); } }
-</code></pre><div style="height:4px"></div>
-          <pre id="code-quadrilateral"><code>// QuadrilateralArea.java
-public class QuadrilateralArea {
-    public static double area(double[][] pts) { double s=0; for(int i=0;i<4;i++){ int j=(i+1)%4; s+=pts[i][0]*pts[j][1]-pts[j][0]*pts[i][1]; } return Math.abs(s)/2.0; }
-    public static void main(String[] args) { double[][] q={{0,0},{4,0},{4,3},{0,3}}; System.out.println("Area: " + area(q)); }
 }
 </code></pre>
-          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn" data-target="code-rectangle">Copy Rectangle</button><button class="btn" data-target="code-square">Copy Square</button><button class="btn" data-target="code-triangle">Copy Triangle</button><button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button></div>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Compile: javac Greeting.java &nbsp; Run: java Greeting</div>
+            <button class="btn" data-target="code-string-input">Copy Code</button>
+          </div>
         </div>
 
-        <div class="example" id="io"><div class="meta"><strong>File Input and Output</strong><div class="small">Write/Read text file</div></div><pre id="code-io"><code>// FileIOExample.java
-import java.nio.file.*;
-public class FileIOExample {
-    public static void main(String[] args) throws Exception {
-        Files.writeString(Path.of("sample.txt"), "Hello Java World");
-        System.out.println(Files.readString(Path.of("sample.txt")));
+        <!-- Type Casting -->
+        <div class="example" id="casting">
+          <div class="meta">
+            <strong>Type Casting (Implicit & Explicit)</strong>
+            <div class="small">Convert between int, double, and show narrowing</div>
+          </div>
+          <pre id="code-casting"><code>// TypeCastingDemo.java
+public class TypeCastingDemo {
+    public static void main(String[] args) {
+        int intVal = 100;
+        double doubleVal = intVal; // implicit widening
+        System.out.println("Implicit (int to double): " + doubleVal);
+        
+        double precise = 9.78;
+        int truncated = (int) precise; // explicit narrowing
+        System.out.println("Explicit (double to int): " + truncated);
+        
+        char grade = 'A';
+        int ascii = grade;
+        System.out.println("Char to ASCII: " + grade + " -> " + ascii);
     }
 }
-</code></pre></div>
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Compile: javac TypeCastingDemo.java &nbsp; Run: java TypeCastingDemo</div>
+            <button class="btn" data-target="code-casting">Copy Code</button>
+          </div>
+        </div>
 
-        <div class="example" id="exceptions"><div class="meta"><strong>Exception Handling</strong><div class="small">try-catch-finally</div></div><pre id="code-exceptions"><code>// ExceptionDemo.java
+        <div class="example" id="oop">
+          <div class="meta">
+            <strong>OOP Example with Inheritance</strong>
+            <div class="small">Three classes in one file for simplicity</div>
+          </div>
+          <pre id="code-oop"><code>// AnimalDemo.java
+class Animal {
+    String name;
+    Animal(String name) { this.name = name; }
+    void sound() { System.out.println(name + " makes a sound"); }
+}
+
+class Dog extends Animal {
+    Dog(String name) { super(name); }
+    @Override
+    void sound() { System.out.println(name + " barks"); }
+}
+
+public class AnimalDemo {
+    public static void main(String[] args) {
+        Animal a = new Animal("Generic");
+        Dog d = new Dog("Rex");
+        a.sound();
+        d.sound();
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="example" id="algorithms">
+          <div class="meta">
+            <strong>Factorial and Fibonacci</strong>
+            <div class="small">Iterative factorial and iterative Fibonacci</div>
+          </div>
+          <pre id="code-algorithms"><code>// MathExamples.java
+public class MathExamples {
+    // iterative factorial
+    public static long factorial(int n) {
+        long f = 1;
+        for (int i = 2; i <= n; i++) f *= i;
+        return f;
+    }
+
+    // iterative fibonacci (n-th, 0-based)
+    public static long fibonacci(int n) {
+        if (n <= 1) return n;
+        long a = 0, b = 1;
+        for (int i = 2; i <= n; i++) {
+            long t = a + b;
+            a = b;
+            b = t;
+        }
+        return b;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("5! = " + factorial(5));
+        System.out.println("Fibonacci(10) = " + fibonacci(10));
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="example" id="prime">
+          <div class="meta">
+            <strong>Prime Check</strong>
+            <div class="small">Efficient check up to sqrt(n)</div>
+          </div>
+          <pre id="code-prime"><code>// PrimeCheck.java
+public class PrimeCheck {
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int[] tests = {1,2,3,4,17,18,19,97};
+        for (int t : tests) {
+            System.out.println(t + " is prime? " + isPrime(t));
+        }
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="example" id="sort">
+          <div class="meta">
+            <strong>Array Sorting using Arrays.sort</strong>
+            <div class="small">Built-in sort for primitives and objects</div>
+          </div>
+          <pre id="code-sort"><code>// SortExample.java
+import java.util.Arrays;
+
+public class SortExample {
+    public static void main(String[] args) {
+        int[] arr = {5, 2, 9, 1, 5, 6};
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+}
+</code></pre>
+        </div>
+
+        <!-- Simple Interest -->
+        <div class="example" id="simple-interest">
+          <div class="meta">
+            <strong>Simple Interest Calculator</strong>
+            <div class="small">Formula: SI = (P * R * T) / 100</div>
+          </div>
+          <pre id="code-simple-interest"><code>// SimpleInterest.java
+import java.util.Scanner;
+
+public class SimpleInterest {
+    public static double calculateInterest(double principal, double rate, double time) {
+        return (principal * rate * time) / 100;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Principal amount (P): ");
+        double principal = sc.nextDouble();
+        System.out.print("Enter Rate of interest (R): ");
+        double rate = sc.nextDouble();
+        System.out.print("Enter Time period in years (T): ");
+        double time = sc.nextDouble();
+
+        double interest = calculateInterest(principal, rate, time);
+        double totalAmount = principal + interest;
+
+        System.out.printf("Simple Interest = %.2f%n", interest);
+        System.out.printf("Total Amount = %.2f%n", totalAmount);
+        sc.close();
+    }
+}
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Compile: javac SimpleInterest.java &nbsp;&nbsp; Run: java SimpleInterest</div>
+            <button class="btn" data-target="code-simple-interest">Copy Code</button>
+          </div>
+        </div>
+
+        <!-- Quadratic -->
+        <div class="example" id="quadratic">
+          <div class="meta">
+            <strong>Quadratic Equation Solver (ax^2 + bx + c = 0)</strong>
+            <div class="small">Finds real and complex roots using discriminant</div>
+          </div>
+          <pre id="code-quadratic"><code>// QuadraticEquation.java
+import java.util.Scanner;
+
+public class QuadraticEquation {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Solve quadratic equation: ax*ax + bx + c = 0");
+        System.out.print("Enter a: ");
+        double a = sc.nextDouble();
+        System.out.print("Enter b: ");
+        double b = sc.nextDouble();
+        System.out.print("Enter c: ");
+        double c = sc.nextDouble();
+
+        if (a == 0) {
+            System.out.println("This is a linear equation (a cannot be 0).");
+            if (b != 0) {
+                double root = -c / b;
+                System.out.printf("Root: x = %.2f%n", root);
+            } else {
+                System.out.println(c == 0 ? "Infinite solutions" : "No solution");
+            }
+        } else {
+            double discriminant = b * b - 4 * a * c;
+            if (discriminant > 0) {
+                double root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                double root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                System.out.printf("Two distinct real roots: %.2f and %.2f%n", root1, root2);
+            } else if (discriminant == 0) {
+                double root = -b / (2 * a);
+                System.out.printf("One real double root: %.2f%n", root);
+            } else {
+                double real = -b / (2 * a);
+                double imaginary = Math.sqrt(-discriminant) / (2 * a);
+                System.out.printf("Complex roots: %.2f + %.2fi and %.2f - %.2fi%n",
+                                  real, imaginary, real, imaginary);
+            }
+        }
+        sc.close();
+    }
+}
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Compile: javac QuadraticEquation.java &nbsp;&nbsp; Run: java QuadraticEquation</div>
+            <button class="btn" data-target="code-quadratic">Copy Code</button>
+          </div>
+        </div>
+
+        <!-- Second Smallest -->
+        <div class="example" id="second-smallest">
+          <div class="meta">
+            <strong>Second Smallest Number (No if-else, no ternary)</strong>
+            <div class="small">Uses only Math.max() and Math.min() and accepts three unequal numbers</div>
+          </div>
+          <pre id="code-second-smallest"><code>// SecondSmallest.java
+import java.util.Scanner;
+
+public class SecondSmallest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter three unequal numbers: ");
+        double a = sc.nextDouble();
+        double b = sc.nextDouble();
+        double c = sc.nextDouble();
+
+        double max = Math.max(a, Math.max(b, c));
+        double min = Math.min(a, Math.min(b, c));
+        double secondSmallest = a + b + c - max - min;
+        
+        System.out.println("Second smallest number: " + secondSmallest);
+        sc.close();
+    }
+}
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Sample Input: 34 82 61 → Output: 61.0 &nbsp;|&nbsp; Compile: javac SecondSmallest.java &nbsp; Run: java SecondSmallest</div>
+            <button class="btn" data-target="code-second-smallest">Copy Code</button>
+          </div>
+        </div>
+
+        <!-- Student Grade -->
+        <div class="example" id="grade-calculator">
+          <div class="meta">
+            <strong>Student Grade Calculator</strong>
+            <div class="small">Input name, class, marks in English, Mathematics, Computer → average & grade</div>
+          </div>
+          <pre id="code-grade-calculator"><code>// StudentGrade.java
+import java.util.Scanner;
+
+public class StudentGrade {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter student name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter class: ");
+        String className = sc.nextLine();
+        System.out.print("Enter marks in English (out of 100): ");
+        double eng = sc.nextDouble();
+        System.out.print("Enter marks in Mathematics (out of 100): ");
+        double math = sc.nextDouble();
+        System.out.print("Enter marks in Computer (out of 100): ");
+        double comp = sc.nextDouble();
+        
+        double average = (eng + math + comp) / 3;
+        String grade;
+        if (average >= 80) {
+            grade = "A*";
+        } else if (average >= 60) {
+            grade = "A";
+        } else if (average >= 50) {
+            grade = "B";
+        } else if (average >= 40) {
+            grade = "C";
+        } else {
+            grade = "Fail";
+        }
+        
+        System.out.println("\n--- Result ---");
+        System.out.println("Name: " + name);
+        System.out.println("Class: " + className);
+        System.out.printf("Average marks: %.2f%%%n", average);
+        System.out.println("Grade: " + grade);
+        sc.close();
+    }
+}
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Compile: javac StudentGrade.java &nbsp;&nbsp; Run: java StudentGrade</div>
+            <button class="btn" data-target="code-grade-calculator">Copy Code</button>
+          </div>
+        </div>
+
+        <!-- NEW: Month Name from Number (added as requested) -->
+        <div class="example" id="month-name">
+          <div class="meta">
+            <strong>Month Name from Number</strong>
+            <div class="small">Input a number (1–12) and display the corresponding month name</div>
+          </div>
+          <pre id="code-month-name"><code>// MonthName.java
+import java.util.Scanner;
+
+public class MonthName {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter month number (1-12): ");
+        int month = sc.nextInt();
+        String monthName;
+
+        switch (month) {
+            case 1:
+                monthName = "January";
+                break;
+            case 2:
+                monthName = "February";
+                break;
+            case 3:
+                monthName = "March";
+                break;
+            case 4:
+                monthName = "April";
+                break;
+            case 5:
+                monthName = "May";
+                break;
+            case 6:
+                monthName = "June";
+                break;
+            case 7:
+                monthName = "July";
+                break;
+            case 8:
+                monthName = "August";
+                break;
+            case 9:
+                monthName = "September";
+                break;
+            case 10:
+                monthName = "October";
+                break;
+            case 11:
+                monthName = "November";
+                break;
+            case 12:
+                monthName = "December";
+                break;
+            default:
+                monthName = "Invalid month number";
+        }
+
+        System.out.println("Month = " + monthName);
+        sc.close();
+    }
+}
+</code></pre>
+          <div class="meta" style="margin-top:8px;">
+            <div class="small">Sample Input: 5 → Month = May &nbsp;|&nbsp; Compile: javac MonthName.java &nbsp; Run: java MonthName</div>
+            <button class="btn" data-target="code-month-name">Copy Code</button>
+          </div>
+        </div>
+
+        <div class="example" id="areas">
+          <div class="meta">
+            <strong>Area Examples</strong>
+            <div class="small">Rectangle, Square, Triangle, Quadrilateral (shoelace)</div>
+          </div>
+          <pre id="code-rectangle"><code>// RectangleArea.java
+public class RectangleArea {
+    public static double area(double width, double height) {
+        return width * height;
+    }
+    public static void main(String[] args) {
+        double w = 5.0;
+        double h = 3.2;
+        System.out.println("Rectangle width = " + w + ", height = " + h);
+        System.out.println("Area = " + area(w, h));
+    }
+}
+</code></pre>
+          <div style="height:8px"></div>
+          <pre id="code-square"><code>// SquareArea.java
+public class SquareArea {
+    public static double area(double side) {
+        return side * side;
+    }
+    public static void main(String[] args) {
+        double s = 4.5;
+        System.out.println("Square side = " + s);
+        System.out.println("Area = " + area(s));
+    }
+}
+</code></pre>
+          <div style="height:8px"></div>
+          <pre id="code-triangle"><code>// TriangleArea.java
+public class TriangleArea {
+    public static double area(double base, double height) {
+        return 0.5 * base * height;
+    }
+    public static void main(String[] args) {
+        double base = 6.0;
+        double height = 4.0;
+        System.out.println("Triangle base = " + base + ", height = " + height);
+        System.out.println("Area = " + area(base, height));
+    }
+}
+</code></pre>
+          <div style="height:8px"></div>
+          <pre id="code-quadrilateral"><code>// QuadrilateralArea.java
+public class QuadrilateralArea {
+    public static double area(double[][] pts) {
+        double sum = 0.0;
+        for (int i = 0; i < 4; i++) {
+            int j = (i + 1) % 4;
+            sum += pts[i][0] * pts[j][1] - pts[j][0] * pts[i][1];
+        }
+        return Math.abs(sum) / 2.0;
+    }
+    public static void main(String[] args) {
+        double[][] quad = {{0.0,0.0},{4.0,0.0},{4.0,3.0},{0.0,3.0}};
+        System.out.println("Quadrilateral Area = " + area(quad));
+    }
+}
+</code></pre>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <button class="btn" data-target="code-rectangle">Copy Rectangle</button>
+            <button class="btn" data-target="code-square">Copy Square</button>
+            <button class="btn" data-target="code-triangle">Copy Triangle</button>
+            <button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button>
+          </div>
+        </div>
+
+        <div class="example" id="io">
+          <div class="meta">
+            <strong>File Input and Output</strong>
+            <div class="small">Writes and reads a small text file</div>
+          </div>
+          <pre id="code-io"><code>// FileIOExample.java
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
+
+public class FileIOExample {
+    public static void main(String[] args) {
+        Path p = Path.of("sample.txt");
+        String text = "Hello from Java World\nLine two";
+        try {
+            Files.writeString(p, text, StandardCharsets.UTF_8);
+            String read = Files.readString(p, StandardCharsets.UTF_8);
+            System.out.println("File contents:\n" + read);
+        } catch (IOException e) {
+            System.err.println("IO error: " + e.getMessage());
+        }
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="example" id="exceptions">
+          <div class="meta">
+            <strong>Exception Handling Example</strong>
+            <div class="small">Demonstrates try-catch-finally</div>
+          </div>
+          <pre id="code-exceptions"><code>// ExceptionDemo.java
 public class ExceptionDemo {
     public static int divide(int a, int b) {
-        try { return a / b; } catch (ArithmeticException e) { System.err.println("Divide by zero"); return 0; } finally { System.out.println("Attempt done"); }
+        try {
+            return a / b;
+        } catch (ArithmeticException ex) {
+            System.err.println("Cannot divide by zero");
+            return 0;
+        } finally {
+            System.out.println("Division attempt finished");
+        }
     }
-    public static void main(String[] args) { System.out.println(divide(10, 2)); System.out.println(divide(10, 0)); }
+    public static void main(String[] args) {
+        System.out.println(divide(10, 2));
+        System.out.println(divide(10, 0));
+    }
 }
-</code></pre></div>
+</code></pre>
+        </div>
       </section>
+
+      <aside>
+        <div class="card">
+          <h2>Quick Actions</h2>
+          <p class="small">Use the copy buttons to copy a complete class to clipboard. Paste into a file named exactly as the public class (for example <strong>HelloWorld.java</strong>) and run:</p>
+          <ol class="small">
+            <li>Save file: <code>javac HelloWorld.java</code></li>
+            <li>Run: <code>java HelloWorld</code></li>
+          </ol>
+          <hr class="sep">
+          <p class="small"><strong>Tip</strong> If a file contains multiple classes and one is public, name the file after the public class.</p>
+          <hr class="sep">
+          <p class="small"><strong>Notes about the area examples</strong></p>
+          <ul class="small">
+            <li>Rectangle and square use simple formulas.</li>
+            <li>Triangle uses base*height/2.</li>
+            <li>Quadrilateral uses shoelace formula.</li>
+          </ul>
+          <hr class="sep">
+          <p class="small"><strong>Simple Interest</strong>: (P*R*T)/100</p>
+          <p class="small"><strong>Quadratic</strong>: handles real/complex roots</p>
+          <p class="small"><strong>Second smallest</strong>: no conditional logic</p>
+          <p class="small"><strong>Grade calculator</strong>: A*,A,B,C,Fail</p>
+          <p class="small"><strong>Month name</strong>: converts number 1‑12 to month name using switch</p>
+          <p class="small"><strong>New basics</strong>: variables, string I/O, type casting</p>
+          <p class="small"><strong>Background</strong>: Smooth animated gradients + floating particles enhance immersion</p>
+        </div>
+      </aside>
     </div>
   </main>
-  <footer><div class="small">© 2026 Java World — Click the Arc Reactor to activate NANO TECH theme</div></footer>
+
+  <footer>
+    <div class="small">copyright 2026 Java World Real Java examples provided for learning</div>
+  </footer>
 
   <script>
-    // Theme toggle on arc reactor click
-    const logoBtn = document.getElementById('interactiveLogo');
-    const body = document.body;
-    let nanoMode = false;
-
-    // Nano particles (optimized: fewer particles, throttled drawing)
-    const nanoCanvas = document.getElementById('nanoCanvas');
-    let nanoCtx = nanoCanvas.getContext('2d');
-    let particles = [];
-    let nanoAnimFrame = null;
-    let lastTimestamp = 0;
-    const PARTICLE_COUNT = 80; // Reduced from 180 for performance
-
-    function initNanoParticles() {
-      particles = [];
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          radius: Math.random() * 2 + 1,
-          alpha: Math.random() * 0.5 + 0.2,
-          speedX: (Math.random() - 0.5) * 0.5,
-          speedY: (Math.random() - 0.5) * 0.5,
-        });
-      }
-    }
-
-    function resizeNanoCanvas() {
-      nanoCanvas.width = window.innerWidth;
-      nanoCanvas.height = window.innerHeight;
-    }
-
-    function drawNanoParticles(now) {
-      if (!nanoCtx) return;
-      // Throttle to 30fps for background particles to save CPU
-      if (now - lastTimestamp < 33) {
-        nanoAnimFrame = requestAnimationFrame(drawNanoParticles);
-        return;
-      }
-      lastTimestamp = now;
-      nanoCtx.clearRect(0, 0, nanoCanvas.width, nanoCanvas.height);
-      for (let p of particles) {
-        nanoCtx.beginPath();
-        nanoCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        nanoCtx.fillStyle = `rgba(0, 229, 255, ${p.alpha * 0.7})`;
-        nanoCtx.fill();
-        p.x += p.speedX;
-        p.y += p.speedY;
-        if (p.x < 0) p.x = nanoCanvas.width;
-        if (p.x > nanoCanvas.width) p.x = 0;
-        if (p.y < 0) p.y = nanoCanvas.height;
-        if (p.y > nanoCanvas.height) p.y = 0;
-      }
-      nanoAnimFrame = requestAnimationFrame(drawNanoParticles);
-    }
-
-    function startNanoParticles() {
-      if (nanoAnimFrame) cancelAnimationFrame(nanoAnimFrame);
-      resizeNanoCanvas();
-      initNanoParticles();
-      lastTimestamp = 0;
-      nanoAnimFrame = requestAnimationFrame(drawNanoParticles);
-    }
-
-    function stopNanoParticles() {
-      if (nanoAnimFrame) {
-        cancelAnimationFrame(nanoAnimFrame);
-        nanoAnimFrame = null;
-      }
-      if (nanoCtx) nanoCtx.clearRect(0, 0, nanoCanvas.width, nanoCanvas.height);
-    }
-
-    window.addEventListener('resize', () => {
-      if (nanoMode) resizeNanoCanvas();
-    });
-
-    // Toggle theme on logo click
-    logoBtn.addEventListener('click', () => {
-      nanoMode = !nanoMode;
-      if (nanoMode) {
-        body.classList.add('nano-theme');
-        startNanoParticles();
-        console.log("NANO TECH ACTIVATED");
-      } else {
-        body.classList.remove('nano-theme');
-        stopNanoParticles();
-      }
-    });
-
-    // --- Logo tilt & ripple (optimized, no heavy animations when inactive) ---
-    const logo = document.getElementById('interactiveLogo');
-    const canvasRipple = document.getElementById('rippleCanvas');
-    const ctxRipple = canvasRipple.getContext('2d');
-    let rippleActive = false, rippleRadius = 0, rippleAlpha = 0, rippleFrame = null;
-    function resizeRippleCanvas() { const rect = logo.getBoundingClientRect(); canvasRipple.width = rect.width; canvasRipple.height = rect.height; }
-    window.addEventListener('resize', resizeRippleCanvas);
-    resizeRippleCanvas();
-    
-    function drawRipple(x, y) {
-      if (!ctxRipple) return;
-      ctxRipple.clearRect(0, 0, canvasRipple.width, canvasRipple.height);
-      if (rippleRadius > 0 && rippleAlpha > 0) {
-        const grad = ctxRipple.createRadialGradient(x, y, 2, x, y, rippleRadius);
-        grad.addColorStop(0, `rgba(0, 229, 255, ${rippleAlpha * 0.8})`);
-        grad.addColorStop(1, 'rgba(0, 229, 255, 0)');
-        ctxRipple.fillStyle = grad;
-        ctxRipple.arc(x, y, rippleRadius, 0, Math.PI * 2);
-        ctxRipple.fill();
-      }
-    }
-    
-    function animateRipple() {
-      if (!rippleActive && rippleRadius <= 0) { if (rippleFrame) cancelAnimationFrame(rippleFrame); return; }
-      if (rippleActive) {
-        rippleRadius += 4;
-        rippleAlpha -= 0.03;
-        if (rippleRadius > 50 || rippleAlpha <= 0) {
-          rippleActive = false;
-          rippleRadius = 0;
-          rippleAlpha = 0;
-          ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height);
-          if (rippleFrame) cancelAnimationFrame(rippleFrame);
-          return;
-        }
-      } else {
-        if (rippleRadius<=0) { if (rippleFrame) cancelAnimationFrame(rippleFrame); return; }
-        rippleRadius -= 3;
-        rippleAlpha -= 0.04;
-        if (rippleRadius<=0) {
-          rippleRadius=0; rippleAlpha=0;
-          ctxRipple.clearRect(0,0,canvasRipple.width,canvasRipple.height);
-          if (rippleFrame) cancelAnimationFrame(rippleFrame);
-          return;
-        }
-      }
-      if (window.lastRX && window.lastRY) drawRipple(window.lastRX, window.lastRY);
-      rippleFrame = requestAnimationFrame(animateRipple);
-    }
-    
-    let transform = { rx:0, ry:0, s:1 }, tiltFrame = null;
-    function updateTilt() { logo.style.transform = `perspective(600px) rotateX(${transform.rx}deg) rotateY(${transform.ry}deg) scale(${transform.s})`; }
-    let hover = false;
-    logo.addEventListener('mousemove', (e) => {
-      if (!hover) return;
-      const rect = logo.getBoundingClientRect();
-      const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
-      const rx = (e.clientX - cx) / (rect.width/2), ry = (e.clientY - cy) / (rect.height/2);
-      transform.ry = Math.min(Math.max(rx * 16, -16), 16);
-      transform.rx = Math.min(Math.max(-ry * 16, -16), 16);
-      transform.s = 1.08;
-      if (tiltFrame) cancelAnimationFrame(tiltFrame); tiltFrame = requestAnimationFrame(updateTilt);
-      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      if (mx>=0 && mx<=rect.width && my>=0 && my<=rect.height) {
-        window.lastRX = mx; window.lastRY = my;
-        rippleActive = true; rippleRadius = 6; rippleAlpha = 0.6;
-        drawRipple(mx, my);
-        if (rippleFrame) cancelAnimationFrame(rippleFrame);
-        animateRipple();
-      }
-    });
-    logo.addEventListener('mouseleave', () => {
-      hover = false;
-      transform.rx = 0; transform.ry = 0; transform.s = 1;
-      if (tiltFrame) cancelAnimationFrame(tiltFrame); tiltFrame = requestAnimationFrame(updateTilt);
-      logo.style.transition = 'transform 0.25s';
-      setTimeout(() => { if (logo) logo.style.transition = ''; }, 250);
-      if (rippleActive) { rippleActive=false; animateRipple(); }
-    });
-    logo.addEventListener('mouseenter', () => { hover = true; logo.style.transition = 'transform 0.03s'; resizeRippleCanvas(); });
-    updateTilt();
-
-    // Copy buttons (standard)
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
+    // Copy-to-clipboard for each example
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('click', async ()=> {
         const id = btn.getAttribute('data-target');
         const pre = document.getElementById(id);
         if (!pre) return;
         const text = pre.innerText;
         try {
           await navigator.clipboard.writeText(text);
-          const orig = btn.innerText;
-          btn.innerText = 'Copied'; btn.classList.add('copied');
-          setTimeout(() => { btn.innerText = orig; btn.classList.remove('copied'); }, 1000);
-        } catch(e) { alert('Manual copy'); }
+          const original = btn.innerText;
+          btn.innerText = 'Copied';
+          btn.classList.add('copied');
+          setTimeout(()=>{ btn.innerText = original; btn.classList.remove('copied'); },1200);
+        } catch (e) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); btn.innerText = 'Copied'; } catch(e){}
+          ta.remove();
+          setTimeout(()=>{ btn.innerText = 'Copy'; },1200);
+        }
       });
+    });
+
+    const buttons = Array.from(document.querySelectorAll('.btn'));
+    const pres = Array.from(document.querySelectorAll('pre'));
+    buttons.forEach((b,i)=>{
+      if (!b.dataset.target && pres[i]) b.dataset.target = pres[i].id || (pres[i].id = 'code-auto-'+i);
     });
   </script>
 </body>
