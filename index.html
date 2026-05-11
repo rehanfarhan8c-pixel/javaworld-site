@@ -17,421 +17,128 @@
     header{background:linear-gradient(90deg,var(--accent),#1f4f7a);color:#fff;padding:28px 20px;text-align:center}
     header h1{margin:0;font-size:28px;letter-spacing:0.4px}
     header p{margin:6px 0 0;color:rgba(255,255,255,0.9)}
-    nav{display:flex;gap:12px;justify-content:center;padding:12px;background:#16324a;flex-wrap:wrap}
-    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:600}
+    nav{display:flex;gap:8px;justify-content:center;padding:10px 12px;background:#16324a;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-weight:600;font-size:13px}
     nav a:hover{background:rgba(255,255,255,0.06)}
     .container{max-width:1100px;margin:24px auto;padding:0 16px}
     .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
     .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
-    h2{margin:0 0 12px;color:var(--accent)}
-    p.lead{margin:0 0 14px;color:var(--muted)}
+    h2{margin:0 0 4px;color:var(--accent);font-size:17px}
+    h3{margin:20px 0 8px;color:#1f4f7a;font-size:14px;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0;padding-bottom:5px}
+    p.lead{margin:0 0 14px;color:var(--muted);font-size:14px}
     .example{margin-bottom:18px}
     pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:14px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5}
-    .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+    .btn{background:var(--accent);color:#fff;padding:6px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600;font-size:12px}
     .small{font-size:13px;color:var(--muted)}
-    aside .card{position:sticky;top:20px}
+    aside .card{position:sticky;top:20px;max-height:92vh;overflow-y:auto}
     footer{max-width:1100px;margin:28px auto 60px;padding:0 16px;color:var(--muted);text-align:center}
     .copied{background:#16a34a;padding:6px 10px;border-radius:6px;color:#fff;font-weight:600}
     hr.sep{border:0;border-top:1px solid #eef2f7;margin:14px 0}
-  </style>
-  <!-- ANIMATIONS STYLES (added without changing content) -->
-  <style>
-    /* ----- GLOBAL PAGE LOAD ANIMATIONS ----- */
-    @keyframes gentleFadeSlide {
-      0% {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    .tag{display:inline-block;background:#ebf4ff;color:#2b6cb0;font-size:11px;padding:2px 7px;border-radius:4px;font-weight:600;margin-left:6px}
+    .multi-btn{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 
-    @keyframes softPulse {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 100% 50%;
-      }
-    }
+    /* ---- animations ---- */
+    @keyframes gentleFadeSlide{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+    @keyframes softPulse{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+    @keyframes breathGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes floatOrbs{0%{background-position:0% 0%,100% 100%,30% 20%,80% 90%;opacity:.7}50%{background-position:20% 30%,70% 60%,55% 15%,95% 75%;opacity:.85}100%{background-position:10% 15%,90% 80%,40% 30%,75% 95%;opacity:.7}}
+    @keyframes particleShift{0%{transform:translate(0,0) scale(1);opacity:.3}100%{transform:translate(40px,-30px) scale(1.3);opacity:0}}
 
-    @keyframes subtleGlow {
-      0% {
-        box-shadow: 0 0 0 0 rgba(43, 108, 176, 0.2);
-      }
-      70% {
-        box-shadow: 0 0 0 6px rgba(43, 108, 176, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(43, 108, 176, 0);
-      }
-    }
+    .grid>section.card{animation:gentleFadeSlide .55s cubic-bezier(.2,.9,.4,1.1) forwards}
+    aside .card{animation:gentleFadeSlide .55s cubic-bezier(.2,.9,.4,1.1) .1s forwards;opacity:0;transform:translateY(18px);animation-fill-mode:forwards}
+    .example{opacity:0;transform:translateY(12px);animation:gentleFadeSlide .45s ease-out forwards;animation-delay:calc(.04s * var(--order,0))}
+    .example:nth-child(1){--order:1}.example:nth-child(2){--order:2}.example:nth-child(3){--order:3}
+    .example:nth-child(4){--order:4}.example:nth-child(5){--order:5}.example:nth-child(6){--order:6}
+    .example:nth-child(7){--order:7}.example:nth-child(8){--order:8}.example:nth-child(9){--order:9}
+    .example:nth-child(10){--order:10}.example:nth-child(11){--order:11}.example:nth-child(12){--order:12}
+    .example:nth-child(13){--order:13}.example:nth-child(14){--order:14}.example:nth-child(15){--order:15}
+    .example:nth-child(n+16){--order:16}
 
-    @keyframes borderSlide {
-      0% {
-        width: 0;
-        opacity: 0;
-      }
-      100% {
-        width: 100%;
-        opacity: 1;
-      }
-    }
-
-    /* entrance animations for cards and examples */
-    .grid > section.card {
-      animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
-    }
-
-    aside .card {
-      animation: gentleFadeSlide 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.1s forwards;
-      opacity: 0;
-      transform: translateY(18px);
-      animation-fill-mode: forwards;
-    }
-
-    .example {
-      opacity: 0;
-      transform: translateY(12px);
-      animation: gentleFadeSlide 0.45s ease-out forwards;
-      animation-delay: calc(0.05s * var(--order, 0));
-    }
-
-    /* assign staggered delay for .example children dynamically */
-    .example:nth-child(1) { --order: 1; }
-    .example:nth-child(2) { --order: 2; }
-    .example:nth-child(3) { --order: 3; }
-    .example:nth-child(4) { --order: 4; }
-    .example:nth-child(5) { --order: 5; }
-    .example:nth-child(6) { --order: 6; }
-    .example:nth-child(7) { --order: 7; }
-    .example:nth-child(8) { --order: 8; }
-    .example:nth-child(9) { --order: 9; }
-    .example:nth-child(10) { --order: 10; }
-    .example:nth-child(11) { --order: 11; }
-    .example:nth-child(12) { --order: 12; }
-    .example:nth-child(13) { --order: 13; }
-    .example:nth-child(14) { --order: 14; }
-    .example:nth-child(15) { --order: 15; }
-    .example:nth-child(16) { --order: 16; }
-    .example:nth-child(17) { --order: 17; }
-    .example:nth-child(18) { --order: 18; }
-    .example:nth-child(19) { --order: 19; }
-    .example:nth-child(20) { --order: 20; }   /* new for month name example */
-
-    /* animated gradient for header (smooth moving shimmer) */
-    header {
-      background: linear-gradient(135deg, #1f4f7a, #2b6cb0, #1f5a8e, #2c6e9e);
-      background-size: 250% 250%;
-      animation: softPulse 8s ease infinite;
-      transition: box-shadow 0.3s ease;
-      position: relative;
-      z-index: 2;
-    }
-
-    header:hover {
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-    }
-
-    /* card micro-interactions: lift & soft shadow */
-    .card {
-      transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s ease;
-      will-change: transform;
-      backdrop-filter: blur(0px); /* keep crisp */
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(0, 0, 0, 0.02);
-    }
-
-    /* aside sticky card - subtle hover (no sticky conflict) */
-    aside .card:hover {
-      transform: translateY(-4px);
-    }
-
-    /* nav link hover animations: underline slide + background glow */
-    nav a {
-      position: relative;
-      transition: all 0.2s ease;
-      overflow: hidden;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: 50%;
-      width: 0%;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 2px;
-      transform: translateX(-50%);
-      transition: width 0.25s ease-out;
-    }
-
-    nav a:hover::after {
-      width: 70%;
-    }
-
-    nav a:hover {
-      background: rgba(255, 255, 255, 0.12);
-      transform: translateY(-1px);
-    }
-
-    /* Buttons micro-animations */
-    .btn {
-      transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn:hover {
-      background: #1e4e76;
-      transform: scale(1.04);
-      box-shadow: 0 5px 12px rgba(43, 108, 176, 0.3);
-    }
-
-    .btn:active {
-      transform: scale(0.97);
-      transition: 0.05s;
-    }
-
-    /* subtle pulse effect on copy "Copied" (without altering content) */
-    .copied {
-      animation: subtleGlow 0.4s ease-out;
-      background: #16a34a;
-    }
-
-    /* code block animations + smoother look + border glow on hover */
-    pre {
-      transition: border-left 0.2s ease, background-color 0.25s ease, box-shadow 0.2s ease;
-      border-left: 3px solid transparent;
-    }
-
-    pre:hover {
-      border-left-color: var(--accent);
-      background-color: #0e1625;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    /* smooth typography link animation for anchors inside but nothing changed */
-    a {
-      transition: color 0.15s ease, text-shadow 0.1s ease;
-    }
-
-    /* footer tiny hover (pure aesthetic) */
-    footer .small {
-      transition: opacity 0.2s ease;
-    }
-
-    footer:hover .small {
-      opacity: 0.85;
-    }
-
-    /* custom scroll reveal / additional smoothness */
-    .container {
-      animation: gentleFadeSlide 0.6s ease-out;
-    }
-
-    /* area-specific group copy buttons - preserve style but add micro effect */
-    .example .btn,
-    div[style*="display:flex;gap:8px"] .btn {
-      transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    }
-
-    /* additional smooth code line readability */
-    code {
-      transition: all 0.1s;
-    }
-
-    /* ========== ADDED BACKGROUND ANIMATIONS ========== */
-    /* Animated gradient background for the whole page */
-    body {
-      background: radial-gradient(circle at 10% 20%, rgba(43, 108, 176, 0.08), rgba(31, 79, 122, 0.02));
-      position: relative;
-      overflow-x: hidden;
-    }
-    
-    /* Create a pseudo-element for the moving gradient backdrop */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(125deg, 
-        rgba(214, 222, 235, 0.4) 0%, 
-        rgba(246, 247, 251, 0.7) 30%,
-        rgba(226, 232, 240, 0.5) 60%,
-        rgba(203, 213, 225, 0.3) 100%);
-      background-size: 300% 300%;
-      animation: breathGradient 22s ease infinite;
-      pointer-events: none;
-      z-index: -2;
-    }
-    
-    /* floating orb animations (background blobs) */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      background-image: 
-        radial-gradient(circle at 15% 40%, rgba(43, 108, 176, 0.12) 0%, transparent 28%),
-        radial-gradient(circle at 85% 70%, rgba(31, 79, 122, 0.1) 0%, transparent 35%),
-        radial-gradient(circle at 45% 10%, rgba(100, 150, 200, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 70% 85%, rgba(43, 108, 176, 0.1) 0%, transparent 30%);
-      background-repeat: no-repeat;
-      animation: floatOrbs 32s infinite alternate ease-in-out;
-    }
-    
-    /* Keyframes for soft gradient movement */
-    @keyframes breathGradient {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-    
-    /* Keyframes for floating background blobs */
-    @keyframes floatOrbs {
-      0% {
-        background-position: 0% 0%, 100% 100%, 30% 20%, 80% 90%;
-        background-size: 60% 60%, 55% 55%, 45% 45%, 50% 50%;
-        opacity: 0.7;
-      }
-      50% {
-        background-position: 20% 30%, 70% 60%, 55% 15%, 95% 75%;
-        background-size: 70% 70%, 65% 65%, 55% 55%, 60% 60%;
-        opacity: 0.85;
-      }
-      100% {
-        background-position: 10% 15%, 90% 80%, 40% 30%, 75% 95%;
-        background-size: 55% 55%, 50% 50%, 40% 40%, 45% 45%;
-        opacity: 0.7;
-      }
-    }
-    
-    /* Additional flowing light particles (tiny moving dots) */
-    .bg-particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-    
-    /* Add animated sparkle effect with pseudo-elements */
-    @keyframes particleShift {
-      0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.3;
-      }
-      100% {
-        transform: translate(40px, -30px) scale(1.3);
-        opacity: 0;
-      }
-    }
-    
-    .bg-particles i {
-      position: absolute;
-      background: rgba(43, 108, 176, 0.3);
-      border-radius: 50%;
-      animation: particleShift 18s infinite linear;
-    }
-    
-    /* Ensure main content has higher stacking context for readability */
-    header, nav, .container, footer {
-      position: relative;
-      z-index: 2;
-    }
-    
-    /* Make cards background slightly more opaque but maintain design */
-    .card {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(0px);
-      transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s ease, background 0.2s;
-    }
-    
-    .card:hover {
-      background: rgba(255, 255, 255, 1);
-    }
+    header{background:linear-gradient(135deg,#1f4f7a,#2b6cb0,#1f5a8e,#2c6e9e);background-size:250% 250%;animation:softPulse 8s ease infinite;position:relative;z-index:2}
+    header:hover{box-shadow:0 8px 22px rgba(0,0,0,.12)}
+    .card{transition:transform .28s cubic-bezier(.2,.9,.4,1.1),box-shadow .35s ease;will-change:transform;background:rgba(255,255,255,.97)}
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 32px rgba(15,23,42,.12)}
+    aside .card:hover{transform:translateY(-3px)}
+    nav a{position:relative;transition:all .2s ease;overflow:hidden}
+    nav a::after{content:'';position:absolute;bottom:4px;left:50%;width:0%;height:2px;background:rgba(255,255,255,.8);border-radius:2px;transform:translateX(-50%);transition:width .25s ease-out}
+    nav a:hover::after{width:70%}
+    nav a:hover{background:rgba(255,255,255,.12);transform:translateY(-1px)}
+    .btn{transition:all .2s cubic-bezier(.18,.89,.32,1.28)}
+    .btn:hover{background:#1e4e76;transform:scale(1.04);box-shadow:0 5px 12px rgba(43,108,176,.3)}
+    .btn:active{transform:scale(.97)}
+    pre{transition:border-left .2s ease,background-color .25s ease,box-shadow .2s ease;border-left:3px solid transparent}
+    pre:hover{border-left-color:var(--accent);background-color:#0e1625;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+    .container{animation:gentleFadeSlide .6s ease-out;position:relative;z-index:2}
+    header,nav,footer{position:relative;z-index:2}
+    body{background:radial-gradient(circle at 10% 20%,rgba(43,108,176,.08),rgba(31,79,122,.02));position:relative;overflow-x:hidden}
+    body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(125deg,rgba(214,222,235,.4) 0%,rgba(246,247,251,.7) 30%,rgba(226,232,240,.5) 60%,rgba(203,213,225,.3) 100%);background-size:300% 300%;animation:breathGradient 22s ease infinite;pointer-events:none;z-index:-2}
+    body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;background-image:radial-gradient(circle at 15% 40%,rgba(43,108,176,.12) 0%,transparent 28%),radial-gradient(circle at 85% 70%,rgba(31,79,122,.1) 0%,transparent 35%),radial-gradient(circle at 45% 10%,rgba(100,150,200,.08) 0%,transparent 40%),radial-gradient(circle at 70% 85%,rgba(43,108,176,.1) 0%,transparent 30%);animation:floatOrbs 32s infinite alternate ease-in-out}
+    .bg-particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+    .bg-particles i{position:absolute;background:rgba(43,108,176,.3);border-radius:50%;animation:particleShift 18s infinite linear}
   </style>
 </head>
 <body>
-<!-- Additional decorative particles container (background only) -->
 <div class="bg-particles" aria-hidden="true">
-  <i style="width: 80px; height: 80px; top: 15%; left: 5%; animation-duration: 22s; animation-delay: 0s;"></i>
-  <i style="width: 40px; height: 40px; top: 45%; left: 85%; animation-duration: 28s; animation-delay: 2s;"></i>
-  <i style="width: 120px; height: 120px; top: 70%; left: 20%; animation-duration: 35s; animation-delay: 1s;"></i>
-  <i style="width: 25px; height: 25px; top: 85%; left: 70%; animation-duration: 25s; animation-delay: 4s;"></i>
-  <i style="width: 60px; height: 60px; top: 30%; left: 60%; animation-duration: 40s; animation-delay: 0.5s;"></i>
-  <i style="width: 90px; height: 90px; top: 10%; left: 40%; animation-duration: 30s; animation-delay: 3s;"></i>
-  <i style="width: 45px; height: 45px; top: 55%; left: 15%; animation-duration: 32s; animation-delay: 1.5s;"></i>
-  <i style="width: 70px; height: 70px; top: 90%; left: 45%; animation-duration: 26s; animation-delay: 2.5s;"></i>
-  <i style="width: 30px; height: 30px; top: 20%; left: 75%; animation-duration: 38s; animation-delay: 0.8s;"></i>
+  <i style="width:80px;height:80px;top:15%;left:5%;animation-duration:22s"></i>
+  <i style="width:40px;height:40px;top:45%;left:85%;animation-duration:28s;animation-delay:2s"></i>
+  <i style="width:120px;height:120px;top:70%;left:20%;animation-duration:35s;animation-delay:1s"></i>
+  <i style="width:25px;height:25px;top:85%;left:70%;animation-duration:25s;animation-delay:4s"></i>
+  <i style="width:60px;height:60px;top:30%;left:60%;animation-duration:40s;animation-delay:.5s"></i>
+  <i style="width:90px;height:90px;top:10%;left:40%;animation-duration:30s;animation-delay:3s"></i>
+  <i style="width:45px;height:45px;top:55%;left:15%;animation-duration:32s;animation-delay:1.5s"></i>
+  <i style="width:70px;height:70px;top:90%;left:45%;animation-duration:26s;animation-delay:2.5s"></i>
 </div>
 
-  <header>
-    <h1>Java World</h1>
-    <p>Real, runnable Java examples for beginners, copy and paste into your IDE</p>
-  </header>
+<header>
+  <h1>Java World</h1>
+  <p>Real, runnable Java examples for beginners — copy and paste into your IDE</p>
+</header>
 
-  <nav>
-    <a href="#hello">Hello</a>
-    <a href="#basics">Basics</a>
-    <a href="#oop">OOP</a>
-    <a href="#algorithms">Algorithms</a>
-    <a href="#areas">Areas</a>
-    <a href="#io">File IO</a>
-    <a href="#exceptions">Exceptions</a>
-  </nav>
+<nav>
+  <a href="#hello">Hello</a>
+  <a href="#basics">Basics</a>
+  <a href="#control">Control Flow</a>
+  <a href="#loops">Loops</a>
+  <a href="#patterns">Patterns</a>
+  <a href="#strings">Strings</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#arrays">Arrays</a>
+  <a href="#searching">Search &amp; Sort</a>
+  <a href="#oop">OOP</a>
+  <a href="#collections">Collections</a>
+  <a href="#math">Math</a>
+  <a href="#algorithms">Algorithms</a>
+  <a href="#areas">Areas</a>
+  <a href="#io">File IO</a>
+  <a href="#exceptions">Exceptions</a>
+</nav>
 
-  <main class="container">
-    <div class="grid">
-      <section class="card" aria-labelledby="examples-title">
-        <h2 id="examples-title">Code Examples</h2>
-        <p class="lead">All snippets below are complete Java classes you can compile and run with <code>javac</code> and <code>java</code> or paste into an IDE.</p>
+<main class="container">
+  <div class="grid">
+    <section class="card" aria-labelledby="examples-title">
+      <h2 id="examples-title">Code Examples</h2>
+      <p class="lead">All snippets are complete Java classes. Compile with <code>javac FileName.java</code> and run with <code>java FileName</code>.</p>
 
-        <!-- All existing examples unchanged, plus new month name program added after grade calculator -->
-        <div class="example" id="hello">
-          <div class="meta">
-            <strong>Hello World</strong>
-            <div>
-              <button class="btn" data-target="code-hello">Copy</button>
-            </div>
-          </div>
-          <pre id="code-hello"><code>// HelloWorld.java
+      <!-- ═══════════════════════════ HELLO ═══════════════════════════ -->
+      <h3 id="hello">Hello World</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Hello World</strong><button class="btn" data-target="code-hello">Copy</button></div>
+        <pre id="code-hello"><code>// HelloWorld.java
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, Java World!");
     }
-}
-</code></pre>
-        </div>
+}</code></pre>
+      </div>
 
-        <div class="example" id="basics">
-          <div class="meta">
-            <strong>Basic Input and Data Types</strong>
-            <div class="small">Run from terminal; enter a number when prompted</div>
-          </div>
-          <pre id="code-basics"><code>// ReadNumber.java
+      <!-- ═══════════════════════════ BASICS ══════════════════════════ -->
+      <h3 id="basics">Basics</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Basic Input &amp; Data Types</strong><button class="btn" data-target="code-basics">Copy</button></div>
+        <pre id="code-basics"><code>// ReadNumber.java
 import java.util.Scanner;
 
 public class ReadNumber {
@@ -442,49 +149,31 @@ public class ReadNumber {
         System.out.println("You entered: " + n);
         sc.close();
     }
-}
-</code></pre>
-        </div>
+}</code></pre>
+      </div>
 
-        <!-- Variables & Arithmetic -->
-        <div class="example" id="variables">
-          <div class="meta">
-            <strong>Variables & Arithmetic</strong>
-            <div class="small">Declare variables, perform basic math operations</div>
-          </div>
-          <pre id="code-variables"><code>// ArithmeticDemo.java
+      <div class="example">
+        <div class="meta"><strong>Variables &amp; Arithmetic</strong><button class="btn" data-target="code-variables">Copy</button></div>
+        <pre id="code-variables"><code>// ArithmeticDemo.java
 public class ArithmeticDemo {
     public static void main(String[] args) {
-        int a = 25;
-        int b = 7;
-        int sum = a + b;
-        int diff = a - b;
-        int product = a * b;
-        int quotient = a / b;
-        int remainder = a % b;
-        
+        int a = 25, b = 7;
         System.out.println("a = " + a + ", b = " + b);
-        System.out.println("Sum = " + sum);
-        System.out.println("Difference = " + diff);
-        System.out.println("Product = " + product);
-        System.out.println("Quotient = " + quotient);
-        System.out.println("Remainder = " + remainder);
-    }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Compile: javac ArithmeticDemo.java &nbsp; Run: java ArithmeticDemo</div>
-            <button class="btn" data-target="code-variables">Copy Code</button>
-          </div>
-        </div>
+        System.out.println("Sum        = " + (a + b));
+        System.out.println("Difference = " + (a - b));
+        System.out.println("Product    = " + (a * b));
+        System.out.println("Quotient   = " + (a / b));
+        System.out.println("Remainder  = " + (a % b));
 
-        <!-- String Input & Concatenation -->
-        <div class="example" id="string-input">
-          <div class="meta">
-            <strong>String Input & Concatenation</strong>
-            <div class="small">Read name and age, display formatted message</div>
-          </div>
-          <pre id="code-string-input"><code>// Greeting.java
+        double x = 7.5, y = 2.3;
+        System.out.printf("%.1f + %.1f = %.2f%n", x, y, x + y);
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>String Input &amp; Concatenation</strong><button class="btn" data-target="code-string-input">Copy</button></div>
+        <pre id="code-string-input"><code>// Greeting.java
 import java.util.Scanner;
 
 public class Greeting {
@@ -494,339 +183,128 @@ public class Greeting {
         String name = sc.nextLine();
         System.out.print("Enter your age: ");
         int age = sc.nextInt();
-        
         System.out.println("Hello, " + name + "! You are " + age + " years old.");
         System.out.println("Next year you will be " + (age + 1) + ".");
         sc.close();
     }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Compile: javac Greeting.java &nbsp; Run: java Greeting</div>
-            <button class="btn" data-target="code-string-input">Copy Code</button>
-          </div>
-        </div>
+}</code></pre>
+      </div>
 
-        <!-- Type Casting -->
-        <div class="example" id="casting">
-          <div class="meta">
-            <strong>Type Casting (Implicit & Explicit)</strong>
-            <div class="small">Convert between int, double, and show narrowing</div>
-          </div>
-          <pre id="code-casting"><code>// TypeCastingDemo.java
+      <div class="example">
+        <div class="meta"><strong>Type Casting (Implicit &amp; Explicit)</strong><button class="btn" data-target="code-casting">Copy</button></div>
+        <pre id="code-casting"><code>// TypeCastingDemo.java
 public class TypeCastingDemo {
     public static void main(String[] args) {
         int intVal = 100;
-        double doubleVal = intVal; // implicit widening
-        System.out.println("Implicit (int to double): " + doubleVal);
-        
+        double doubleVal = intVal;          // implicit widening
+        System.out.println("int to double: " + doubleVal);
+
         double precise = 9.78;
-        int truncated = (int) precise; // explicit narrowing
-        System.out.println("Explicit (double to int): " + truncated);
-        
+        int truncated = (int) precise;      // explicit narrowing
+        System.out.println("double to int: " + truncated);
+
         char grade = 'A';
         int ascii = grade;
-        System.out.println("Char to ASCII: " + grade + " -> " + ascii);
+        System.out.println("Char to ASCII: " + grade + " = " + ascii);
+
+        long big = 1234567890123L;
+        int small = (int) big;              // data loss
+        System.out.println("long to int (data loss): " + small);
     }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Compile: javac TypeCastingDemo.java &nbsp; Run: java TypeCastingDemo</div>
-            <button class="btn" data-target="code-casting">Copy Code</button>
-          </div>
-        </div>
+}</code></pre>
+      </div>
 
-        <div class="example" id="oop">
-          <div class="meta">
-            <strong>OOP Example with Inheritance</strong>
-            <div class="small">Three classes in one file for simplicity</div>
-          </div>
-          <pre id="code-oop"><code>// AnimalDemo.java
-class Animal {
-    String name;
-    Animal(String name) { this.name = name; }
-    void sound() { System.out.println(name + " makes a sound"); }
-}
+      <!-- ═══════════════════════ CONTROL FLOW ════════════════════════ -->
+      <h3 id="control">Control Flow</h3>
 
-class Dog extends Animal {
-    Dog(String name) { super(name); }
-    @Override
-    void sound() { System.out.println(name + " barks"); }
-}
-
-public class AnimalDemo {
-    public static void main(String[] args) {
-        Animal a = new Animal("Generic");
-        Dog d = new Dog("Rex");
-        a.sound();
-        d.sound();
-    }
-}
-</code></pre>
-        </div>
-
-        <div class="example" id="algorithms">
-          <div class="meta">
-            <strong>Factorial and Fibonacci</strong>
-            <div class="small">Iterative factorial and iterative Fibonacci</div>
-          </div>
-          <pre id="code-algorithms"><code>// MathExamples.java
-public class MathExamples {
-    // iterative factorial
-    public static long factorial(int n) {
-        long f = 1;
-        for (int i = 2; i <= n; i++) f *= i;
-        return f;
-    }
-
-    // iterative fibonacci (n-th, 0-based)
-    public static long fibonacci(int n) {
-        if (n <= 1) return n;
-        long a = 0, b = 1;
-        for (int i = 2; i <= n; i++) {
-            long t = a + b;
-            a = b;
-            b = t;
-        }
-        return b;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("5! = " + factorial(5));
-        System.out.println("Fibonacci(10) = " + fibonacci(10));
-    }
-}
-</code></pre>
-        </div>
-
-        <div class="example" id="prime">
-          <div class="meta">
-            <strong>Prime Check</strong>
-            <div class="small">Efficient check up to sqrt(n)</div>
-          </div>
-          <pre id="code-prime"><code>// PrimeCheck.java
-public class PrimeCheck {
-    public static boolean isPrime(int n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-        for (int i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0) return false;
-        }
-        return true;
-    }
-
-    public static void main(String[] args) {
-        int[] tests = {1,2,3,4,17,18,19,97};
-        for (int t : tests) {
-            System.out.println(t + " is prime? " + isPrime(t));
-        }
-    }
-}
-</code></pre>
-        </div>
-
-        <div class="example" id="sort">
-          <div class="meta">
-            <strong>Array Sorting using Arrays.sort</strong>
-            <div class="small">Built-in sort for primitives and objects</div>
-          </div>
-          <pre id="code-sort"><code>// SortExample.java
-import java.util.Arrays;
-
-public class SortExample {
-    public static void main(String[] args) {
-        int[] arr = {5, 2, 9, 1, 5, 6};
-        Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
-}
-</code></pre>
-        </div>
-
-        <!-- Simple Interest -->
-        <div class="example" id="simple-interest">
-          <div class="meta">
-            <strong>Simple Interest Calculator</strong>
-            <div class="small">Formula: SI = (P * R * T) / 100</div>
-          </div>
-          <pre id="code-simple-interest"><code>// SimpleInterest.java
+      <div class="example">
+        <div class="meta"><strong>if / else if / else — Even, Odd, Positive, Negative</strong><button class="btn" data-target="code-ifelse">Copy</button></div>
+        <pre id="code-ifelse"><code>// IfElseDemo.java
 import java.util.Scanner;
 
-public class SimpleInterest {
-    public static double calculateInterest(double principal, double rate, double time) {
-        return (principal * rate * time) / 100;
-    }
-
+public class IfElseDemo {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Principal amount (P): ");
-        double principal = sc.nextDouble();
-        System.out.print("Enter Rate of interest (R): ");
-        double rate = sc.nextDouble();
-        System.out.print("Enter Time period in years (T): ");
-        double time = sc.nextDouble();
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
 
-        double interest = calculateInterest(principal, rate, time);
-        double totalAmount = principal + interest;
-
-        System.out.printf("Simple Interest = %.2f%n", interest);
-        System.out.printf("Total Amount = %.2f%n", totalAmount);
-        sc.close();
-    }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Compile: javac SimpleInterest.java &nbsp;&nbsp; Run: java SimpleInterest</div>
-            <button class="btn" data-target="code-simple-interest">Copy Code</button>
-          </div>
-        </div>
-
-        <!-- Quadratic -->
-        <div class="example" id="quadratic">
-          <div class="meta">
-            <strong>Quadratic Equation Solver (ax^2 + bx + c = 0)</strong>
-            <div class="small">Finds real and complex roots using discriminant</div>
-          </div>
-          <pre id="code-quadratic"><code>// QuadraticEquation.java
-import java.util.Scanner;
-
-public class QuadraticEquation {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Solve quadratic equation: ax*ax + bx + c = 0");
-        System.out.print("Enter a: ");
-        double a = sc.nextDouble();
-        System.out.print("Enter b: ");
-        double b = sc.nextDouble();
-        System.out.print("Enter c: ");
-        double c = sc.nextDouble();
-
-        if (a == 0) {
-            System.out.println("This is a linear equation (a cannot be 0).");
-            if (b != 0) {
-                double root = -c / b;
-                System.out.printf("Root: x = %.2f%n", root);
-            } else {
-                System.out.println(c == 0 ? "Infinite solutions" : "No solution");
-            }
+        // even / odd
+        if (n % 2 == 0) {
+            System.out.println(n + " is EVEN");
         } else {
-            double discriminant = b * b - 4 * a * c;
-            if (discriminant > 0) {
-                double root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-                double root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-                System.out.printf("Two distinct real roots: %.2f and %.2f%n", root1, root2);
-            } else if (discriminant == 0) {
-                double root = -b / (2 * a);
-                System.out.printf("One real double root: %.2f%n", root);
-            } else {
-                double real = -b / (2 * a);
-                double imaginary = Math.sqrt(-discriminant) / (2 * a);
-                System.out.printf("Complex roots: %.2f + %.2fi and %.2f - %.2fi%n",
-                                  real, imaginary, real, imaginary);
-            }
+            System.out.println(n + " is ODD");
+        }
+
+        // positive / negative / zero
+        if (n > 0) {
+            System.out.println(n + " is POSITIVE");
+        } else if (n < 0) {
+            System.out.println(n + " is NEGATIVE");
+        } else {
+            System.out.println("The number is ZERO");
         }
         sc.close();
     }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Compile: javac QuadraticEquation.java &nbsp;&nbsp; Run: java QuadraticEquation</div>
-            <button class="btn" data-target="code-quadratic">Copy Code</button>
-          </div>
-        </div>
+}</code></pre>
+      </div>
 
-        <!-- Second Smallest -->
-        <div class="example" id="second-smallest">
-          <div class="meta">
-            <strong>Second Smallest Number (No if-else, no ternary)</strong>
-            <div class="small">Uses only Math.max() and Math.min() and accepts three unequal numbers</div>
-          </div>
-          <pre id="code-second-smallest"><code>// SecondSmallest.java
+      <div class="example">
+        <div class="meta"><strong>Largest of Three Numbers</strong><button class="btn" data-target="code-largest">Copy</button></div>
+        <pre id="code-largest"><code>// LargestOfThree.java
 import java.util.Scanner;
 
-public class SecondSmallest {
+public class LargestOfThree {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter three unequal numbers: ");
+        System.out.print("Enter three numbers: ");
         double a = sc.nextDouble();
         double b = sc.nextDouble();
         double c = sc.nextDouble();
 
-        double max = Math.max(a, Math.max(b, c));
-        double min = Math.min(a, Math.min(b, c));
-        double secondSmallest = a + b + c - max - min;
-        
-        System.out.println("Second smallest number: " + secondSmallest);
+        double largest;
+        if (a >= b && a >= c) {
+            largest = a;
+        } else if (b >= a && b >= c) {
+            largest = b;
+        } else {
+            largest = c;
+        }
+        System.out.println("Largest = " + largest);
         sc.close();
     }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Sample Input: 34 82 61 → Output: 61.0 &nbsp;|&nbsp; Compile: javac SecondSmallest.java &nbsp; Run: java SecondSmallest</div>
-            <button class="btn" data-target="code-second-smallest">Copy Code</button>
-          </div>
-        </div>
+}</code></pre>
+      </div>
 
-        <!-- Student Grade -->
-        <div class="example" id="grade-calculator">
-          <div class="meta">
-            <strong>Student Grade Calculator</strong>
-            <div class="small">Input name, class, marks in English, Mathematics, Computer → average & grade</div>
-          </div>
-          <pre id="code-grade-calculator"><code>// StudentGrade.java
+      <div class="example">
+        <div class="meta"><strong>switch — Day Name from Number</strong><button class="btn" data-target="code-dayname">Copy</button></div>
+        <pre id="code-dayname"><code>// DayName.java
 import java.util.Scanner;
 
-public class StudentGrade {
+public class DayName {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter student name: ");
-        String name = sc.nextLine();
-        System.out.print("Enter class: ");
-        String className = sc.nextLine();
-        System.out.print("Enter marks in English (out of 100): ");
-        double eng = sc.nextDouble();
-        System.out.print("Enter marks in Mathematics (out of 100): ");
-        double math = sc.nextDouble();
-        System.out.print("Enter marks in Computer (out of 100): ");
-        double comp = sc.nextDouble();
-        
-        double average = (eng + math + comp) / 3;
-        String grade;
-        if (average >= 80) {
-            grade = "A*";
-        } else if (average >= 60) {
-            grade = "A";
-        } else if (average >= 50) {
-            grade = "B";
-        } else if (average >= 40) {
-            grade = "C";
-        } else {
-            grade = "Fail";
+        System.out.print("Enter day number (1=Mon … 7=Sun): ");
+        int day = sc.nextInt();
+        String name;
+        switch (day) {
+            case 1: name = "Monday";    break;
+            case 2: name = "Tuesday";   break;
+            case 3: name = "Wednesday"; break;
+            case 4: name = "Thursday";  break;
+            case 5: name = "Friday";    break;
+            case 6: name = "Saturday";  break;
+            case 7: name = "Sunday";    break;
+            default: name = "Invalid day number";
         }
-        
-        System.out.println("\n--- Result ---");
-        System.out.println("Name: " + name);
-        System.out.println("Class: " + className);
-        System.out.printf("Average marks: %.2f%%%n", average);
-        System.out.println("Grade: " + grade);
+        System.out.println("Day = " + name);
         sc.close();
     }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Compile: javac StudentGrade.java &nbsp;&nbsp; Run: java StudentGrade</div>
-            <button class="btn" data-target="code-grade-calculator">Copy Code</button>
-          </div>
-        </div>
+}</code></pre>
+      </div>
 
-        <!-- NEW: Month Name from Number (added as requested) -->
-        <div class="example" id="month-name">
-          <div class="meta">
-            <strong>Month Name from Number</strong>
-            <div class="small">Input a number (1–12) and display the corresponding month name</div>
-          </div>
-          <pre id="code-month-name"><code>// MonthName.java
+      <div class="example">
+        <div class="meta"><strong>switch — Month Name from Number</strong><button class="btn" data-target="code-month-name">Copy</button></div>
+        <pre id="code-month-name"><code>// MonthName.java
 import java.util.Scanner;
 
 public class MonthName {
@@ -835,168 +313,1650 @@ public class MonthName {
         System.out.print("Enter month number (1-12): ");
         int month = sc.nextInt();
         String monthName;
-
         switch (month) {
-            case 1:
-                monthName = "January";
-                break;
-            case 2:
-                monthName = "February";
-                break;
-            case 3:
-                monthName = "March";
-                break;
-            case 4:
-                monthName = "April";
-                break;
-            case 5:
-                monthName = "May";
-                break;
-            case 6:
-                monthName = "June";
-                break;
-            case 7:
-                monthName = "July";
-                break;
-            case 8:
-                monthName = "August";
-                break;
-            case 9:
-                monthName = "September";
-                break;
-            case 10:
-                monthName = "October";
-                break;
-            case 11:
-                monthName = "November";
-                break;
-            case 12:
-                monthName = "December";
-                break;
-            default:
-                monthName = "Invalid month number";
+            case 1:  monthName = "January";   break;
+            case 2:  monthName = "February";  break;
+            case 3:  monthName = "March";     break;
+            case 4:  monthName = "April";     break;
+            case 5:  monthName = "May";       break;
+            case 6:  monthName = "June";      break;
+            case 7:  monthName = "July";      break;
+            case 8:  monthName = "August";    break;
+            case 9:  monthName = "September"; break;
+            case 10: monthName = "October";   break;
+            case 11: monthName = "November";  break;
+            case 12: monthName = "December";  break;
+            default: monthName = "Invalid month number";
         }
-
         System.out.println("Month = " + monthName);
         sc.close();
     }
-}
-</code></pre>
-          <div class="meta" style="margin-top:8px;">
-            <div class="small">Sample Input: 5 → Month = May &nbsp;|&nbsp; Compile: javac MonthName.java &nbsp; Run: java MonthName</div>
-            <button class="btn" data-target="code-month-name">Copy Code</button>
-          </div>
-        </div>
+}</code></pre>
+      </div>
 
-        <div class="example" id="areas">
-          <div class="meta">
-            <strong>Area Examples</strong>
-            <div class="small">Rectangle, Square, Triangle, Quadrilateral (shoelace)</div>
-          </div>
-          <pre id="code-rectangle"><code>// RectangleArea.java
+      <div class="example">
+        <div class="meta"><strong>Ternary Operator</strong><button class="btn" data-target="code-ternary">Copy</button></div>
+        <pre id="code-ternary"><code>// TernaryDemo.java
+import java.util.Scanner;
+
+public class TernaryDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+
+        String parity  = (n % 2 == 0) ? "Even" : "Odd";
+        String sign    = (n > 0) ? "Positive" : (n < 0) ? "Negative" : "Zero";
+        int    absVal  = (n < 0) ? -n : n;
+
+        System.out.println(n + " is " + parity);
+        System.out.println(n + " is " + sign);
+        System.out.println("Absolute value = " + absVal);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════════ LOOPS ═══════════════════════════ -->
+      <h3 id="loops">Loops</h3>
+
+      <div class="example">
+        <div class="meta"><strong>for loop — Sum from 1 to N</strong><button class="btn" data-target="code-forloop">Copy</button></div>
+        <pre id="code-forloop"><code>// ForLoopDemo.java
+import java.util.Scanner;
+
+public class ForLoopDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sc.nextInt();
+
+        int sum = 0;
+        for (int i = 1; i <= n; i++) {
+            sum += i;
+        }
+        System.out.println("Sum of 1 to " + n + " = " + sum);
+
+        // for-each loop on an array
+        int[] nums = {10, 20, 30, 40, 50};
+        System.out.print("Array elements: ");
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>while loop — Digits Reverse</strong><button class="btn" data-target="code-while">Copy</button></div>
+        <pre id="code-while"><code>// WhileLoopDemo.java
+import java.util.Scanner;
+
+public class WhileLoopDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a positive integer: ");
+        int n = sc.nextInt();
+        int original = n, reversed = 0;
+
+        while (n != 0) {
+            int digit = n % 10;
+            reversed = reversed * 10 + digit;
+            n /= 10;
+        }
+        System.out.println("Reversed: " + reversed);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>do-while loop — Guess the Number</strong><button class="btn" data-target="code-dowhile">Copy</button></div>
+        <pre id="code-dowhile"><code>// DoWhileDemo.java
+import java.util.Scanner;
+
+public class DoWhileDemo {
+    public static void main(String[] args) {
+        int secret = 42;
+        Scanner sc = new Scanner(System.in);
+        int guess;
+        int attempts = 0;
+
+        do {
+            System.out.print("Guess the number (1-100): ");
+            guess = sc.nextInt();
+            attempts++;
+            if (guess < secret)       System.out.println("Too low!");
+            else if (guess > secret)  System.out.println("Too high!");
+        } while (guess != secret);
+
+        System.out.println("Correct! Took " + attempts + " attempt(s).");
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Multiplication Table</strong><button class="btn" data-target="code-multitable">Copy</button></div>
+        <pre id="code-multitable"><code>// MultiplicationTable.java
+import java.util.Scanner;
+
+public class MultiplicationTable {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+        System.out.println("Multiplication table of " + n + ":");
+        for (int i = 1; i <= 10; i++) {
+            System.out.printf("%2d x %2d = %3d%n", n, i, n * i);
+        }
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Nested Loops — 10×10 Times Table Grid</strong><button class="btn" data-target="code-timegrid">Copy</button></div>
+        <pre id="code-timegrid"><code>// TimesTableGrid.java
+public class TimesTableGrid {
+    public static void main(String[] args) {
+        System.out.print("   ");
+        for (int j = 1; j <= 10; j++) System.out.printf("%4d", j);
+        System.out.println("\n   " + "----".repeat(10));
+        for (int i = 1; i <= 10; i++) {
+            System.out.printf("%2d|", i);
+            for (int j = 1; j <= 10; j++) {
+                System.out.printf("%4d", i * j);
+            }
+            System.out.println();
+        }
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ PATTERNS ════════════════════════════ -->
+      <h3 id="patterns">Patterns</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Right-Angled Star Triangle</strong><button class="btn" data-target="code-startriangle">Copy</button></div>
+        <pre id="code-startriangle"><code>// StarTriangle.java
+import java.util.Scanner;
+
+public class StarTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of rows: ");
+        int n = sc.nextInt();
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+/* Output for n=5:
+*
+* *
+* * *
+* * * *
+* * * * *
+*/</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Pyramid (Centred Stars)</strong><button class="btn" data-target="code-pyramid">Copy</button></div>
+        <pre id="code-pyramid"><code>// Pyramid.java
+import java.util.Scanner;
+
+public class Pyramid {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of rows: ");
+        int n = sc.nextInt();
+        for (int i = 1; i <= n; i++) {
+            // print spaces
+            for (int s = i; s < n; s++) System.out.print(" ");
+            // print stars
+            for (int j = 1; j <= 2 * i - 1; j++) System.out.print("*");
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+/* Output for n=5:
+    *
+   ***
+  *****
+ *******
+*********
+*/</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Inverted Triangle</strong><button class="btn" data-target="code-invtriangle">Copy</button></div>
+        <pre id="code-invtriangle"><code>// InvertedTriangle.java
+import java.util.Scanner;
+
+public class InvertedTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter rows: ");
+        int n = sc.nextInt();
+        for (int i = n; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) System.out.print("* ");
+            System.out.println();
+        }
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Number Pattern (Floyd's Triangle)</strong><button class="btn" data-target="code-floyd">Copy</button></div>
+        <pre id="code-floyd"><code>// FloydTriangle.java
+import java.util.Scanner;
+
+public class FloydTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter rows: ");
+        int n = sc.nextInt();
+        int num = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.printf("%4d", num++);
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+/* Output for n=4:
+   1
+   2   3
+   4   5   6
+   7   8   9  10
+*/</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Diamond Pattern</strong><button class="btn" data-target="code-diamond">Copy</button></div>
+        <pre id="code-diamond"><code>// Diamond.java
+import java.util.Scanner;
+
+public class Diamond {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter half-size (odd n): ");
+        int n = sc.nextInt();
+        // upper half
+        for (int i = 1; i <= n; i += 2) {
+            for (int s = (n - i) / 2; s > 0; s--) System.out.print(" ");
+            for (int j = 1; j <= i; j++) System.out.print("*");
+            System.out.println();
+        }
+        // lower half
+        for (int i = n - 2; i >= 1; i -= 2) {
+            for (int s = (n - i) / 2; s > 0; s--) System.out.print(" ");
+            for (int j = 1; j <= i; j++) System.out.print("*");
+            System.out.println();
+        }
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ STRINGS ══════════════════════════════ -->
+      <h3 id="strings">String Operations</h3>
+
+      <div class="example">
+        <div class="meta"><strong>String Methods Demo</strong><button class="btn" data-target="code-stringmethods">Copy</button></div>
+        <pre id="code-stringmethods"><code>// StringMethodsDemo.java
+public class StringMethodsDemo {
+    public static void main(String[] args) {
+        String s = "  Hello, Java World!  ";
+        System.out.println("Original    : '" + s + "'");
+        System.out.println("Trimmed     : '" + s.trim() + "'");
+
+        String t = s.trim();
+        System.out.println("Length      : " + t.length());
+        System.out.println("Upper       : " + t.toUpperCase());
+        System.out.println("Lower       : " + t.toLowerCase());
+        System.out.println("charAt(7)   : " + t.charAt(7));
+        System.out.println("indexOf('J'): " + t.indexOf('J'));
+        System.out.println("substring(7): " + t.substring(7));
+        System.out.println("sub(7,11)   : " + t.substring(7, 11));
+        System.out.println("replace     : " + t.replace("Java", "Python"));
+        System.out.println("contains    : " + t.contains("World"));
+        System.out.println("startsWith  : " + t.startsWith("Hello"));
+        System.out.println("endsWith    : " + t.endsWith("!"));
+        System.out.println("isEmpty     : " + t.isEmpty());
+
+        // split
+        String csv = "apple,banana,cherry";
+        String[] fruits = csv.split(",");
+        for (String f : fruits) System.out.println("Fruit: " + f);
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Palindrome Check (String)</strong><button class="btn" data-target="code-palindrome">Copy</button></div>
+        <pre id="code-palindrome"><code>// PalindromeCheck.java
+import java.util.Scanner;
+
+public class PalindromeCheck {
+    public static boolean isPalindrome(String s) {
+        s = s.toLowerCase().replaceAll("[^a-z0-9]", "");
+        int l = 0, r = s.length() - 1;
+        while (l < r) {
+            if (s.charAt(l) != s.charAt(r)) return false;
+            l++; r--;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a word or sentence: ");
+        String input = sc.nextLine();
+        System.out.println(isPalindrome(input) ? "\"" + input + "\" IS a palindrome"
+                                               : "\"" + input + "\" is NOT a palindrome");
+        sc.close();
+    }
+}
+// Also works for: "racecar", "A man a plan a canal Panama"</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Reverse a String</strong><button class="btn" data-target="code-reversestr">Copy</button></div>
+        <pre id="code-reversestr"><code>// ReverseString.java
+import java.util.Scanner;
+
+public class ReverseString {
+    // Using StringBuilder
+    public static String reverse(String s) {
+        return new StringBuilder(s).reverse().toString();
+    }
+
+    // Manual method
+    public static String reverseManual(String s) {
+        char[] ch = s.toCharArray();
+        int l = 0, r = ch.length - 1;
+        while (l < r) {
+            char tmp = ch[l];
+            ch[l++] = ch[r];
+            ch[r--] = tmp;
+        }
+        return new String(ch);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+        System.out.println("Reversed (StringBuilder): " + reverse(input));
+        System.out.println("Reversed (manual)       : " + reverseManual(input));
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Count Vowels &amp; Consonants</strong><button class="btn" data-target="code-vowels">Copy</button></div>
+        <pre id="code-vowels"><code>// CountVowels.java
+import java.util.Scanner;
+
+public class CountVowels {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String s = sc.nextLine().toLowerCase();
+
+        int vowels = 0, consonants = 0, spaces = 0, digits = 0;
+        for (char c : s.toCharArray()) {
+            if ("aeiou".indexOf(c) >= 0) vowels++;
+            else if (c >= 'a' && c <= 'z') consonants++;
+            else if (c == ' ') spaces++;
+            else if (c >= '0' && c <= '9') digits++;
+        }
+        System.out.println("Vowels     : " + vowels);
+        System.out.println("Consonants : " + consonants);
+        System.out.println("Spaces     : " + spaces);
+        System.out.println("Digits     : " + digits);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Anagram Check</strong><button class="btn" data-target="code-anagram">Copy</button></div>
+        <pre id="code-anagram"><code>// AnagramCheck.java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class AnagramCheck {
+    public static boolean isAnagram(String a, String b) {
+        a = a.toLowerCase().replaceAll("\\s", "");
+        b = b.toLowerCase().replaceAll("\\s", "");
+        if (a.length() != b.length()) return false;
+        char[] ca = a.toCharArray();
+        char[] cb = b.toCharArray();
+        Arrays.sort(ca);
+        Arrays.sort(cb);
+        return Arrays.equals(ca, cb);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter first word : ");  String a = sc.nextLine();
+        System.out.print("Enter second word: ");  String b = sc.nextLine();
+        System.out.println(isAnagram(a, b) ? "\"" + a + "\" and \"" + b + "\" ARE anagrams"
+                                           : "NOT anagrams");
+        sc.close();
+    }
+}
+// Examples: "listen" / "silent", "Astronomer" / "Moon starer"</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>StringBuilder Demo</strong><button class="btn" data-target="code-sb">Copy</button></div>
+        <pre id="code-sb"><code>// StringBuilderDemo.java
+public class StringBuilderDemo {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Hello");
+        sb.append(", Java!");
+        sb.insert(5, " beautiful");
+        sb.replace(0, 5, "Hi");
+        sb.delete(2, 12);
+        sb.reverse();
+
+        System.out.println("Result : " + sb);
+        System.out.println("Length : " + sb.length());
+
+        // Efficient string building in a loop
+        StringBuilder list = new StringBuilder();
+        for (int i = 1; i <= 5; i++) {
+            list.append("item").append(i);
+            if (i < 5) list.append(", ");
+        }
+        System.out.println("List   : " + list);
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ NUMBERS ══════════════════════════════ -->
+      <h3 id="numbers">Number Programs</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Armstrong Number</strong><button class="btn" data-target="code-armstrong">Copy</button></div>
+        <pre id="code-armstrong"><code>// ArmstrongNumber.java
+import java.util.Scanner;
+
+public class ArmstrongNumber {
+    public static boolean isArmstrong(int n) {
+        int original = n, digits = String.valueOf(n).length(), sum = 0;
+        while (n > 0) {
+            int d = n % 10;
+            sum += (int) Math.pow(d, digits);
+            n /= 10;
+        }
+        return sum == original;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+        System.out.println(n + (isArmstrong(n) ? " IS" : " is NOT") + " an Armstrong number");
+
+        // Print all 3-digit Armstrong numbers
+        System.out.print("3-digit Armstrong numbers: ");
+        for (int i = 100; i <= 999; i++) {
+            if (isArmstrong(i)) System.out.print(i + " ");
+        }
+        System.out.println();
+        sc.close();
+    }
+}
+// e.g. 153 = 1³ + 5³ + 3³ = 153</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Leap Year Check</strong><button class="btn" data-target="code-leapyear">Copy</button></div>
+        <pre id="code-leapyear"><code>// LeapYear.java
+import java.util.Scanner;
+
+public class LeapYear {
+    public static boolean isLeap(int year) {
+        return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a year: ");
+        int year = sc.nextInt();
+        System.out.println(year + (isLeap(year) ? " IS a leap year" : " is NOT a leap year"));
+
+        // Next 5 leap years
+        System.out.print("Next 5 leap years from " + year + ": ");
+        int count = 0;
+        for (int y = year + 1; count < 5; y++) {
+            if (isLeap(y)) { System.out.print(y + " "); count++; }
+        }
+        System.out.println();
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Sum of Digits &amp; Count Digits</strong><button class="btn" data-target="code-sumdigits">Copy</button></div>
+        <pre id="code-sumdigits"><code>// DigitOperations.java
+import java.util.Scanner;
+
+public class DigitOperations {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a positive integer: ");
+        int n = sc.nextInt();
+        int temp = Math.abs(n);
+        int sum = 0, count = 0, product = 1;
+
+        while (temp > 0) {
+            int d = temp % 10;
+            sum     += d;
+            product *= d;
+            count++;
+            temp /= 10;
+        }
+        System.out.println("Number of digits : " + count);
+        System.out.println("Sum of digits    : " + sum);
+        System.out.println("Product of digits: " + product);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>GCD and LCM</strong><button class="btn" data-target="code-gcdlcm">Copy</button></div>
+        <pre id="code-gcdlcm"><code>// GcdLcm.java
+import java.util.Scanner;
+
+public class GcdLcm {
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int t = b;
+            b = a % b;
+            a = t;
+        }
+        return a;
+    }
+
+    public static long lcm(int a, int b) {
+        return (long) a / gcd(a, b) * b;   // avoid overflow
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter two positive integers: ");
+        int a = sc.nextInt(), b = sc.nextInt();
+        System.out.println("GCD(" + a + ", " + b + ") = " + gcd(a, b));
+        System.out.println("LCM(" + a + ", " + b + ") = " + lcm(a, b));
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Power Without Math.pow</strong><button class="btn" data-target="code-power">Copy</button></div>
+        <pre id="code-power"><code>// PowerCalc.java
+import java.util.Scanner;
+
+public class PowerCalc {
+    // Fast exponentiation (exponentiation by squaring)
+    public static long power(long base, int exp) {
+        long result = 1;
+        while (exp > 0) {
+            if (exp % 2 == 1) result *= base;
+            base *= base;
+            exp /= 2;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter base: ");
+        long base = sc.nextLong();
+        System.out.print("Enter exponent (non-negative): ");
+        int exp = sc.nextInt();
+        System.out.println(base + "^" + exp + " = " + power(base, exp));
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Temperature Conversion (°C ↔ °F ↔ K)</strong><button class="btn" data-target="code-temp">Copy</button></div>
+        <pre id="code-temp"><code>// TempConversion.java
+import java.util.Scanner;
+
+public class TempConversion {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Convert from: 1) Celsius  2) Fahrenheit  3) Kelvin");
+        System.out.print("Choice: ");
+        int choice = sc.nextInt();
+        System.out.print("Enter temperature: ");
+        double temp = sc.nextDouble();
+
+        switch (choice) {
+            case 1:
+                System.out.printf("%.2f°C = %.2f°F%n", temp, temp * 9/5 + 32);
+                System.out.printf("%.2f°C = %.2fK%n",  temp, temp + 273.15);
+                break;
+            case 2:
+                System.out.printf("%.2f°F = %.2f°C%n", temp, (temp - 32) * 5/9);
+                System.out.printf("%.2f°F = %.2fK%n",  temp, (temp - 32) * 5/9 + 273.15);
+                break;
+            case 3:
+                System.out.printf("%.2fK = %.2f°C%n", temp, temp - 273.15);
+                System.out.printf("%.2fK = %.2f°F%n", temp, (temp - 273.15) * 9/5 + 32);
+                break;
+            default:
+                System.out.println("Invalid choice");
+        }
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Simple Interest Calculator</strong><button class="btn" data-target="code-simple-interest">Copy</button></div>
+        <pre id="code-simple-interest"><code>// SimpleInterest.java
+import java.util.Scanner;
+
+public class SimpleInterest {
+    public static double calculateInterest(double p, double r, double t) {
+        return (p * r * t) / 100;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Principal (P): "); double p = sc.nextDouble();
+        System.out.print("Rate (R)     : "); double r = sc.nextDouble();
+        System.out.print("Time (T) yrs : "); double t = sc.nextDouble();
+        double si = calculateInterest(p, r, t);
+        System.out.printf("Simple Interest = %.2f%n", si);
+        System.out.printf("Total Amount    = %.2f%n", p + si);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Quadratic Equation Solver</strong><button class="btn" data-target="code-quadratic">Copy</button></div>
+        <pre id="code-quadratic"><code>// QuadraticEquation.java
+import java.util.Scanner;
+
+public class QuadraticEquation {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("ax² + bx + c = 0");
+        System.out.print("Enter a: "); double a = sc.nextDouble();
+        System.out.print("Enter b: "); double b = sc.nextDouble();
+        System.out.print("Enter c: "); double c = sc.nextDouble();
+
+        double disc = b * b - 4 * a * c;
+        if (disc > 0) {
+            double r1 = (-b + Math.sqrt(disc)) / (2 * a);
+            double r2 = (-b - Math.sqrt(disc)) / (2 * a);
+            System.out.printf("Two real roots: %.4f and %.4f%n", r1, r2);
+        } else if (disc == 0) {
+            System.out.printf("One real root: %.4f%n", -b / (2 * a));
+        } else {
+            double re = -b / (2 * a);
+            double im = Math.sqrt(-disc) / (2 * a);
+            System.out.printf("Complex roots: %.4f + %.4fi  and  %.4f - %.4fi%n", re, im, re, im);
+        }
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Second Smallest (No if/else)</strong><button class="btn" data-target="code-second-smallest">Copy</button></div>
+        <pre id="code-second-smallest"><code>// SecondSmallest.java
+import java.util.Scanner;
+
+public class SecondSmallest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter three unequal numbers: ");
+        double a = sc.nextDouble(), b = sc.nextDouble(), c = sc.nextDouble();
+        double max = Math.max(a, Math.max(b, c));
+        double min = Math.min(a, Math.min(b, c));
+        System.out.println("Second smallest = " + (a + b + c - max - min));
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Student Grade Calculator</strong><button class="btn" data-target="code-grade-calculator">Copy</button></div>
+        <pre id="code-grade-calculator"><code>// StudentGrade.java
+import java.util.Scanner;
+
+public class StudentGrade {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Student name : "); String name = sc.nextLine();
+        System.out.print("Class        : "); String cls  = sc.nextLine();
+        System.out.print("English marks: "); double eng  = sc.nextDouble();
+        System.out.print("Maths marks  : "); double math = sc.nextDouble();
+        System.out.print("Computer marks: "); double comp = sc.nextDouble();
+
+        double avg = (eng + math + comp) / 3;
+        String grade = avg >= 80 ? "A*" : avg >= 60 ? "A" : avg >= 50 ? "B" : avg >= 40 ? "C" : "Fail";
+
+        System.out.println("\n--- Result ---");
+        System.out.println("Name   : " + name);
+        System.out.println("Class  : " + cls);
+        System.out.printf ("Average: %.2f%%%n", avg);
+        System.out.println("Grade  : " + grade);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ ARRAYS ═══════════════════════════════ -->
+      <h3 id="arrays">Arrays</h3>
+
+      <div class="example">
+        <div class="meta"><strong>1D Array — Min, Max, Sum, Average</strong><button class="btn" data-target="code-array1d">Copy</button></div>
+        <pre id="code-array1d"><code>// ArrayBasics.java
+import java.util.Scanner;
+
+public class ArrayBasics {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("How many elements? ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.print("Enter elements: ");
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+
+        int min = arr[0], max = arr[0], sum = 0;
+        for (int x : arr) {
+            if (x < min) min = x;
+            if (x > max) max = x;
+            sum += x;
+        }
+        System.out.println("Min     = " + min);
+        System.out.println("Max     = " + max);
+        System.out.println("Sum     = " + sum);
+        System.out.printf ("Average = %.2f%n", (double) sum / n);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Array — Reverse &amp; Copy</strong><button class="btn" data-target="code-arrayreverse">Copy</button></div>
+        <pre id="code-arrayreverse"><code>// ArrayReverse.java
+import java.util.Arrays;
+
+public class ArrayReverse {
+    public static void reverseInPlace(int[] arr) {
+        int l = 0, r = arr.length - 1;
+        while (l < r) {
+            int tmp = arr[l]; arr[l++] = arr[r]; arr[r--] = tmp;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] original = {10, 20, 30, 40, 50};
+        System.out.println("Original  : " + Arrays.toString(original));
+
+        // copy then reverse
+        int[] copy = Arrays.copyOf(original, original.length);
+        reverseInPlace(copy);
+        System.out.println("Reversed  : " + Arrays.toString(copy));
+        System.out.println("Original still: " + Arrays.toString(original));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>2D Array — Matrix Addition</strong><button class="btn" data-target="code-matrix">Copy</button></div>
+        <pre id="code-matrix"><code>// MatrixAddition.java
+public class MatrixAddition {
+    static void print(int[][] m) {
+        for (int[] row : m) {
+            for (int v : row) System.out.printf("%4d", v);
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        int[][] A = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] B = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+        int rows = A.length, cols = A[0].length;
+        int[][] C = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                C[i][j] = A[i][j] + B[i][j];
+
+        System.out.println("Matrix A:"); print(A);
+        System.out.println("Matrix B:"); print(B);
+        System.out.println("A + B:"); print(C);
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>2D Array — Matrix Multiplication</strong><button class="btn" data-target="code-matmul">Copy</button></div>
+        <pre id="code-matmul"><code>// MatrixMultiply.java
+public class MatrixMultiply {
+    public static int[][] multiply(int[][] A, int[][] B) {
+        int r = A.length, c = B[0].length, k = B.length;
+        int[][] C = new int[r][c];
+        for (int i = 0; i < r; i++)
+            for (int j = 0; j < c; j++)
+                for (int p = 0; p < k; p++)
+                    C[i][j] += A[i][p] * B[p][j];
+        return C;
+    }
+
+    public static void main(String[] args) {
+        int[][] A = {{1, 2}, {3, 4}};
+        int[][] B = {{5, 6}, {7, 8}};
+        int[][] C = multiply(A, B);
+        System.out.println("A x B:");
+        for (int[] row : C) {
+            for (int v : row) System.out.printf("%5d", v);
+            System.out.println();
+        }
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ SEARCH & SORT ═══════════════════════ -->
+      <h3 id="searching">Searching &amp; Sorting</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Linear Search</strong><button class="btn" data-target="code-linearsearch">Copy</button></div>
+        <pre id="code-linearsearch"><code>// LinearSearch.java
+import java.util.Scanner;
+
+public class LinearSearch {
+    public static int search(int[] arr, int key) {
+        for (int i = 0; i < arr.length; i++)
+            if (arr[i] == key) return i;
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 25, 12, 22, 11, 90, 45};
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter key to search: ");
+        int key = sc.nextInt();
+        int idx = search(arr, key);
+        if (idx == -1) System.out.println(key + " not found.");
+        else           System.out.println(key + " found at index " + idx);
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Binary Search</strong><button class="btn" data-target="code-binarysearch">Copy</button></div>
+        <pre id="code-binarysearch"><code>// BinarySearch.java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class BinarySearch {
+    public static int binarySearch(int[] arr, int key) {
+        int low = 0, high = arr.length - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] == key) return mid;
+            else if (arr[mid] < key) low = mid + 1;
+            else high = mid - 1;
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+        System.out.println("Sorted array: " + Arrays.toString(arr));
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter key: ");
+        int key = sc.nextInt();
+        int idx = binarySearch(arr, key);
+        System.out.println(idx >= 0 ? key + " found at index " + idx : key + " not found");
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Bubble Sort</strong><button class="btn" data-target="code-bubblesort">Copy</button></div>
+        <pre id="code-bubblesort"><code>// BubbleSort.java
+import java.util.Arrays;
+
+public class BubbleSort {
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = tmp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;  // already sorted
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+        System.out.println("Before: " + Arrays.toString(arr));
+        bubbleSort(arr);
+        System.out.println("After : " + Arrays.toString(arr));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Selection Sort</strong><button class="btn" data-target="code-selectionsort">Copy</button></div>
+        <pre id="code-selectionsort"><code>// SelectionSort.java
+import java.util.Arrays;
+
+public class SelectionSort {
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++)
+                if (arr[j] < arr[minIdx]) minIdx = j;
+            int tmp = arr[minIdx]; arr[minIdx] = arr[i]; arr[i] = tmp;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {29, 10, 14, 37, 13};
+        System.out.println("Before: " + Arrays.toString(arr));
+        selectionSort(arr);
+        System.out.println("After : " + Arrays.toString(arr));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Insertion Sort</strong><button class="btn" data-target="code-insertionsort">Copy</button></div>
+        <pre id="code-insertionsort"><code>// InsertionSort.java
+import java.util.Arrays;
+
+public class InsertionSort {
+    public static void insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {12, 11, 13, 5, 6};
+        System.out.println("Before: " + Arrays.toString(arr));
+        insertionSort(arr);
+        System.out.println("After : " + Arrays.toString(arr));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Arrays.sort (Built-in)</strong><button class="btn" data-target="code-sort">Copy</button></div>
+        <pre id="code-sort"><code>// SortExample.java
+import java.util.Arrays;
+
+public class SortExample {
+    public static void main(String[] args) {
+        // sort primitives
+        int[] nums = {5, 2, 9, 1, 5, 6};
+        Arrays.sort(nums);
+        System.out.println("Sorted ints   : " + Arrays.toString(nums));
+
+        // sort strings (lexicographic)
+        String[] words = {"banana", "apple", "cherry", "date"};
+        Arrays.sort(words);
+        System.out.println("Sorted strings: " + Arrays.toString(words));
+
+        // partial sort (index 1 to 4)
+        int[] partial = {5, 2, 9, 1, 5, 6};
+        Arrays.sort(partial, 1, 4);
+        System.out.println("Partial sorted: " + Arrays.toString(partial));
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════════ OOP ══════════════════════════════ -->
+      <h3 id="oop">Object-Oriented Programming</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Class, Objects &amp; Constructor</strong><button class="btn" data-target="code-class">Copy</button></div>
+        <pre id="code-class"><code>// StudentClass.java
+public class StudentClass {
+    // Fields
+    String name;
+    int age;
+    double gpa;
+
+    // Constructor
+    StudentClass(String name, int age, double gpa) {
+        this.name = name;
+        this.age  = age;
+        this.gpa  = gpa;
+    }
+
+    // Method
+    void display() {
+        System.out.printf("Name: %-12s  Age: %2d  GPA: %.2f%n", name, age, gpa);
+    }
+
+    public static void main(String[] args) {
+        StudentClass s1 = new StudentClass("Alice", 20, 3.8);
+        StudentClass s2 = new StudentClass("Bob",   22, 3.2);
+        StudentClass s3 = new StudentClass("Carol",  19, 3.95);
+        s1.display(); s2.display(); s3.display();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Constructor Overloading</strong><button class="btn" data-target="code-constrover">Copy</button></div>
+        <pre id="code-constrover"><code>// Rectangle.java
+public class Rectangle {
+    double width, height;
+
+    Rectangle() {                          // default
+        this.width = 1; this.height = 1;
+    }
+    Rectangle(double side) {               // square
+        this.width = this.height = side;
+    }
+    Rectangle(double w, double h) {        // full
+        this.width = w; this.height = h;
+    }
+
+    double area()      { return width * height; }
+    double perimeter() { return 2 * (width + height); }
+
+    @Override
+    public String toString() {
+        return "Rectangle[" + width + "x" + height + "]  area=" + area();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Rectangle());
+        System.out.println(new Rectangle(5));
+        System.out.println(new Rectangle(4, 7));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Inheritance</strong><button class="btn" data-target="code-oop">Copy</button></div>
+        <pre id="code-oop"><code>// AnimalDemo.java
+class Animal {
+    String name;
+    Animal(String name) { this.name = name; }
+    void sound() { System.out.println(name + " makes a sound"); }
+    void eat()   { System.out.println(name + " is eating"); }
+}
+
+class Dog extends Animal {
+    Dog(String name) { super(name); }
+    @Override void sound() { System.out.println(name + " barks: Woof!"); }
+}
+
+class Cat extends Animal {
+    Cat(String name) { super(name); }
+    @Override void sound() { System.out.println(name + " meows: Meow!"); }
+}
+
+public class AnimalDemo {
+    public static void main(String[] args) {
+        Animal[] animals = { new Dog("Rex"), new Cat("Whiskers"), new Animal("Generic") };
+        for (Animal a : animals) { a.sound(); a.eat(); }
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Interface</strong><button class="btn" data-target="code-interface">Copy</button></div>
+        <pre id="code-interface"><code>// InterfaceDemo.java
+interface Shape {
+    double area();
+    double perimeter();
+    default void describe() {
+        System.out.printf("Area=%.2f  Perimeter=%.2f%n", area(), perimeter());
+    }
+}
+
+class Circle implements Shape {
+    double r;
+    Circle(double r) { this.r = r; }
+    public double area()      { return Math.PI * r * r; }
+    public double perimeter() { return 2 * Math.PI * r; }
+}
+
+class RectShape implements Shape {
+    double w, h;
+    RectShape(double w, double h) { this.w=w; this.h=h; }
+    public double area()      { return w * h; }
+    public double perimeter() { return 2 * (w + h); }
+}
+
+public class InterfaceDemo {
+    public static void main(String[] args) {
+        Shape[] shapes = { new Circle(5), new RectShape(4, 6) };
+        for (Shape s : shapes) {
+            System.out.print(s.getClass().getSimpleName() + " -> ");
+            s.describe();
+        }
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Abstract Class</strong><button class="btn" data-target="code-abstract">Copy</button></div>
+        <pre id="code-abstract"><code>// AbstractDemo.java
+abstract class Vehicle {
+    String brand;
+    int speed;
+
+    Vehicle(String brand, int speed) {
+        this.brand = brand; this.speed = speed;
+    }
+
+    abstract String fuelType();   // must override
+
+    void describe() {
+        System.out.printf("%-10s | speed=%3d km/h | fuel=%s%n", brand, speed, fuelType());
+    }
+}
+
+class Car extends Vehicle {
+    Car(String b, int s) { super(b, s); }
+    public String fuelType() { return "Petrol"; }
+}
+
+class ElectricCar extends Vehicle {
+    ElectricCar(String b, int s) { super(b, s); }
+    public String fuelType() { return "Electric"; }
+}
+
+public class AbstractDemo {
+    public static void main(String[] args) {
+        Vehicle[] v = { new Car("Honda", 180), new Car("BMW", 250), new ElectricCar("Tesla", 300) };
+        for (Vehicle x : v) x.describe();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Static Members &amp; Methods</strong><button class="btn" data-target="code-static">Copy</button></div>
+        <pre id="code-static"><code>// StaticDemo.java
+public class StaticDemo {
+    static int count = 0;          // shared across all instances
+    String name;
+
+    StaticDemo(String name) {
+        this.name = name;
+        count++;
+    }
+
+    static int getCount() { return count; }
+
+    // Utility static method (no object needed)
+    static boolean isEven(int n) { return n % 2 == 0; }
+
+    public static void main(String[] args) {
+        new StaticDemo("Alice");
+        new StaticDemo("Bob");
+        new StaticDemo("Carol");
+        System.out.println("Objects created: " + StaticDemo.getCount());
+        System.out.println("4 is even: " + StaticDemo.isEven(4));
+        System.out.println("7 is even: " + StaticDemo.isEven(7));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Encapsulation (Getters &amp; Setters)</strong><button class="btn" data-target="code-encap">Copy</button></div>
+        <pre id="code-encap"><code>// BankAccount.java
+public class BankAccount {
+    private String owner;
+    private double balance;
+
+    BankAccount(String owner, double initialBalance) {
+        this.owner   = owner;
+        this.balance = (initialBalance >= 0) ? initialBalance : 0;
+    }
+
+    public double getBalance() { return balance; }
+    public String getOwner()   { return owner; }
+
+    public void deposit(double amount) {
+        if (amount > 0) { balance += amount; System.out.printf("Deposited %.2f. Balance: %.2f%n", amount, balance); }
+        else System.out.println("Invalid deposit amount.");
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) { balance -= amount; System.out.printf("Withdrawn %.2f. Balance: %.2f%n", amount, balance); }
+        else System.out.println("Insufficient funds or invalid amount.");
+    }
+
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount("Rehan", 1000);
+        acc.deposit(500);
+        acc.withdraw(200);
+        acc.withdraw(2000);
+        System.out.printf("Final balance of %s: %.2f%n", acc.getOwner(), acc.getBalance());
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ COLLECTIONS ══════════════════════════ -->
+      <h3 id="collections">Collections</h3>
+
+      <div class="example">
+        <div class="meta"><strong>ArrayList Basics</strong><button class="btn" data-target="code-arraylist">Copy</button></div>
+        <pre id="code-arraylist"><code>// ArrayListDemo.java
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ArrayListDemo {
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;();
+
+        // add
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Carol");
+        names.add(1, "Dave");         // insert at index
+
+        System.out.println("List    : " + names);
+        System.out.println("Size    : " + names.size());
+        System.out.println("Get [2] : " + names.get(2));
+        System.out.println("Contains: " + names.contains("Bob"));
+
+        names.remove("Bob");           // remove by value
+        names.remove(0);               // remove by index
+        System.out.println("After remove: " + names);
+
+        Collections.sort(names);
+        System.out.println("Sorted  : " + names);
+        Collections.reverse(names);
+        System.out.println("Reversed: " + names);
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>HashMap Basics</strong><button class="btn" data-target="code-hashmap">Copy</button></div>
+        <pre id="code-hashmap"><code>// HashMapDemo.java
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapDemo {
+    public static void main(String[] args) {
+        HashMap&lt;String, Integer&gt; scores = new HashMap&lt;&gt;();
+
+        scores.put("Alice", 95);
+        scores.put("Bob",   82);
+        scores.put("Carol", 77);
+        scores.put("Dave",  91);
+        scores.put("Alice", 98);    // update existing key
+
+        System.out.println("Alice's score: " + scores.get("Alice"));
+        System.out.println("Contains Bob : " + scores.containsKey("Bob"));
+        System.out.println("Size         : " + scores.size());
+
+        scores.remove("Dave");
+        System.out.println("After remove : " + scores);
+
+        // iterate all entries
+        System.out.println("\nAll scores:");
+        for (Map.Entry&lt;String, Integer&gt; e : scores.entrySet()) {
+            System.out.println("  " + e.getKey() + " -> " + e.getValue());
+        }
+
+        // getOrDefault
+        System.out.println("Eve's score: " + scores.getOrDefault("Eve", 0));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>HashSet Basics</strong><button class="btn" data-target="code-hashset">Copy</button></div>
+        <pre id="code-hashset"><code>// HashSetDemo.java
+import java.util.HashSet;
+
+public class HashSetDemo {
+    public static void main(String[] args) {
+        HashSet&lt;Integer&gt; set = new HashSet&lt;&gt;();
+        int[] arr = {1, 2, 3, 2, 4, 3, 5, 1};
+
+        for (int n : arr) set.add(n);
+        System.out.println("Unique elements: " + set);
+        System.out.println("Size           : " + set.size());
+        System.out.println("Contains 3     : " + set.contains(3));
+        set.remove(3);
+        System.out.println("After remove 3 : " + set);
+
+        // Find duplicates in an array
+        System.out.print("Duplicates in original array: ");
+        HashSet&lt;Integer&gt; seen = new HashSet&lt;&gt;();
+        for (int n : arr) {
+            if (!seen.add(n)) System.out.print(n + " ");
+        }
+        System.out.println();
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ MATH ═════════════════════════════════ -->
+      <h3 id="math">Math Class &amp; Random</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Math Class Methods</strong><button class="btn" data-target="code-mathclass">Copy</button></div>
+        <pre id="code-mathclass"><code>// MathClassDemo.java
+public class MathClassDemo {
+    public static void main(String[] args) {
+        System.out.println("abs(-9)      = " + Math.abs(-9));
+        System.out.println("sqrt(144)    = " + Math.sqrt(144));
+        System.out.println("cbrt(27)     = " + Math.cbrt(27));
+        System.out.println("pow(2,10)    = " + (int) Math.pow(2, 10));
+        System.out.println("ceil(4.3)    = " + Math.ceil(4.3));
+        System.out.println("floor(4.9)   = " + Math.floor(4.9));
+        System.out.println("round(4.56)  = " + Math.round(4.56));
+        System.out.println("max(7,15)    = " + Math.max(7, 15));
+        System.out.println("min(7,15)    = " + Math.min(7, 15));
+        System.out.println("log(Math.E)  = " + Math.log(Math.E));
+        System.out.println("log10(1000)  = " + Math.log10(1000));
+        System.out.println("PI           = " + Math.PI);
+        System.out.println("sin(90°)     = " + Math.sin(Math.toRadians(90)));
+        System.out.println("cos(0°)      = " + Math.cos(Math.toRadians(0)));
+        System.out.println("hypotenuse   = " + Math.hypot(3, 4));
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Random Numbers</strong><button class="btn" data-target="code-random">Copy</button></div>
+        <pre id="code-random"><code>// RandomDemo.java
+import java.util.Random;
+
+public class RandomDemo {
+    public static void main(String[] args) {
+        Random rand = new Random();
+
+        // random int between 0 (incl) and 100 (excl)
+        System.out.println("Random 0-99   : " + rand.nextInt(100));
+
+        // random int in range [min, max]
+        int min = 10, max = 50;
+        int n = rand.nextInt(max - min + 1) + min;
+        System.out.println("Random 10-50  : " + n);
+
+        System.out.printf ("Random double : %.4f%n", rand.nextDouble());
+        System.out.println("Random boolean: " + rand.nextBoolean());
+
+        // Simulate rolling a dice 5 times
+        System.out.print("Dice rolls: ");
+        for (int i = 0; i < 5; i++) System.out.print(rand.nextInt(6) + 1 + " ");
+        System.out.println();
+
+        // Math.random() shorthand
+        System.out.printf("Math.random(): %.4f%n", Math.random());
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ ALGORITHMS ═══════════════════════════ -->
+      <h3 id="algorithms">Algorithms</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Factorial &amp; Fibonacci</strong><button class="btn" data-target="code-algorithms">Copy</button></div>
+        <pre id="code-algorithms"><code>// MathExamples.java
+public class MathExamples {
+    public static long factorial(int n) {
+        long f = 1;
+        for (int i = 2; i <= n; i++) f *= i;
+        return f;
+    }
+
+    public static long fibonacci(int n) {
+        if (n <= 1) return n;
+        long a = 0, b = 1;
+        for (int i = 2; i <= n; i++) { long t = a + b; a = b; b = t; }
+        return b;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i <= 10; i++) System.out.println(i + "! = " + factorial(i));
+        System.out.print("Fibonacci(0-10): ");
+        for (int i = 0; i <= 10; i++) System.out.print(fibonacci(i) + " ");
+        System.out.println();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Recursion — Factorial, Fibonacci, Tower of Hanoi</strong><button class="btn" data-target="code-recursion">Copy</button></div>
+        <pre id="code-recursion"><code>// RecursionDemo.java
+public class RecursionDemo {
+    static long factRec(int n) {
+        return n <= 1 ? 1 : n * factRec(n - 1);
+    }
+
+    static long fibRec(int n) {
+        return n <= 1 ? n : fibRec(n - 1) + fibRec(n - 2);
+    }
+
+    static void hanoi(int n, char from, char to, char via) {
+        if (n == 1) { System.out.println("Move disk 1 from " + from + " to " + to); return; }
+        hanoi(n - 1, from, via, to);
+        System.out.println("Move disk " + n + " from " + from + " to " + to);
+        hanoi(n - 1, via, to, from);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("5! = " + factRec(5));
+        System.out.println("fib(7) = " + fibRec(7));
+        System.out.println("\nTower of Hanoi (3 disks):");
+        hanoi(3, 'A', 'C', 'B');
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Prime Check</strong><button class="btn" data-target="code-prime">Copy</button></div>
+        <pre id="code-prime"><code>// PrimeCheck.java
+public class PrimeCheck {
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        for (int i = 5; i * i <= n; i += 6)
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.print("Primes up to 50: ");
+        for (int i = 2; i <= 50; i++) if (isPrime(i)) System.out.print(i + " ");
+        System.out.println();
+    }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Sieve of Eratosthenes</strong><button class="btn" data-target="code-sieve">Copy</button></div>
+        <pre id="code-sieve"><code>// SieveOfEratosthenes.java
+import java.util.Arrays;
+
+public class SieveOfEratosthenes {
+    public static void main(String[] args) {
+        int limit = 100;
+        boolean[] isComposite = new boolean[limit + 1];
+        Arrays.fill(isComposite, false);
+
+        for (int i = 2; i * i <= limit; i++) {
+            if (!isComposite[i]) {
+                for (int j = i * i; j <= limit; j += i)
+                    isComposite[j] = true;
+            }
+        }
+
+        System.out.println("Primes up to " + limit + ":");
+        int count = 0;
+        for (int i = 2; i <= limit; i++) {
+            if (!isComposite[i]) { System.out.printf("%4d", i); count++; }
+        }
+        System.out.println("\nTotal: " + count + " primes");
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ AREAS ════════════════════════════════ -->
+      <h3 id="areas">Area Calculations</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Rectangle, Square, Triangle &amp; Quadrilateral</strong></div>
+        <pre id="code-rectangle"><code>// RectangleArea.java
 public class RectangleArea {
-    public static double area(double width, double height) {
-        return width * height;
-    }
+    public static double area(double w, double h) { return w * h; }
     public static void main(String[] args) {
-        double w = 5.0;
-        double h = 3.2;
-        System.out.println("Rectangle width = " + w + ", height = " + h);
-        System.out.println("Area = " + area(w, h));
+        System.out.println("Rectangle (5 x 3.2) area = " + area(5.0, 3.2));
     }
-}
-</code></pre>
-          <div style="height:8px"></div>
-          <pre id="code-square"><code>// SquareArea.java
+}</code></pre>
+        <div style="height:8px"></div>
+        <pre id="code-square"><code>// SquareArea.java
 public class SquareArea {
-    public static double area(double side) {
-        return side * side;
-    }
+    public static double area(double side) { return side * side; }
     public static void main(String[] args) {
-        double s = 4.5;
-        System.out.println("Square side = " + s);
-        System.out.println("Area = " + area(s));
+        System.out.println("Square (4.5) area = " + area(4.5));
     }
-}
-</code></pre>
-          <div style="height:8px"></div>
-          <pre id="code-triangle"><code>// TriangleArea.java
+}</code></pre>
+        <div style="height:8px"></div>
+        <pre id="code-triangle"><code>// TriangleArea.java
 public class TriangleArea {
-    public static double area(double base, double height) {
-        return 0.5 * base * height;
+    // base & height
+    static double areaBaseHeight(double b, double h) { return 0.5 * b * h; }
+    // Heron's formula (three sides)
+    static double areaHeron(double a, double b, double c) {
+        double s = (a + b + c) / 2;
+        return Math.sqrt(s * (s-a) * (s-b) * (s-c));
     }
     public static void main(String[] args) {
-        double base = 6.0;
-        double height = 4.0;
-        System.out.println("Triangle base = " + base + ", height = " + height);
-        System.out.println("Area = " + area(base, height));
+        System.out.println("Triangle (b=6, h=4)  area = " + areaBaseHeight(6, 4));
+        System.out.println("Triangle (3,4,5 sides) area = " + areaHeron(3, 4, 5));
     }
-}
-</code></pre>
-          <div style="height:8px"></div>
-          <pre id="code-quadrilateral"><code>// QuadrilateralArea.java
+}</code></pre>
+        <div style="height:8px"></div>
+        <pre id="code-quadrilateral"><code>// QuadrilateralArea.java
 public class QuadrilateralArea {
     public static double area(double[][] pts) {
-        double sum = 0.0;
+        double sum = 0;
         for (int i = 0; i < 4; i++) {
             int j = (i + 1) % 4;
-            sum += pts[i][0] * pts[j][1] - pts[j][0] * pts[i][1];
+            sum += pts[i][0]*pts[j][1] - pts[j][0]*pts[i][1];
         }
         return Math.abs(sum) / 2.0;
     }
     public static void main(String[] args) {
-        double[][] quad = {{0.0,0.0},{4.0,0.0},{4.0,3.0},{0.0,3.0}};
-        System.out.println("Quadrilateral Area = " + area(quad));
+        double[][] quad = {{0,0},{4,0},{4,3},{0,3}};
+        System.out.println("Quadrilateral area = " + area(quad));
     }
-}
-</code></pre>
-          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-            <button class="btn" data-target="code-rectangle">Copy Rectangle</button>
-            <button class="btn" data-target="code-square">Copy Square</button>
-            <button class="btn" data-target="code-triangle">Copy Triangle</button>
-            <button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button>
-          </div>
+}</code></pre>
+        <div class="multi-btn">
+          <button class="btn" data-target="code-rectangle">Copy Rectangle</button>
+          <button class="btn" data-target="code-square">Copy Square</button>
+          <button class="btn" data-target="code-triangle">Copy Triangle</button>
+          <button class="btn" data-target="code-quadrilateral">Copy Quadrilateral</button>
         </div>
+      </div>
 
-        <div class="example" id="io">
-          <div class="meta">
-            <strong>File Input and Output</strong>
-            <div class="small">Writes and reads a small text file</div>
-          </div>
-          <pre id="code-io"><code>// FileIOExample.java
+      <div class="example">
+        <div class="meta"><strong>Circle &amp; Sphere</strong><button class="btn" data-target="code-circle">Copy</button></div>
+        <pre id="code-circle"><code>// CircleSphere.java
+public class CircleSphere {
+    public static void main(String[] args) {
+        double r = 7.0;
+        System.out.printf("Circle (r=%.1f):%n", r);
+        System.out.printf("  Area          = %.4f%n", Math.PI * r * r);
+        System.out.printf("  Circumference = %.4f%n", 2 * Math.PI * r);
+
+        System.out.printf("Sphere (r=%.1f):%n", r);
+        System.out.printf("  Surface Area  = %.4f%n", 4 * Math.PI * r * r);
+        System.out.printf("  Volume        = %.4f%n", (4.0/3) * Math.PI * r * r * r);
+    }
+}</code></pre>
+      </div>
+
+      <!-- ═══════════════════════ FILE IO ══════════════════════════════ -->
+      <h3 id="io">File Input &amp; Output</h3>
+
+      <div class="example">
+        <div class="meta"><strong>Write &amp; Read a Text File</strong><button class="btn" data-target="code-io">Copy</button></div>
+        <pre id="code-io"><code>// FileIOExample.java
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 import java.nio.charset.StandardCharsets;
 
 public class FileIOExample {
     public static void main(String[] args) {
         Path p = Path.of("sample.txt");
-        String text = "Hello from Java World\nLine two";
+        String text = "Hello from Java World\nLine two\nLine three";
         try {
             Files.writeString(p, text, StandardCharsets.UTF_8);
+            System.out.println("File written successfully.");
             String read = Files.readString(p, StandardCharsets.UTF_8);
             System.out.println("File contents:\n" + read);
         } catch (IOException e) {
             System.err.println("IO error: " + e.getMessage());
         }
     }
-}
-</code></pre>
-        </div>
+}</code></pre>
+      </div>
 
-        <div class="example" id="exceptions">
-          <div class="meta">
-            <strong>Exception Handling Example</strong>
-            <div class="small">Demonstrates try-catch-finally</div>
-          </div>
-          <pre id="code-exceptions"><code>// ExceptionDemo.java
+      <!-- ═══════════════════════ EXCEPTIONS ═══════════════════════════ -->
+      <h3 id="exceptions">Exception Handling</h3>
+
+      <div class="example">
+        <div class="meta"><strong>try / catch / finally</strong><button class="btn" data-target="code-exceptions">Copy</button></div>
+        <pre id="code-exceptions"><code>// ExceptionDemo.java
 public class ExceptionDemo {
     public static int divide(int a, int b) {
         try {
             return a / b;
         } catch (ArithmeticException ex) {
-            System.err.println("Cannot divide by zero");
+            System.err.println("Error: " + ex.getMessage());
             return 0;
         } finally {
             System.out.println("Division attempt finished");
@@ -1006,76 +1966,156 @@ public class ExceptionDemo {
         System.out.println(divide(10, 2));
         System.out.println(divide(10, 0));
     }
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="meta"><strong>Multiple Exceptions &amp; Custom Exception</strong><button class="btn" data-target="code-customex">Copy</button></div>
+        <pre id="code-customex"><code>// CustomExceptionDemo.java
+
+// Custom checked exception
+class AgeException extends Exception {
+    AgeException(String msg) { super(msg); }
 }
-</code></pre>
-        </div>
-      </section>
 
-      <aside>
-        <div class="card">
-          <h2>Quick Actions</h2>
-          <p class="small">Use the copy buttons to copy a complete class to clipboard. Paste into a file named exactly as the public class (for example <strong>HelloWorld.java</strong>) and run:</p>
-          <ol class="small">
-            <li>Save file: <code>javac HelloWorld.java</code></li>
-            <li>Run: <code>java HelloWorld</code></li>
-          </ol>
-          <hr class="sep">
-          <p class="small"><strong>Tip</strong> If a file contains multiple classes and one is public, name the file after the public class.</p>
-          <hr class="sep">
-          <p class="small"><strong>Notes about the area examples</strong></p>
-          <ul class="small">
-            <li>Rectangle and square use simple formulas.</li>
-            <li>Triangle uses base*height/2.</li>
-            <li>Quadrilateral uses shoelace formula.</li>
-          </ul>
-          <hr class="sep">
-          <p class="small"><strong>Simple Interest</strong>: (P*R*T)/100</p>
-          <p class="small"><strong>Quadratic</strong>: handles real/complex roots</p>
-          <p class="small"><strong>Second smallest</strong>: no conditional logic</p>
-          <p class="small"><strong>Grade calculator</strong>: A*,A,B,C,Fail</p>
-          <p class="small"><strong>Month name</strong>: converts number 1‑12 to month name using switch</p>
-          <p class="small"><strong>New basics</strong>: variables, string I/O, type casting</p>
-          <p class="small"><strong>Background</strong>: Smooth animated gradients + floating particles enhance immersion</p>
-        </div>
-      </aside>
-    </div>
-  </main>
+public class CustomExceptionDemo {
+    static void validateAge(int age) throws AgeException {
+        if (age < 0 || age > 150)
+            throw new AgeException("Invalid age: " + age);
+    }
 
-  <footer>
-    <div class="small">copyright 2026 Java World Real Java examples provided for learning</div>
-  </footer>
-
-  <script>
-    // Copy-to-clipboard for each example
-    document.querySelectorAll('.btn').forEach(btn=>{
-      btn.addEventListener('click', async ()=> {
-        const id = btn.getAttribute('data-target');
-        const pre = document.getElementById(id);
-        if (!pre) return;
-        const text = pre.innerText;
+    static int parseAndDivide(String s, int divisor) {
         try {
-          await navigator.clipboard.writeText(text);
-          const original = btn.innerText;
-          btn.innerText = 'Copied';
-          btn.classList.add('copied');
-          setTimeout(()=>{ btn.innerText = original; btn.classList.remove('copied'); },1200);
-        } catch (e) {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          document.body.appendChild(ta);
-          ta.select();
-          try { document.execCommand('copy'); btn.innerText = 'Copied'; } catch(e){}
-          ta.remove();
-          setTimeout(()=>{ btn.innerText = 'Copy'; },1200);
+            int value = Integer.parseInt(s);
+            return value / divisor;
+        } catch (NumberFormatException e) {
+            System.out.println("Not a number: " + s);
+        } catch (ArithmeticException e) {
+            System.out.println("Division by zero!");
         }
-      });
-    });
+        return 0;
+    }
 
-    const buttons = Array.from(document.querySelectorAll('.btn'));
-    const pres = Array.from(document.querySelectorAll('pre'));
-    buttons.forEach((b,i)=>{
-      if (!b.dataset.target && pres[i]) b.dataset.target = pres[i].id || (pres[i].id = 'code-auto-'+i);
+    public static void main(String[] args) {
+        // custom exception
+        int[] ages = {25, -1, 200};
+        for (int age : ages) {
+            try {
+                validateAge(age);
+                System.out.println(age + " is valid.");
+            } catch (AgeException e) {
+                System.out.println("Caught: " + e.getMessage());
+            }
+        }
+        // multiple catch types
+        System.out.println(parseAndDivide("100", 4));
+        System.out.println(parseAndDivide("abc", 4));
+        System.out.println(parseAndDivide("100", 0));
+    }
+}</code></pre>
+      </div>
+
+    </section><!-- end main section -->
+
+    <!-- ═══════════════════════ SIDEBAR ═════════════════════════════ -->
+    <aside>
+      <div class="card">
+        <h2>Quick Reference</h2>
+        <p class="small">Copy any snippet, save as <strong>ClassName.java</strong>, then:</p>
+        <pre style="font-size:12px;padding:10px;border-radius:6px;">javac ClassName.java
+java  ClassName</pre>
+        <hr class="sep">
+        <p class="small"><strong>Tip:</strong> The public class name must match the filename exactly.</p>
+        <hr class="sep">
+        <p class="small" style="font-weight:700;color:#2b6cb0;margin-bottom:6px;">Topics Covered</p>
+        <div class="small" style="line-height:2">
+          ✅ Hello World<br>
+          ✅ Variables &amp; Arithmetic<br>
+          ✅ String I/O &amp; Casting<br>
+          ✅ if / else / switch<br>
+          ✅ Ternary Operator<br>
+          ✅ for / while / do-while<br>
+          ✅ Nested Loops<br>
+          ✅ Star &amp; Number Patterns<br>
+          ✅ Pyramid &amp; Diamond<br>
+          ✅ String Methods<br>
+          ✅ Palindrome &amp; Reverse<br>
+          ✅ Vowel Count &amp; Anagram<br>
+          ✅ StringBuilder<br>
+          ✅ Armstrong Number<br>
+          ✅ Leap Year<br>
+          ✅ Sum &amp; Count of Digits<br>
+          ✅ GCD &amp; LCM<br>
+          ✅ Power Calculation<br>
+          ✅ Temperature Conversion<br>
+          ✅ Simple Interest<br>
+          ✅ Quadratic Equation<br>
+          ✅ Grade Calculator<br>
+          ✅ 1D &amp; 2D Arrays<br>
+          ✅ Matrix Add &amp; Multiply<br>
+          ✅ Linear &amp; Binary Search<br>
+          ✅ Bubble / Selection / Insertion Sort<br>
+          ✅ Arrays.sort (Built-in)<br>
+          ✅ OOP: Classes &amp; Objects<br>
+          ✅ Constructor Overloading<br>
+          ✅ Inheritance<br>
+          ✅ Interface<br>
+          ✅ Abstract Class<br>
+          ✅ Static Members<br>
+          ✅ Encapsulation<br>
+          ✅ ArrayList &amp; HashMap<br>
+          ✅ HashSet<br>
+          ✅ Math Class<br>
+          ✅ Random Numbers<br>
+          ✅ Factorial &amp; Fibonacci<br>
+          ✅ Recursion &amp; Hanoi<br>
+          ✅ Prime Check &amp; Sieve<br>
+          ✅ Circle &amp; Sphere Areas<br>
+          ✅ File IO<br>
+          ✅ Exception Handling<br>
+          ✅ Custom Exceptions
+        </div>
+        <hr class="sep">
+        <p class="small"><strong>Data Types Reminder</strong></p>
+        <pre style="font-size:11px;padding:10px;border-radius:6px;">byte    -128 to 127
+short   -32768 to 32767
+int     ~±2.1 billion
+long    ~±9.2 × 10¹⁸
+float   ~7 decimal digits
+double  ~15 decimal digits
+char    single Unicode char
+boolean true / false</pre>
+      </div>
+    </aside>
+
+  </div><!-- end grid -->
+</main>
+
+<footer>
+  <div class="small">© 2026 Java World — Real Java examples provided for learning</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id  = btn.getAttribute('data-target');
+      const pre = document.getElementById(id);
+      if (!pre) return;
+      const text = pre.innerText;
+      const original = btn.innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch(e2){}
+        ta.remove();
+      }
+      btn.innerText = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerText = original; btn.classList.remove('copied'); }, 1300);
     });
-  </script>
+  });
+</script>
 </body>
 </html>
